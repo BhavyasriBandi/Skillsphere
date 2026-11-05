@@ -17,3 +17,5 @@ media/
 .idea/
 .DS_Store
 Thumbs.db
+backend/db.sqlite3.backup
+backend/sqlite_data.json
