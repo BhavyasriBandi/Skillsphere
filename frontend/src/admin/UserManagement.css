@@ -1,0 +1,941 @@
+
+.um-page {
+  --um-navy: #243b64;
+  --um-text: #202b3c;
+  --um-muted: #778397;
+  --um-border: #e8edf4;
+  min-width: 0;
+  color: var(--um-text);
+  font-family: inherit;
+}
+
+.um-page * {
+  box-sizing: border-box;
+}
+
+.um-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.um-eyebrow {
+  display: block;
+  color: #7183a0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  margin-bottom: 8px;
+}
+
+.um-header h1 {
+  margin: 0;
+  color: #1d2b43;
+  font-size: clamp(25px, 3vw, 32px);
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+
+.um-header p,
+.um-table-heading p {
+  margin: 8px 0 0;
+  color: var(--um-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.um-primary-btn,
+.um-secondary-btn {
+  min-height: 43px;
+  padding: 0 17px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.um-primary-btn {
+  border: 1px solid var(--um-navy);
+  background: var(--um-navy);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(36, 59, 100, 0.12);
+}
+
+.um-primary-btn:hover {
+  background: #192d50;
+  transform: translateY(-1px);
+}
+
+.um-secondary-btn {
+  background: #fff;
+  color: #46536a;
+  border: 1px solid #dce3ec;
+}
+
+.um-secondary-btn:hover {
+  background: #f5f7fb;
+}
+
+.um-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-bottom: 24px;
+}
+
+.um-stat-card {
+  min-width: 0;
+  min-height: 132px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 21px 18px;
+  background: #fff;
+  border: 1px solid var(--um-border);
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(27, 47, 79, 0.025);
+}
+
+.um-stat-icon {
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.um-icon-blue {
+  color: #345da8;
+  background: #eaf0ff;
+}
+
+.um-icon-green {
+  color: #16845c;
+  background: #e3f7ee;
+}
+
+.um-icon-purple {
+  color: #7951b8;
+  background: #f0eaff;
+}
+
+.um-icon-orange {
+  color: #c4772a;
+  background: #fff0df;
+}
+
+.um-stat-card p {
+  margin: 0 0 7px;
+  color: #778397;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.um-stat-card h2 {
+  margin: 0 0 6px;
+  color: #1d2b43;
+  font-size: 28px;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.um-stat-card > div:last-child > span {
+  color: #96a0b0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.um-table-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--um-border);
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(27, 47, 79, 0.025);
+}
+
+.um-table-heading {
+  padding: 23px 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.um-table-heading h2 {
+  margin: 0;
+  color: #24334b;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.um-table-heading p {
+  font-size: 12px;
+}
+
+.um-result-count {
+  padding: 7px 11px;
+  background: #f0f3f8;
+  color: #586780;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.um-filters {
+  padding: 0 24px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.um-search {
+  min-width: 180px;
+  height: 42px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  background: #fff;
+  border: 1px solid #e0e6ef;
+  border-radius: 8px;
+  color: #7e8ba0;
+}
+
+.um-search > span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.um-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #27354b;
+  font: inherit;
+  font-size: 12px;
+}
+
+.um-search:focus-within {
+  border-color: #7f98c2;
+  box-shadow: 0 0 0 3px rgba(36, 59, 100, 0.07);
+}
+
+.um-filters select,
+.um-form-field select,
+.um-form-field input {
+  min-width: 0;
+  min-height: 42px;
+  padding: 0 12px;
+  color: #46536a;
+  background: #fff;
+  border: 1px solid #e0e6ef;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.um-filters select {
+  width: 145px;
+}
+
+.um-filters select:focus,
+.um-form-field input:focus,
+.um-form-field select:focus {
+  border-color: #8098c1;
+  box-shadow: 0 0 0 3px rgba(36, 59, 100, 0.07);
+}
+
+.um-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.um-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.um-table thead {
+  background: #f7f9fc;
+}
+
+.um-table th {
+  height: 44px;
+  padding: 0 18px;
+  color: #78869a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+  border-top: 1px solid #edf0f5;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.um-table th:first-child,
+.um-table td:first-child {
+  padding-left: 24px;
+}
+
+.um-table td {
+  height: 75px;
+  padding: 11px 18px;
+  color: #637087;
+  font-size: 12px;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.um-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.um-table tbody tr:hover {
+  background: #fbfcfe;
+}
+
+.um-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.um-avatar {
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #eaf0fb;
+  color: #304f83;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.um-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.um-user-info strong {
+  color: #27364d;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.um-user-info span {
+  color: #8a96a8;
+  font-size: 11px;
+}
+
+.um-role,
+.um-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.um-role-student {
+  background: #edf3ff;
+  color: #3b62a6;
+}
+
+.um-role-mentor {
+  background: #f1eaff;
+  color: #7952ac;
+}
+
+.um-role-admin {
+  background: #fff0df;
+  color: #ad6a1e;
+}
+
+.um-status-active {
+  color: #16835b;
+  background: #e8f8f0;
+}
+
+.um-status-inactive {
+  color: #a46b29;
+  background: #fff4e5;
+}
+
+.um-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.um-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.um-action-btn {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e5eaf1;
+  border-radius: 7px;
+  background: #fff;
+  color: #5f708a;
+  font: inherit;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.um-action-btn:hover {
+  color: var(--um-navy);
+  background: #eef3fb;
+  border-color: #d6e0f0;
+}
+
+.um-action-btn.um-delete-btn:hover {
+  color: #c33c4b;
+  background: #fff0f1;
+  border-color: #f2d5d9;
+}
+
+.um-empty {
+  height: 180px !important;
+  text-align: center;
+}
+
+.um-empty div,
+.um-empty strong,
+.um-empty span {
+  display: block;
+  margin: 5px auto;
+}
+
+.um-empty div {
+  color: #8292aa;
+  font-size: 25px;
+}
+
+.um-empty strong {
+  color: #33445d;
+}
+
+.um-empty span {
+  color: #8b97a9;
+}
+
+.um-table-footer {
+  padding: 16px 24px;
+  color: #8a96a8;
+  background: #fff;
+  border-top: 1px solid #edf0f5;
+  font-size: 11px;
+}
+
+.um-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(17, 30, 52, 0.56);
+  backdrop-filter: blur(3px);
+}
+
+.um-modal {
+  width: 100%;
+  max-width: 510px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 27px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(12, 25, 46, 0.22);
+}
+
+.um-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.um-modal-header h2 {
+  margin: 0;
+  color: #24334b;
+  font-size: 23px;
+  letter-spacing: -0.4px;
+}
+
+.um-modal-close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #e6eaf0;
+  border-radius: 8px;
+  background: #fff;
+  color: #66758a;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.um-modal-close:hover {
+  background: #f4f6fa;
+}
+
+.um-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #40516a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.um-form-field input,
+.um-form-field select {
+  width: 100%;
+  height: 44px;
+  font-weight: 400;
+}
+
+.um-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.um-form-error {
+  margin: 0 0 15px;
+  padding: 11px 12px;
+  border: 1px solid #f2d1d5;
+  border-radius: 8px;
+  background: #fff2f3;
+  color: #b42e3e;
+  font-size: 12px;
+}
+
+.um-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 10px;
+  margin-top: 4px;
+  border-top: 1px solid #edf0f5;
+}
+
+@media (max-width: 1100px) {
+  .um-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .um-stat-card {
+    min-height: 115px;
+  }
+}
+
+@media (max-width: 650px) {
+  .um-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .um-header .um-primary-btn {
+    width: 100%;
+  }
+
+  .um-stats {
+    gap: 10px;
+  }
+
+  .um-stat-card {
+    padding: 14px 11px;
+    gap: 9px;
+  }
+
+  .um-stat-icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    font-size: 18px;
+  }
+
+  .um-stat-card h2 {
+    font-size: 23px;
+  }
+
+  .um-stat-card p {
+    font-size: 11px;
+  }
+
+  .um-stat-card > div:last-child > span {
+    font-size: 9px;
+  }
+
+  .um-table-heading {
+    padding: 18px 15px;
+  }
+
+  .um-filters {
+    padding: 0 15px 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .um-filters select {
+    width: 100%;
+  }
+
+  .um-search {
+    flex: auto;
+    width: 100%;
+  }
+
+  .um-table th:first-child,
+  .um-table td:first-child {
+    padding-left: 15px;
+  }
+
+  .um-table th,
+  .um-table td {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .um-modal {
+    padding: 21px;
+  }
+}
+
+@media (max-width: 390px) {
+  .um-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+
+
+/* ==========================================
+   USER MANAGEMENT - GLOBAL DARK THEME
+   Add this block at the END of UserManagement.css
+========================================== */
+
+:root[data-theme="dark"] .um-page,
+body[data-theme="dark"] .um-page {
+  --um-text: var(--color-text);
+  --um-muted: var(--color-text-muted);
+  --um-border: var(--color-border);
+
+  color: var(--color-text);
+}
+
+/* Headings and text */
+:root[data-theme="dark"] .um-page h1,
+:root[data-theme="dark"] .um-page h2,
+:root[data-theme="dark"] .um-page h3,
+:root[data-theme="dark"] .um-page strong {
+  color: var(--color-text);
+}
+
+:root[data-theme="dark"] .um-page p,
+:root[data-theme="dark"] .um-page span {
+  color: var(--color-text);
+}
+
+:root[data-theme="dark"] .um-page .um-eyebrow,
+:root[data-theme="dark"] .um-page .um-header p,
+:root[data-theme="dark"] .um-page .um-table-heading p,
+:root[data-theme="dark"] .um-page .um-stat-card p,
+:root[data-theme="dark"] .um-page .um-stat-card h2 {
+  color: var(--color-text);
+}
+
+/* Cards and containers */
+:root[data-theme="dark"] .um-page .um-stat-card,
+:root[data-theme="dark"] .um-page .um-table-card,
+:root[data-theme="dark"] .um-page .um-modal {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+/* Search and form fields */
+:root[data-theme="dark"] .um-page .um-search,
+:root[data-theme="dark"] .um-page input,
+:root[data-theme="dark"] .um-page select {
+  background: var(--color-input-background);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .um-page input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Table */
+:root[data-theme="dark"] .um-page .um-table thead {
+  background: var(--color-background-soft);
+}
+
+:root[data-theme="dark"] .um-page .um-table th,
+:root[data-theme="dark"] .um-page .um-table td {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .um-page .um-table tbody tr:hover {
+  background: var(--color-surface-hover);
+}
+
+/* Table footer and result count */
+:root[data-theme="dark"] .um-page .um-table-footer,
+:root[data-theme="dark"] .um-page .um-result-count {
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* Buttons */
+:root[data-theme="dark"] .um-page .um-secondary-btn,
+:root[data-theme="dark"] .um-page .um-action-btn,
+:root[data-theme="dark"] .um-page .um-modal-close {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .um-page .um-secondary-btn:hover,
+:root[data-theme="dark"] .um-page .um-action-btn:hover,
+:root[data-theme="dark"] .um-page .um-modal-close:hover {
+  background: var(--color-surface-hover);
+}
+
+/* Modal */
+:root[data-theme="dark"] .um-page .um-modal-header h2 {
+  color: var(--color-text);
+}
+
+:root[data-theme="dark"] .um-page .um-form-field {
+  color: var(--color-text);
+}
+
+:root[data-theme="dark"] .um-page .um-modal-actions {
+  border-color: var(--color-border);
+}
+
+/* Empty state */
+:root[data-theme="dark"] .um-page .um-empty {
+  color: var(--color-text);
+}
+
+
+
+/* ==========================================
+   USER MANAGEMENT - COMPLETE DARK THEME
+========================================== */
+
+:root[data-theme="dark"] .um-page,
+body[data-theme="dark"] .um-page {
+  --um-text: #e5edf8;
+  --um-muted: #a5b4c8;
+  --um-border: #304159;
+  color: #e5edf8;
+}
+
+/* Page headings */
+:root[data-theme="dark"] .um-page h1,
+:root[data-theme="dark"] .um-page h2,
+:root[data-theme="dark"] .um-page h3,
+:root[data-theme="dark"] .um-page strong,
+:root[data-theme="dark"] .um-page p,
+:root[data-theme="dark"] .um-page span {
+  color: #e5edf8;
+}
+
+/* Cards and table */
+:root[data-theme="dark"] .um-page .um-stat-card,
+:root[data-theme="dark"] .um-page .um-table-card,
+:root[data-theme="dark"] .um-page .um-modal {
+  background: #18263a;
+  border-color: #304159;
+  color: #e5edf8;
+  box-shadow: none;
+}
+
+/* Table headings */
+:root[data-theme="dark"] .um-page .um-table thead,
+:root[data-theme="dark"] .um-page .um-table th {
+  background: #111e31;
+}
+
+:root[data-theme="dark"] .um-page .um-table th,
+:root[data-theme="dark"] .um-page .um-table td {
+  color: #dce6f5;
+  border-color: #304159;
+}
+
+:root[data-theme="dark"] .um-page .um-table tbody tr {
+  background: #18263a;
+}
+
+:root[data-theme="dark"] .um-page .um-table tbody tr:hover {
+  background: #263950;
+}
+
+/* Search and form controls */
+:root[data-theme="dark"] .um-page .um-search,
+:root[data-theme="dark"] .um-page input,
+:root[data-theme="dark"] .um-page select {
+  background: #111e31;
+  color: #e5edf8;
+  border-color: #304159;
+}
+
+:root[data-theme="dark"] .um-page input::placeholder {
+  color: #a5b4c8;
+}
+
+/* User avatar */
+:root[data-theme="dark"] .um-page .um-avatar {
+  background: #30476a;
+  color: #e5edf8;
+}
+
+/* Role badges */
+:root[data-theme="dark"] .um-page .um-role-student {
+  background: #263d60;
+  color: #a9c8ff;
+}
+
+:root[data-theme="dark"] .um-page .um-role-mentor {
+  background: #3b3158;
+  color: #d0baff;
+}
+
+:root[data-theme="dark"] .um-page .um-role-admin {
+  background: #51402c;
+  color: #ffd49b;
+}
+
+/* Status badges */
+:root[data-theme="dark"] .um-page .um-status-active {
+  background: #173e35;
+  color: #83e0b9;
+}
+
+:root[data-theme="dark"] .um-page .um-status-inactive {
+  background: #49351f;
+  color: #f2c27e;
+}
+
+/* Action buttons */
+:root[data-theme="dark"] .um-page .um-action-btn,
+:root[data-theme="dark"] .um-page .um-secondary-btn,
+:root[data-theme="dark"] .um-page .um-modal-close {
+  background: #22344d;
+  color: #e5edf8;
+  border-color: #3b506c;
+}
+
+:root[data-theme="dark"] .um-page .um-action-btn:hover,
+:root[data-theme="dark"] .um-page .um-secondary-btn:hover,
+:root[data-theme="dark"] .um-page .um-modal-close:hover {
+  background: #304966;
+  color: #ffffff;
+}
+
+/* Primary button */
+:root[data-theme="dark"] .um-page .um-primary-btn {
+  background: #355b91;
+  border-color: #5279b3;
+  color: #ffffff;
+}
+
+/* Result count and footer */
+:root[data-theme="dark"] .um-page .um-result-count,
+:root[data-theme="dark"] .um-page .um-table-footer {
+  background: #111e31;
+  color: #c5d2e5;
+  border-color: #304159;
+}
+
+/* Modal fields and labels */
+:root[data-theme="dark"] .um-page .um-form-field {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .um-page .um-modal-actions {
+  border-color: #304159;
+}
+
+/* Empty state */
+:root[data-theme="dark"] .um-page .um-empty {
+  color: #e5edf8;
+}
+
+
+
+/* ==========================================
+   USER MANAGEMENT - DARK STAT ICONS
+========================================== */
+
+/* Statistics icon backgrounds */
+:root[data-theme="dark"] .um-page .um-icon-blue {
+  background: #263d60;
+  color: #a9c8ff;
+}
+
+:root[data-theme="dark"] .um-page .um-icon-green {
+  background: #173e35;
+  color: #83e0b9;
+}
+
+:root[data-theme="dark"] .um-page .um-icon-purple {
+  background: #3b3158;
+  color: #d0baff;
+}
+
+:root[data-theme="dark"] .um-page .um-icon-orange {
+  background: #51402c;
+  color: #ffd49b;
+}
+
+/* Header and date label */
+:root[data-theme="dark"] .um-page .um-date-label {
+  background: #18263a;
+  color: #e5edf8;
+  border-color: #304159;
+}
+
+/* Result count */
+:root[data-theme="dark"] .um-page .um-result-count {
+  background: #111e31;
+  color: #e5edf8;
+}
+

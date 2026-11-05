@@ -1,0 +1,340 @@
+
+.admin-email-management {
+  width: 100%;
+  color: #24324b;
+}
+
+.aem-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.aem-eyebrow {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.aem-heading h2 {
+  margin: 8px 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.aem-heading p,
+.aem-panel-heading p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.aem-heading-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #eaf0ff;
+  color: #243b64;
+  font-size: 25px;
+  flex-shrink: 0;
+}
+
+.aem-panel {
+  padding: 26px;
+  background: #fff;
+  border: 1px solid #e5eaf2;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(36, 59, 100, 0.05);
+}
+
+.aem-panel-heading {
+  margin-bottom: 24px;
+}
+
+.aem-panel-heading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.aem-form {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.aem-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aem-field label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.aem-field input,
+.aem-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+  background: #fff;
+  color: #24324b;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.aem-field input:focus,
+.aem-field textarea:focus {
+  border-color: #526fa8;
+  box-shadow: 0 0 0 3px rgba(82, 111, 168, 0.12);
+}
+
+.aem-field input:disabled,
+.aem-field textarea:disabled {
+  background: #f8fafc;
+  cursor: not-allowed;
+}
+
+.aem-field textarea {
+  min-height: 180px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.aem-character-count {
+  color: #64748b;
+  font-size: 12px;
+  text-align: right;
+}
+
+.aem-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.aem-primary-button,
+.aem-secondary-button {
+  padding: 11px 18px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.aem-primary-button {
+  border: 1px solid #243b64;
+  background: #243b64;
+  color: #fff;
+}
+
+.aem-secondary-button {
+  border: 1px solid #d8e0eb;
+  background: #fff;
+  color: #334155;
+}
+
+.aem-primary-button:hover:not(:disabled) {
+  background: #1b2e50;
+}
+
+.aem-secondary-button:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.aem-primary-button:disabled,
+.aem-secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.aem-result {
+  padding: 12px 14px;
+  border: 1px solid #d8e0eb;
+  border-radius: 9px;
+  background: #f8fafc;
+  overflow-wrap: anywhere;
+}
+
+.aem-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid #e5eaf2;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.aem-info p {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .aem-heading h2 {
+    font-size: 22px;
+  }
+
+  .aem-panel {
+    padding: 18px;
+  }
+
+  .aem-actions {
+    flex-direction: column-reverse;
+  }
+
+  .aem-actions button {
+    width: 100%;
+  }
+}
+
+
+
+/* =====================================
+   ADMIN EMAIL MANAGEMENT - DARK THEME
+===================================== */
+
+:root[data-theme="dark"] .admin-email-management,
+body[data-theme="dark"] .admin-email-management {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .aem-heading h2,
+:root[data-theme="dark"] .aem-panel-heading h3,
+body[data-theme="dark"] .aem-heading h2,
+body[data-theme="dark"] .aem-panel-heading h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .aem-eyebrow,
+body[data-theme="dark"] .aem-eyebrow {
+  color: #91b5e8;
+}
+
+:root[data-theme="dark"] .aem-heading p,
+:root[data-theme="dark"] .aem-panel-heading p,
+:root[data-theme="dark"] .aem-character-count,
+body[data-theme="dark"] .aem-heading p,
+body[data-theme="dark"] .aem-panel-heading p,
+body[data-theme="dark"] .aem-character-count {
+  color: #a5b4c8;
+}
+
+/* Heading icon */
+
+:root[data-theme="dark"] .aem-heading-icon,
+body[data-theme="dark"] .aem-heading-icon {
+  background: #263950;
+  color: #91b5e8;
+}
+
+/* Main panel */
+
+:root[data-theme="dark"] .aem-panel,
+body[data-theme="dark"] .aem-panel {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* Form labels */
+
+:root[data-theme="dark"] .aem-field label,
+body[data-theme="dark"] .aem-field label {
+  color: #c5d3e6;
+}
+
+/* Input fields */
+
+:root[data-theme="dark"] .aem-field input,
+:root[data-theme="dark"] .aem-field textarea,
+body[data-theme="dark"] .aem-field input,
+body[data-theme="dark"] .aem-field textarea {
+  background: #111e31;
+  border-color: #3a4d67;
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .aem-field input::placeholder,
+:root[data-theme="dark"] .aem-field textarea::placeholder,
+body[data-theme="dark"] .aem-field input::placeholder,
+body[data-theme="dark"] .aem-field textarea::placeholder {
+  color: #8192aa;
+}
+
+:root[data-theme="dark"] .aem-field input:focus,
+:root[data-theme="dark"] .aem-field textarea:focus,
+body[data-theme="dark"] .aem-field input:focus,
+body[data-theme="dark"] .aem-field textarea:focus {
+  border-color: #719bd5;
+  box-shadow: 0 0 0 3px rgba(113, 155, 213, 0.15);
+}
+
+:root[data-theme="dark"] .aem-field input:disabled,
+:root[data-theme="dark"] .aem-field textarea:disabled,
+body[data-theme="dark"] .aem-field input:disabled,
+body[data-theme="dark"] .aem-field textarea:disabled {
+  background: #263950;
+  color: #91a1b7;
+  opacity: 0.8;
+}
+
+/* Buttons */
+
+:root[data-theme="dark"] .aem-primary-button,
+body[data-theme="dark"] .aem-primary-button {
+  background: #345486;
+  border-color: #456b9f;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .aem-primary-button:hover:not(:disabled),
+body[data-theme="dark"] .aem-primary-button:hover:not(:disabled) {
+  background: #42699f;
+}
+
+:root[data-theme="dark"] .aem-secondary-button,
+body[data-theme="dark"] .aem-secondary-button {
+  background: #263950;
+  border-color: #3a4d67;
+  color: #d5e1f1;
+}
+
+:root[data-theme="dark"] .aem-secondary-button:hover:not(:disabled),
+body[data-theme="dark"] .aem-secondary-button:hover:not(:disabled) {
+  background: #344d6a;
+}
+
+/* Result message */
+
+:root[data-theme="dark"] .aem-result,
+body[data-theme="dark"] .aem-result {
+  background: #111e31;
+  border-color: #304159;
+  color: #c5d3e6;
+}
+
+/* Information section */
+
+:root[data-theme="dark"] .aem-info,
+body[data-theme="dark"] .aem-info {
+  background: #142238;
+  border-color: #304159;
+  color: #a5b4c8;
+}

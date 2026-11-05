@@ -1,0 +1,501 @@
+
+.sp-page {
+  width: 100%;
+  padding: 24px;
+  color: #243b64;
+  box-sizing: border-box;
+}
+
+.sp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sp-header h2 {
+  margin: 0 0 7px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.sp-header p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.sp-refresh-btn,
+.sp-primary-btn {
+  border: none;
+  border-radius: 8px;
+  background: #243b64;
+  color: white;
+  padding: 11px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sp-refresh-btn:hover,
+.sp-primary-btn:hover {
+  background: #192d50;
+}
+
+.sp-summary-grid,
+.sp-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.sp-summary-card,
+.sp-progress-card {
+  background: #fff;
+  border: 1px solid #e7ecf3;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 12px rgba(36, 59, 100, 0.05);
+}
+
+.sp-summary-card span,
+.sp-progress-card span {
+  display: block;
+  color: #718096;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.sp-summary-card strong,
+.sp-progress-card strong {
+  display: block;
+  color: #243b64;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.sp-selector-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-width: 500px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #e7ecf3;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.sp-selector-card label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sp-selector-card select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9e0eb;
+  border-radius: 8px;
+  background: white;
+  color: #243b64;
+  outline: none;
+}
+
+.sp-student-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: 22px;
+  background: #fff;
+  border: 1px solid #e7ecf3;
+  border-radius: 12px;
+}
+
+.sp-avatar {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e9eff9;
+  color: #243b64;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sp-student-card h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+
+.sp-student-card p {
+  margin: 0 0 7px;
+  color: #718096;
+  font-size: 13px;
+}
+
+.sp-active-label {
+  display: inline-block;
+  color: #16845b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sp-section {
+  margin-bottom: 24px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid #e7ecf3;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(36, 59, 100, 0.04);
+}
+
+.sp-section h3 {
+  margin: 0 0 18px;
+  color: #243b64;
+  font-size: 18px;
+}
+
+.sp-progress-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.sp-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.sp-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.sp-table th,
+.sp-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #edf0f5;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.sp-table th {
+  background: #f6f8fc;
+  color: #52627c;
+  font-weight: 600;
+}
+
+.sp-table td {
+  color: #43536d;
+}
+
+.sp-level,
+.sp-status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.sp-level {
+  background: #edf2fa;
+  color: #243b64;
+}
+
+.sp-status.completed {
+  background: #e5f7ee;
+  color: #16845b;
+}
+
+.sp-status.pending {
+  background: #fff4df;
+  color: #a56a09;
+}
+
+.sp-empty,
+.sp-loading {
+  padding: 55px 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e7ecf3;
+  border-radius: 12px;
+}
+
+.sp-empty-icon {
+  font-size: 38px;
+  margin-bottom: 12px;
+}
+
+.sp-empty h3 {
+  margin: 0 0 8px;
+}
+
+.sp-empty p,
+.sp-no-data {
+  color: #718096;
+  font-size: 13px;
+}
+
+.sp-error {
+  margin-bottom: 15px;
+  padding: 14px;
+  color: #b42318;
+  background: #fff0ee;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .sp-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .sp-page {
+    padding: 14px;
+  }
+
+  .sp-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sp-summary-grid,
+  .sp-progress-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-section {
+    padding: 15px;
+  }
+}
+
+
+/* ==========================================
+   SKILLSPHERE - MENTOR STUDENT PROGRESS
+   COMPLETE DARK THEME
+========================================== */
+
+/* Main page */
+
+:root[data-theme="dark"] .sp-page,
+body[data-theme="dark"] .sp-page {
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+/* Header */
+
+:root[data-theme="dark"] .sp-header h2,
+body[data-theme="dark"] .sp-header h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .sp-header p,
+body[data-theme="dark"] .sp-header p {
+  color: #a5b4c8;
+}
+
+/* Buttons */
+
+:root[data-theme="dark"] .sp-refresh-btn,
+:root[data-theme="dark"] .sp-primary-btn,
+body[data-theme="dark"] .sp-refresh-btn,
+body[data-theme="dark"] .sp-primary-btn {
+  background: #345486;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .sp-refresh-btn:hover,
+:root[data-theme="dark"] .sp-primary-btn:hover,
+body[data-theme="dark"] .sp-refresh-btn:hover,
+body[data-theme="dark"] .sp-primary-btn:hover {
+  background: #42699f;
+}
+
+/* Summary and progress cards */
+
+:root[data-theme="dark"] .sp-summary-card,
+:root[data-theme="dark"] .sp-progress-card,
+body[data-theme="dark"] .sp-summary-card,
+body[data-theme="dark"] .sp-progress-card {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .sp-summary-card span,
+:root[data-theme="dark"] .sp-progress-card span,
+body[data-theme="dark"] .sp-summary-card span,
+body[data-theme="dark"] .sp-progress-card span {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .sp-summary-card strong,
+:root[data-theme="dark"] .sp-progress-card strong,
+body[data-theme="dark"] .sp-summary-card strong,
+body[data-theme="dark"] .sp-progress-card strong {
+  color: #e5edf8;
+}
+
+/* Student selector */
+
+:root[data-theme="dark"] .sp-selector-card,
+body[data-theme="dark"] .sp-selector-card {
+  background: #18263a;
+  border-color: #304159;
+}
+
+:root[data-theme="dark"] .sp-selector-card label,
+body[data-theme="dark"] .sp-selector-card label {
+  color: #dce6f5;
+}
+
+:root[data-theme="dark"] .sp-selector-card select,
+body[data-theme="dark"] .sp-selector-card select {
+  background: #111e31;
+  border-color: #3a4d67;
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .sp-selector-card select option,
+body[data-theme="dark"] .sp-selector-card select option {
+  background: #18263a;
+  color: #e5edf8;
+}
+
+/* Student profile card */
+
+:root[data-theme="dark"] .sp-student-card,
+body[data-theme="dark"] .sp-student-card {
+  background: #18263a;
+  border-color: #304159;
+}
+
+:root[data-theme="dark"] .sp-avatar,
+body[data-theme="dark"] .sp-avatar {
+  background: #293f60;
+  color: #c5dcff;
+}
+
+:root[data-theme="dark"] .sp-student-card h3,
+body[data-theme="dark"] .sp-student-card h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .sp-student-card p,
+body[data-theme="dark"] .sp-student-card p {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .sp-active-label,
+body[data-theme="dark"] .sp-active-label {
+  color: #65d49b;
+}
+
+/* Sections */
+
+:root[data-theme="dark"] .sp-section,
+body[data-theme="dark"] .sp-section {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .sp-section h3,
+body[data-theme="dark"] .sp-section h3 {
+  color: #e5edf8;
+}
+
+/* Table */
+
+:root[data-theme="dark"] .sp-table,
+body[data-theme="dark"] .sp-table {
+  background: #18263a;
+}
+
+:root[data-theme="dark"] .sp-table th,
+body[data-theme="dark"] .sp-table th {
+  background: #22334b;
+  border-bottom-color: #40516a;
+  color: #c5d4ed;
+}
+
+:root[data-theme="dark"] .sp-table td,
+body[data-theme="dark"] .sp-table td {
+  background: #18263a;
+  border-bottom-color: #304159;
+  color: #b3c2d7;
+}
+
+/* Level badge */
+
+:root[data-theme="dark"] .sp-level,
+body[data-theme="dark"] .sp-level {
+  background: #293f60;
+  color: #c5dcff;
+}
+
+/* Status badges */
+
+:root[data-theme="dark"] .sp-status.completed,
+body[data-theme="dark"] .sp-status.completed {
+  background: #194638;
+  color: #91e3bd;
+}
+
+:root[data-theme="dark"] .sp-status.pending,
+body[data-theme="dark"] .sp-status.pending {
+  background: #49391e;
+  color: #f2cd82;
+}
+
+/* Empty and loading states */
+
+:root[data-theme="dark"] .sp-empty,
+:root[data-theme="dark"] .sp-loading,
+body[data-theme="dark"] .sp-empty,
+body[data-theme="dark"] .sp-loading {
+  background: #18263a;
+  border-color: #304159;
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .sp-empty h3,
+body[data-theme="dark"] .sp-empty h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .sp-empty p,
+:root[data-theme="dark"] .sp-no-data,
+body[data-theme="dark"] .sp-empty p,
+body[data-theme="dark"] .sp-no-data {
+  color: #a5b4c8;
+}
+
+/* Error message */
+
+:root[data-theme="dark"] .sp-error,
+body[data-theme="dark"] .sp-error {
+  background: #38252b;
+  color: #ffb4b4;
+  border: 1px solid #70404a;
+}
+
+/* Focus accessibility */
+
+:root[data-theme="dark"] .sp-page button:focus-visible,
+:root[data-theme="dark"] .sp-page select:focus-visible,
+body[data-theme="dark"] .sp-page button:focus-visible,
+body[data-theme="dark"] .sp-page select:focus-visible {
+  outline: 3px solid rgba(145, 181, 232, 0.55);
+  outline-offset: 2px;
+}
+

@@ -1,0 +1,64 @@
+
+.register-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.register-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #172554;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  text-decoration: none;
+}
+
+.register-brand-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4361ee, #7045e8);
+  color: #ffffff;
+  font-size: 23px;
+  box-shadow: 0 7px 18px rgb(67 97 238 / 20%);
+}
+
+.register-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: #5145d9;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.register-home-link:hover {
+  color: #30258f;
+  background: #f0efff;
+}
+
+.register-home-link span {
+  font-size: 17px;
+}
+
+@media (max-width: 420px) {
+  .register-navigation {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

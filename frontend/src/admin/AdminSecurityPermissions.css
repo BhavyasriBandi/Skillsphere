@@ -1,0 +1,740 @@
+
+.asp-page {
+  width: 100%;
+  min-width: 0;
+  color: #1e293b;
+  animation: aspFadeIn 0.25s ease;
+}
+
+.asp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.asp-header h1 {
+  margin: 6px 0 8px;
+  color: #182b4d;
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 750;
+}
+
+.asp-header p,
+.asp-panel-heading p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.asp-eyebrow {
+  color: #5275b7;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.asp-refresh-button,
+.asp-save-button,
+.asp-error button {
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 15px;
+  background: #243b64;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.asp-refresh-button:hover,
+.asp-save-button:hover,
+.asp-error button:hover {
+  background: #345487;
+}
+
+.asp-refresh-button:disabled,
+.asp-save-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.asp-security-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 22px;
+  padding: 20px;
+  border: 1px solid #d9e5f6;
+  border-radius: 14px;
+  background: #f3f7fd;
+}
+
+.asp-shield {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 12px;
+  background: #dce9ff;
+  color: #244b8a;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.asp-security-banner h2 {
+  margin: 1px 0 6px;
+  color: #20385e;
+  font-size: 16px;
+}
+
+.asp-security-banner p {
+  margin: 0;
+  color: #5e6f87;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.asp-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.asp-stat-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 19px;
+  border: 1px solid #e6ebf2;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(25, 45, 80, 0.035);
+}
+
+.asp-stat-icon {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border-radius: 10px;
+  background: #eef3fb;
+  color: #2b4c7c;
+  font-size: 20px;
+}
+
+.asp-stat-card > span:nth-child(2) {
+  color: #738097;
+  font-size: 12px;
+}
+
+.asp-stat-card strong {
+  color: #1f3150;
+  font-size: 27px;
+  font-weight: 750;
+}
+
+.asp-panel {
+  min-width: 0;
+  margin-bottom: 22px;
+  padding: 22px;
+  border: 1px solid #e6ebf2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(25, 45, 80, 0.035);
+}
+
+.asp-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.asp-panel-heading h2 {
+  margin: 0 0 6px;
+  color: #203455;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.asp-role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.asp-role-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e5eaf2;
+  border-radius: 12px;
+  background: #fbfcfe;
+}
+
+.asp-role-top {
+  margin-bottom: 13px;
+}
+
+.asp-role-badge,
+.asp-current-role {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 7px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.asp-role-admin {
+  background: #e8edff;
+  color: #354ca4;
+}
+
+.asp-role-mentor {
+  background: #e3f7ef;
+  color: #16734e;
+}
+
+.asp-role-student {
+  background: #fff2dc;
+  color: #986018;
+}
+
+.asp-role-card h3 {
+  margin: 0 0 15px;
+  color: #293c59;
+  font-size: 14px;
+}
+
+.asp-role-card ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.asp-role-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #63718a;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.asp-role-card li span {
+  color: #26815b;
+  font-weight: 800;
+}
+
+.asp-note {
+  margin: 17px 0 0;
+  color: #79869a;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.asp-search {
+  width: min(100%, 290px);
+  min-width: 180px;
+  padding: 11px 13px;
+  border: 1px solid #dce3ed;
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: #263750;
+  font: inherit;
+  font-size: 13px;
+}
+
+.asp-search:focus,
+.asp-role-select:focus {
+  border-color: #6c8ec5;
+  box-shadow: 0 0 0 3px rgba(76, 119, 185, 0.12);
+}
+
+.asp-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.asp-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.asp-table th {
+  padding: 13px 12px;
+  border-bottom: 1px solid #e5eaf1;
+  background: #f7f9fc;
+  color: #65738a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.35px;
+  white-space: nowrap;
+}
+
+.asp-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #edf0f5;
+  color: #526178;
+  font-size: 12px;
+}
+
+.asp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.asp-table tbody tr:hover {
+  background: #fafcff;
+}
+
+.asp-account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 145px;
+  color: #2d3f5a;
+  font-weight: 650;
+}
+
+.asp-avatar {
+  display: grid;
+  flex: 0 0 33px;
+  width: 33px;
+  height: 33px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e6edf9;
+  color: #294b80;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.asp-current-role {
+  background: #edf2f8;
+  color: #435675;
+}
+
+.asp-role-select {
+  max-width: 130px;
+  padding: 8px 9px;
+  border: 1px solid #dce3ed;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #394b65;
+  font: inherit;
+  font-size: 12px;
+}
+
+.asp-save-button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.asp-empty {
+  padding: 30px 15px;
+  color: #78859a;
+  text-align: center;
+  font-size: 13px;
+}
+
+.asp-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #f2d0d0;
+  border-radius: 10px;
+  background: #fff7f7;
+  color: #a23838;
+  font-size: 13px;
+}
+
+.asp-error p {
+  margin: 0;
+}
+
+.asp-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.asp-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.asp-check-icon {
+  display: grid;
+  flex: 0 0 29px;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e5f5ec;
+  color: #228253;
+  font-weight: 800;
+}
+
+.asp-check-row strong {
+  display: block;
+  margin: 2px 0 5px;
+  color: #30425e;
+  font-size: 13px;
+}
+
+.asp-check-row p {
+  margin: 0;
+  color: #77849a;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@keyframes aspFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1050px) {
+  .asp-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .asp-role-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .asp-header,
+  .asp-panel-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .asp-refresh-button {
+    align-self: flex-start;
+  }
+
+  .asp-panel {
+    padding: 16px;
+  }
+
+  .asp-stat-grid {
+    gap: 10px;
+  }
+
+  .asp-stat-card {
+    padding: 14px;
+  }
+
+  .asp-security-banner {
+    padding: 15px;
+  }
+
+  .asp-search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .asp-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* =========================================
+   SKILLSPHERE ADMIN - SECURITY & PERMISSIONS
+   DARK THEME
+========================================= */
+
+/* Main page */
+
+:root[data-theme="dark"] .asp-page,
+body[data-theme="dark"] .asp-page {
+  color: #e5edf8;
+}
+
+/* Header */
+
+:root[data-theme="dark"] .asp-header h1,
+:root[data-theme="dark"] .asp-panel-heading h2,
+body[data-theme="dark"] .asp-header h1,
+body[data-theme="dark"] .asp-panel-heading h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .asp-header p,
+:root[data-theme="dark"] .asp-panel-heading p,
+:root[data-theme="dark"] .asp-eyebrow,
+body[data-theme="dark"] .asp-header p,
+body[data-theme="dark"] .asp-panel-heading p,
+body[data-theme="dark"] .asp-eyebrow {
+  color: #a5b4c8;
+}
+
+/* Buttons */
+
+:root[data-theme="dark"] .asp-refresh-button,
+:root[data-theme="dark"] .asp-save-button,
+:root[data-theme="dark"] .asp-error button,
+body[data-theme="dark"] .asp-refresh-button,
+body[data-theme="dark"] .asp-save-button,
+body[data-theme="dark"] .asp-error button {
+  background: #345486;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .asp-refresh-button:hover,
+:root[data-theme="dark"] .asp-save-button:hover,
+:root[data-theme="dark"] .asp-error button:hover,
+body[data-theme="dark"] .asp-refresh-button:hover,
+body[data-theme="dark"] .asp-save-button:hover,
+body[data-theme="dark"] .asp-error button:hover {
+  background: #42699f;
+}
+
+/* Security banner */
+
+:root[data-theme="dark"] .asp-security-banner,
+body[data-theme="dark"] .asp-security-banner {
+  background: #192d48;
+  border-color: #304b70;
+}
+
+:root[data-theme="dark"] .asp-shield,
+body[data-theme="dark"] .asp-shield {
+  background: #263f62;
+  color: #a9caff;
+}
+
+:root[data-theme="dark"] .asp-security-banner h2,
+body[data-theme="dark"] .asp-security-banner h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .asp-security-banner p,
+body[data-theme="dark"] .asp-security-banner p {
+  color: #b3c2d7;
+}
+
+/* Statistics cards */
+
+:root[data-theme="dark"] .asp-stat-card,
+body[data-theme="dark"] .asp-stat-card {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .asp-stat-icon,
+body[data-theme="dark"] .asp-stat-icon {
+  background: #263950;
+  color: #91b5e8;
+}
+
+:root[data-theme="dark"] .asp-stat-card > span:nth-child(2),
+body[data-theme="dark"] .asp-stat-card > span:nth-child(2) {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .asp-stat-card strong,
+body[data-theme="dark"] .asp-stat-card strong {
+  color: #e5edf8;
+}
+
+/* Panels */
+
+:root[data-theme="dark"] .asp-panel,
+body[data-theme="dark"] .asp-panel {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Role cards */
+
+:root[data-theme="dark"] .asp-role-card,
+body[data-theme="dark"] .asp-role-card {
+  background: #142238;
+  border-color: #304159;
+}
+
+:root[data-theme="dark"] .asp-role-card h3,
+body[data-theme="dark"] .asp-role-card h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .asp-role-card li,
+body[data-theme="dark"] .asp-role-card li {
+  color: #b3c2d7;
+}
+
+:root[data-theme="dark"] .asp-role-card li span,
+body[data-theme="dark"] .asp-role-card li span {
+  color: #65d49b;
+}
+
+/* Role badges */
+
+:root[data-theme="dark"] .asp-role-admin,
+body[data-theme="dark"] .asp-role-admin {
+  background: #29375e;
+  color: #b8c8ff;
+}
+
+:root[data-theme="dark"] .asp-role-mentor,
+body[data-theme="dark"] .asp-role-mentor {
+  background: #194638;
+  color: #91e3bd;
+}
+
+:root[data-theme="dark"] .asp-role-student,
+body[data-theme="dark"] .asp-role-student {
+  background: #49391e;
+  color: #f2cd82;
+}
+
+:root[data-theme="dark"] .asp-current-role,
+body[data-theme="dark"] .asp-current-role {
+  background: #263950;
+  color: #c5d3e6;
+}
+
+/* Notes */
+
+:root[data-theme="dark"] .asp-note,
+body[data-theme="dark"] .asp-note {
+  color: #a5b4c8;
+}
+
+/* Search and role select */
+
+:root[data-theme="dark"] .asp-search,
+:root[data-theme="dark"] .asp-role-select,
+body[data-theme="dark"] .asp-search,
+body[data-theme="dark"] .asp-role-select {
+  background: #111e31;
+  border-color: #3a4d67;
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .asp-search::placeholder,
+body[data-theme="dark"] .asp-search::placeholder {
+  color: #8192aa;
+}
+
+:root[data-theme="dark"] .asp-search:focus,
+:root[data-theme="dark"] .asp-role-select:focus,
+body[data-theme="dark"] .asp-search:focus,
+body[data-theme="dark"] .asp-role-select:focus {
+  border-color: #719bd5;
+  box-shadow: 0 0 0 3px rgba(113, 155, 213, 0.15);
+}
+
+/* Dropdown options */
+
+:root[data-theme="dark"] .asp-role-select option,
+body[data-theme="dark"] .asp-role-select option {
+  background: #18263a;
+  color: #e5edf8;
+}
+
+/* Table */
+
+:root[data-theme="dark"] .asp-table th,
+body[data-theme="dark"] .asp-table th {
+  background: #22334b;
+  border-bottom-color: #3a4d67;
+  color: #c0cde0;
+}
+
+:root[data-theme="dark"] .asp-table td,
+body[data-theme="dark"] .asp-table td {
+  border-bottom-color: #304159;
+  color: #b3c2d7;
+}
+
+:root[data-theme="dark"] .asp-table tbody tr:hover,
+body[data-theme="dark"] .asp-table tbody tr:hover {
+  background: #22334b;
+}
+
+/* Account and avatar */
+
+:root[data-theme="dark"] .asp-account,
+body[data-theme="dark"] .asp-account {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .asp-avatar,
+body[data-theme="dark"] .asp-avatar {
+  background: #293f60;
+  color: #c5dcff;
+}
+
+/* Empty state */
+
+:root[data-theme="dark"] .asp-empty,
+body[data-theme="dark"] .asp-empty {
+  color: #a5b4c8;
+}
+
+/* Error message */
+
+:root[data-theme="dark"] .asp-error,
+body[data-theme="dark"] .asp-error {
+  background: #38252b;
+  border-color: #70404a;
+  color: #ffb4b4;
+}
+
+/* Security checklist */
+
+:root[data-theme="dark"] .asp-check-icon,
+body[data-theme="dark"] .asp-check-icon {
+  background: #194638;
+  color: #91e3bd;
+}
+
+:root[data-theme="dark"] .asp-check-row strong,
+body[data-theme="dark"] .asp-check-row strong {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .asp-check-row p,
+body[data-theme="dark"] .asp-check-row p {
+  color: #a5b4c8;
+}
+
+/* Focus accessibility */
+
+:root[data-theme="dark"] .asp-page button:focus-visible,
+body[data-theme="dark"] .asp-page button:focus-visible {
+  outline: 3px solid rgba(145, 181, 232, 0.55);
+  outline-offset: 2px;
+}

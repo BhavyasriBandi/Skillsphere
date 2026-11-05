@@ -1,0 +1,520 @@
+
+:root {
+  color-scheme: light;
+
+  --color-navy: #172554;
+  --color-blue: #4361ee;
+  --color-purple: #7045e8;
+  --color-text: #354563;
+  --color-text-muted: #63718d;
+  --color-border: #e5e9f6;
+  --color-background: #ffffff;
+  --color-background-soft: #f5f7ff;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0f3ff;
+  --color-input-background: #ffffff;
+  --color-shadow: 0 12px 35px rgb(23 37 84 / 7%);
+
+  font-family: "DM Sans", Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme="dark"],
+body[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-navy: #f1f5ff;
+  --color-blue: #8b9cff;
+  --color-purple: #b09aff;
+  --color-text: #e0e7ff;
+  --color-text-muted: #a4b0cd;
+  --color-border: #303954;
+  --color-background: #101426;
+  --color-background-soft: #171d33;
+  --color-surface: #1c2340;
+  --color-surface-hover: #272f50;
+  --color-input-background: #171d33;
+  --color-shadow: 0 12px 35px rgb(0 0 0 / 20%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  -webkit-text-size-adjust: 100%;
+
+  /* Allow normal document scrolling */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+
+  /* Keep vertical scrolling enabled */
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font-size: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+img {
+  display: block;
+}
+
+a {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+button {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgb(99 102 241 / 45%);
+  outline-offset: 4px;
+}
+
+::selection {
+  color: #172554;
+  background: #e0e7ff;
+}
+
+:root[data-theme="dark"] ::selection,
+body[data-theme="dark"] ::selection {
+  color: #ffffff;
+  background: #454b83;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  overflow: visible;
+}
+
+.skillsphere-app {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100vh;
+
+  /* Changed from clip to visible */
+  overflow: visible;
+
+  background: var(--color-background);
+  color: var(--color-text);
+
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+}
+
+.skillsphere-app main {
+  width: 100%;
+}
+
+/* Global text and surface defaults */
+
+.skillsphere-app h1,
+.skillsphere-app h2,
+.skillsphere-app h3,
+.skillsphere-app h4,
+.skillsphere-app h5,
+.skillsphere-app h6 {
+  color: var(--color-navy);
+}
+
+.skillsphere-app p {
+  overflow-wrap: break-word;
+}
+
+.skillsphere-app input,
+.skillsphere-app textarea,
+.skillsphere-app select {
+  color: var(--color-text);
+  background-color: var(--color-input-background);
+  border-color: var(--color-border);
+}
+
+.skillsphere-app input::placeholder,
+.skillsphere-app textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Floating theme toggle */
+
+.theme-toggle {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 46px;
+  padding: 11px 17px;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, #5145d9, #7045e8);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgb(67 56 202 / 28%);
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgb(67 56 202 / 35%);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-toggle span:first-child {
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* Footer */
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 30px;
+  padding: 32px clamp(24px, 7.5vw, 112px);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-navy);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  text-decoration: none;
+}
+
+.footer-brand-icon {
+  color: var(--color-purple);
+  font-size: 26px;
+}
+
+.site-footer > p,
+.footer-copyright {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* Responsive layout */
+
+@media (max-width: 650px) {
+  body {
+    font-size: 14px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 28px 22px;
+  }
+
+  .theme-toggle {
+    right: 14px;
+    bottom: 14px;
+    min-height: 42px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark theme: improve text readability across the landing page */
+
+:root[data-theme="dark"] .skillsphere-app,
+body[data-theme="dark"] .skillsphere-app {
+  color: #e0e7ff;
+}
+
+:root[data-theme="dark"] .skillsphere-app h1,
+:root[data-theme="dark"] .skillsphere-app h2,
+:root[data-theme="dark"] .skillsphere-app h3,
+body[data-theme="dark"] .skillsphere-app h1,
+body[data-theme="dark"] .skillsphere-app h2,
+body[data-theme="dark"] .skillsphere-app h3 {
+  color: #f1f5ff;
+}
+
+:root[data-theme="dark"] .skillsphere-app p,
+:root[data-theme="dark"] .skillsphere-app li,
+body[data-theme="dark"] .skillsphere-app p,
+body[data-theme="dark"] .skillsphere-app li {
+  color: #c5cee4;
+}
+
+:root[data-theme="dark"] .site-footer,
+body[data-theme="dark"] .site-footer {
+  background: #171d33;
+  border-color: #303954;
+}
+
+:root[data-theme="dark"] .footer-brand,
+body[data-theme="dark"] .footer-brand {
+  color: #f1f5ff;
+}
+
+:root[data-theme="dark"] .site-footer > p,
+:root[data-theme="dark"] .footer-copyright,
+body[data-theme="dark"] .site-footer > p,
+body[data-theme="dark"] .footer-copyright {
+  color: #aebbd5;
+}
+
+/* Complete Global Dark Theme */
+
+:root[data-theme="dark"],
+body[data-theme="dark"] {
+  color-scheme: dark;
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+/* Application backgrounds */
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] #root,
+:root[data-theme="dark"] .skillsphere-app,
+body[data-theme="dark"] {
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+/* Main application areas */
+
+:root[data-theme="dark"] main,
+:root[data-theme="dark"] .main-content,
+:root[data-theme="dark"] .dashboard-content,
+:root[data-theme="dark"] .student-dashboard,
+:root[data-theme="dark"] .student-profile-section {
+  background-color: #0d1829;
+  color: #e5edf8;
+}
+
+/* Common cards and panels */
+
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .panel {
+  background-color: #18263a;
+  border-color: #2b3c54;
+  color: #e5edf8;
+}
+
+/* Common form controls */
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  color-scheme: dark;
+}
+
+/* Common text */
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4,
+:root[data-theme="dark"] label {
+  color: #e5edf8;
+}
+
+/* Centralized Global Dark Theme */
+
+:root[data-theme="dark"],
+body[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-navy: #f1f5ff;
+  --color-blue: #8bafff;
+  --color-purple: #b09aff;
+
+  --color-text: #e5edf8;
+  --color-text-muted: #a5b4c8;
+  --color-border: #304159;
+
+  --color-background: #0d1829;
+  --color-background-soft: #142238;
+  --color-surface: #18263a;
+  --color-surface-hover: #263950;
+  --color-input-background: #111e31;
+
+  --color-shadow: 0 12px 35px rgb(0 0 0 / 25%);
+
+  /* Existing Student Dashboard variables */
+  --ss-blue: #8bafff;
+  --ss-blue-dark: #668fe0;
+  --ss-ink: #e5edf8;
+  --ss-muted: #a5b4c8;
+  --ss-border: #304159;
+  --ss-background: #0d1829;
+  --ss-white: #18263a;
+}
+
+/* Application backgrounds */
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] #root,
+:root[data-theme="dark"] .skillsphere-app {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Common text */
+
+:root[data-theme="dark"] .skillsphere-app h1,
+:root[data-theme="dark"] .skillsphere-app h2,
+:root[data-theme="dark"] .skillsphere-app h3,
+:root[data-theme="dark"] .skillsphere-app h4,
+:root[data-theme="dark"] .skillsphere-app h5,
+:root[data-theme="dark"] .skillsphere-app h6,
+:root[data-theme="dark"] .skillsphere-app label {
+  color: var(--color-navy);
+}
+
+:root[data-theme="dark"] .skillsphere-app p,
+:root[data-theme="dark"] .skillsphere-app li {
+  color: var(--color-text);
+}
+
+/* Common surfaces */
+
+:root[data-theme="dark"] .skillsphere-app .card,
+:root[data-theme="dark"] .skillsphere-app .panel,
+:root[data-theme="dark"] .skillsphere-app .modal,
+:root[data-theme="dark"] .skillsphere-app .dropdown-menu {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+/* Form controls */
+
+:root[data-theme="dark"] .skillsphere-app input,
+:root[data-theme="dark"] .skillsphere-app textarea,
+:root[data-theme="dark"] .skillsphere-app select {
+  color: var(--color-text);
+  background-color: var(--color-input-background);
+  border-color: var(--color-border);
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] .skillsphere-app input::placeholder,
+:root[data-theme="dark"] .skillsphere-app textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Footer */
+
+:root[data-theme="dark"] .site-footer {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .footer-brand {
+  color: var(--color-navy);
+}
+
+:root[data-theme="dark"] .site-footer > p,
+:root[data-theme="dark"] .footer-copyright {
+  color: var(--color-text-muted);
+}

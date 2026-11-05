@@ -1,0 +1,587 @@
+
+/* =========================================
+   SkillSphere - Reports & Analytics
+   Matches ReportsAnalytics.js class names
+========================================= */
+
+.reports-analytics {
+  width: 100%;
+  min-height: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+  background: #f4f7fc;
+  color: #243b64;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+
+.reports-analytics .reports-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.reports-analytics .reports-header h1 {
+  margin: 0 0 10px;
+  color: #243b64;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.reports-analytics .reports-header p {
+  margin: 0;
+  color: #71809a;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Buttons */
+
+.reports-analytics .reports-export-btn,
+.reports-analytics .reports-generate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 22px;
+  border: 1px solid #243b64;
+  border-radius: 8px;
+  background: #243b64;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.reports-analytics .reports-export-btn:hover:not(:disabled),
+.reports-analytics .reports-generate-btn:hover:not(:disabled) {
+  background: #314f80;
+  box-shadow: 0 4px 10px rgba(36, 59, 100, 0.16);
+  transform: translateY(-1px);
+}
+
+.reports-analytics .reports-export-btn:disabled,
+.reports-analytics .reports-generate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Date filters */
+
+.reports-analytics .reports-filters {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 24px;
+  margin-bottom: 26px;
+  border: 1px solid #e3eaf4;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(36, 59, 100, 0.04);
+}
+
+.reports-analytics .reports-date-field {
+  display: flex;
+  flex: 0 1 220px;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.reports-analytics .reports-date-field label {
+  color: #526580;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.reports-analytics .reports-date-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid #d7e0ee;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #243b64;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.reports-analytics .reports-date-field input:focus {
+  outline: 2px solid #8ca9d4;
+  outline-offset: 2px;
+  border-color: #8ca9d4;
+}
+
+.reports-analytics .reports-generate-btn {
+  margin-bottom: 0;
+}
+
+/* Error message */
+
+.reports-analytics .reports-error {
+  padding: 15px 18px;
+  margin-bottom: 22px;
+  border: 1px solid #f2c5c5;
+  border-radius: 10px;
+  background: #fff0f0;
+  color: #a52c2c;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Metric cards */
+
+.reports-analytics .reports-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.reports-analytics .reports-metric-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+  min-height: 135px;
+  padding: 24px;
+  box-sizing: border-box;
+  border: 1px solid #e3eaf4;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(36, 59, 100, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.reports-analytics .reports-metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(36, 59, 100, 0.09);
+}
+
+.reports-analytics .reports-metric-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #edf2fc;
+  font-size: 23px;
+}
+
+.reports-analytics .reports-metric-card > div:last-child {
+  min-width: 0;
+}
+
+.reports-analytics .reports-metric-card p {
+  margin: 2px 0 12px;
+  color: #71809a;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.reports-analytics .reports-metric-card h2 {
+  margin: 0;
+  color: #243b64;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+/* Analytics panels */
+
+.reports-analytics .reports-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.reports-analytics .reports-panel {
+  min-width: 0;
+  padding: 25px;
+  box-sizing: border-box;
+  border: 1px solid #e3eaf4;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(36, 59, 100, 0.05);
+}
+
+.reports-analytics .reports-panel-heading {
+  margin-bottom: 25px;
+}
+
+.reports-analytics .reports-panel-heading h2 {
+  margin: 0 0 9px;
+  color: #243b64;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.reports-analytics .reports-panel-heading p {
+  margin: 0;
+  color: #71809a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Monthly registrations */
+
+.reports-analytics .reports-registration-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reports-analytics .reports-registration-row {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(70px, 2fr) 35px;
+  align-items: center;
+  gap: 12px;
+}
+
+.reports-analytics .reports-registration-row > span {
+  color: #526580;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.reports-analytics .reports-registration-row > strong {
+  color: #243b64;
+  font-size: 13px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Progress bars */
+
+.reports-analytics .reports-bar-track {
+  width: 100%;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #edf1f8;
+}
+
+.reports-analytics .reports-bar-fill {
+  height: 100%;
+  min-width: 0;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #314f80, #7298d3);
+  transition: width 0.35s ease;
+}
+
+/* Role distribution */
+
+.reports-analytics .reports-role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.reports-analytics .reports-role-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.reports-analytics .reports-role-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.reports-analytics .reports-role-label span {
+  color: #526580;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.reports-analytics .reports-role-label strong {
+  color: #243b64;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.reports-analytics .reports-role-fill {
+  background: linear-gradient(90deg, #6689c3, #9ab5e0);
+}
+
+/* Empty states */
+
+.reports-analytics .reports-empty {
+  padding: 25px 18px;
+  border: 1px dashed #d7e0ee;
+  border-radius: 10px;
+  background: #f8faff;
+  color: #8390a5;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* Keyboard accessibility */
+
+.reports-analytics button:focus-visible {
+  outline: 3px solid #8ca9d4;
+  outline-offset: 3px;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+  .reports-analytics {
+    padding: 22px;
+  }
+
+  .reports-analytics .reports-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reports-analytics .reports-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .reports-analytics {
+    padding: 16px;
+  }
+
+  .reports-analytics .reports-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .reports-analytics .reports-header h1 {
+    font-size: 24px;
+  }
+
+  .reports-analytics .reports-export-btn {
+    width: 100%;
+  }
+
+  .reports-analytics .reports-filters {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .reports-analytics .reports-date-field {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .reports-analytics .reports-generate-btn {
+    width: 100%;
+  }
+
+  .reports-analytics .reports-metrics {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reports-analytics .reports-metric-card {
+    min-height: 115px;
+    padding: 20px;
+  }
+
+  .reports-analytics .reports-panel {
+    padding: 19px;
+  }
+
+  .reports-analytics .reports-panel-heading h2 {
+    font-size: 18px;
+  }
+
+  .reports-analytics .reports-registration-row {
+    grid-template-columns: minmax(75px, 1fr) minmax(45px, 1.5fr) 28px;
+    gap: 8px;
+  }
+}
+
+
+
+
+/* =========================================
+   SKILLSPHERE - REPORTS & ANALYTICS
+   DARK THEME
+========================================= */
+
+:root[data-theme="dark"] .reports-analytics,
+body[data-theme="dark"] .reports-analytics {
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-header h1,
+:root[data-theme="dark"] .reports-analytics .reports-metric-card h2,
+:root[data-theme="dark"] .reports-analytics .reports-panel-heading h2,
+:root[data-theme="dark"] .reports-analytics .reports-registration-row > strong,
+:root[data-theme="dark"] .reports-analytics .reports-role-label strong,
+body[data-theme="dark"] .reports-analytics .reports-header h1,
+body[data-theme="dark"] .reports-analytics .reports-metric-card h2,
+body[data-theme="dark"] .reports-analytics .reports-panel-heading h2,
+body[data-theme="dark"] .reports-analytics .reports-registration-row > strong,
+body[data-theme="dark"] .reports-analytics .reports-role-label strong {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-header p,
+:root[data-theme="dark"] .reports-analytics .reports-metric-card p,
+:root[data-theme="dark"] .reports-analytics .reports-panel-heading p,
+:root[data-theme="dark"] .reports-analytics .reports-registration-row > span,
+:root[data-theme="dark"] .reports-analytics .reports-role-label span,
+body[data-theme="dark"] .reports-analytics .reports-header p,
+body[data-theme="dark"] .reports-analytics .reports-metric-card p,
+body[data-theme="dark"] .reports-analytics .reports-panel-heading p,
+body[data-theme="dark"] .reports-analytics .reports-registration-row > span,
+body[data-theme="dark"] .reports-analytics .reports-role-label span {
+  color: #a5b4c8;
+}
+
+/* Buttons */
+
+:root[data-theme="dark"] .reports-analytics .reports-export-btn,
+:root[data-theme="dark"] .reports-analytics .reports-generate-btn,
+body[data-theme="dark"] .reports-analytics .reports-export-btn,
+body[data-theme="dark"] .reports-analytics .reports-generate-btn {
+  background: #345486;
+  border-color: #456b9f;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-export-btn:hover:not(:disabled),
+:root[data-theme="dark"] .reports-analytics .reports-generate-btn:hover:not(:disabled),
+body[data-theme="dark"] .reports-analytics .reports-export-btn:hover:not(:disabled),
+body[data-theme="dark"] .reports-analytics .reports-generate-btn:hover:not(:disabled) {
+  background: #42699f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Filters */
+
+:root[data-theme="dark"] .reports-analytics .reports-filters,
+body[data-theme="dark"] .reports-analytics .reports-filters {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-date-field label,
+body[data-theme="dark"] .reports-analytics .reports-date-field label {
+  color: #c5d3e6;
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-date-field input,
+body[data-theme="dark"] .reports-analytics .reports-date-field input {
+  background: #111e31;
+  color: #e5edf8;
+  border-color: #3a4d67;
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-date-field input:focus,
+body[data-theme="dark"] .reports-analytics .reports-date-field input:focus {
+  outline-color: #719bd5;
+  border-color: #719bd5;
+}
+
+/* Error */
+
+:root[data-theme="dark"] .reports-analytics .reports-error,
+body[data-theme="dark"] .reports-analytics .reports-error {
+  background: #482b2b;
+  border-color: #704040;
+  color: #ffaaaa;
+}
+
+/* Metric cards */
+
+:root[data-theme="dark"] .reports-analytics .reports-metric-card,
+body[data-theme="dark"] .reports-analytics .reports-metric-card {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-metric-card:hover,
+body[data-theme="dark"] .reports-analytics .reports-metric-card:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-metric-icon,
+body[data-theme="dark"] .reports-analytics .reports-metric-icon {
+  background: #263950;
+}
+
+/* Analytics panels */
+
+:root[data-theme="dark"] .reports-analytics .reports-panel,
+body[data-theme="dark"] .reports-analytics .reports-panel {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Progress bars */
+
+:root[data-theme="dark"] .reports-analytics .reports-bar-track,
+body[data-theme="dark"] .reports-analytics .reports-bar-track {
+  background: #304159;
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-bar-fill,
+body[data-theme="dark"] .reports-analytics .reports-bar-fill {
+  background: linear-gradient(90deg, #5279b7, #91b5e8);
+}
+
+:root[data-theme="dark"] .reports-analytics .reports-role-fill,
+body[data-theme="dark"] .reports-analytics .reports-role-fill {
+  background: linear-gradient(90deg, #6689c3, #a9c5eb);
+}
+
+/* Empty states */
+
+:root[data-theme="dark"] .reports-analytics .reports-empty,
+body[data-theme="dark"] .reports-analytics .reports-empty {
+  background: #111e31;
+  border-color: #3a4d67;
+  color: #a5b4c8;
+}
+
+/* Keyboard accessibility */
+
+:root[data-theme="dark"] .reports-analytics button:focus-visible,
+body[data-theme="dark"] .reports-analytics button:focus-visible {
+  outline-color: #91b5e8;
+}

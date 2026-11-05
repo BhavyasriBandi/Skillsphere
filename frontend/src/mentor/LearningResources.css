@@ -1,0 +1,630 @@
+
+.mentor-resources-page {
+  width: 100%;
+  padding: 28px;
+  box-sizing: border-box;
+  color: #24344d;
+  font-family: inherit;
+}
+
+.mentor-resources-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.mentor-resources-eyebrow {
+  color: #7183a0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.mentor-resources-header h2 {
+  margin: 8px 0;
+  color: #243b64;
+  font-size: 27px;
+  font-weight: 750;
+}
+
+.mentor-resources-header p {
+  margin: 0;
+  color: #7b8799;
+  font-size: 14px;
+}
+
+.mentor-resources-total {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 20px;
+  background: #f1f5fb;
+  border: 1px solid #e2eaf5;
+  border-radius: 13px;
+  min-width: 165px;
+}
+
+.mentor-resources-total-icon {
+  font-size: 27px;
+}
+
+.mentor-resources-total div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mentor-resources-total strong {
+  color: #243b64;
+  font-size: 22px;
+}
+
+.mentor-resources-total span:last-child {
+  color: #7b8799;
+  font-size: 11px;
+}
+
+.mentor-resources-search-panel {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px;
+  margin-bottom: 27px;
+  background: #ffffff;
+  border: 1px solid #e7ecf3;
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(36, 59, 100, 0.04);
+}
+
+.mentor-resources-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 150px;
+  padding: 0 13px;
+  height: 43px;
+  background: #f7f9fc;
+  border: 1px solid #e8edf4;
+  border-radius: 8px;
+}
+
+.mentor-resources-search > span {
+  color: #7183a0;
+  font-size: 23px;
+}
+
+.mentor-resources-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #24344d;
+  font-size: 13px;
+}
+
+.mentor-resources-search-panel select {
+  min-width: 145px;
+  height: 43px;
+  padding: 0 12px;
+  border: 1px solid #e3e9f1;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #52627a;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mentor-resources-results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.mentor-resources-results h3 {
+  margin: 0;
+  color: #243b64;
+  font-size: 18px;
+}
+
+.mentor-resources-results > span {
+  color: #8793a5;
+  font-size: 12px;
+}
+
+.mentor-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px;
+}
+
+.mentor-resource-card {
+  min-width: 0;
+  padding: 21px;
+  background: #ffffff;
+  border: 1px solid #e8edf4;
+  border-radius: 13px;
+  box-shadow: 0 4px 14px rgba(36, 59, 100, 0.045);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mentor-resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 22px rgba(36, 59, 100, 0.09);
+}
+
+.mentor-resource-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mentor-resource-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 49px;
+  height: 49px;
+  border-radius: 12px;
+  background: #edf3fc;
+  font-size: 25px;
+}
+
+.mentor-resource-level {
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: #eef4ff;
+  color: #42679e;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.mentor-resource-category {
+  color: #6c83a8;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.mentor-resource-card h3 {
+  margin: 8px 0;
+  color: #243b64;
+  font-size: 18px;
+}
+
+.mentor-resource-description {
+  min-height: 40px;
+  margin: 0;
+  color: #7c8798;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.mentor-resource-meta {
+  display: flex;
+  gap: 19px;
+  padding: 13px 0;
+  margin-top: 12px;
+  border-top: 1px solid #edf0f5;
+  border-bottom: 1px solid #edf0f5;
+  color: #687992;
+  font-size: 11px;
+}
+
+.mentor-resource-skills {
+  margin-top: 16px;
+}
+
+.mentor-resource-skills strong,
+.mentor-resource-links strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #344966;
+  font-size: 12px;
+}
+
+.mentor-resource-skills > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.mentor-resource-skills > div span {
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: #f2f5fa;
+  color: #63748d;
+  font-size: 10px;
+}
+
+.mentor-resource-links {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #edf0f5;
+}
+
+.mentor-resource-links a {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  color: #426da9;
+  text-decoration: none;
+  font-size: 12px;
+  border-bottom: 1px solid #f1f3f7;
+}
+
+.mentor-resource-links a:last-child {
+  border-bottom: none;
+}
+
+.mentor-resource-links a:hover {
+  color: #243b64;
+}
+
+.mentor-resources-loading,
+.mentor-resources-error,
+.mentor-resources-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  color: #718096;
+}
+
+.mentor-resources-spinner {
+  width: 35px;
+  height: 35px;
+  border: 3px solid #e6edf7;
+  border-top-color: #345783;
+  border-radius: 50%;
+  animation: mentor-resource-spin 0.8s linear infinite;
+}
+
+@keyframes mentor-resource-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mentor-resources-error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff0f0;
+  color: #d14b4b;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.mentor-resources-error h3,
+.mentor-resources-empty h3 {
+  margin-bottom: 5px;
+  color: #243b64;
+}
+
+.mentor-resources-error p,
+.mentor-resources-empty p {
+  max-width: 420px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.mentor-resources-retry,
+.mentor-resources-empty button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #243b64;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mentor-resources-empty > span {
+  font-size: 35px;
+}
+
+@media (max-width: 900px) {
+  .mentor-resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mentor-resources-search-panel {
+    flex-wrap: wrap;
+  }
+
+  .mentor-resources-search {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .mentor-resources-page {
+    padding: 16px;
+  }
+
+  .mentor-resources-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mentor-resources-search-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mentor-resources-search-panel select {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================
+   SKILLSPHERE - MENTOR LEARNING RESOURCES
+   COMPLETE DARK THEME
+========================================== */
+
+/* Main page */
+
+:root[data-theme="dark"] .mentor-resources-page,
+body[data-theme="dark"] .mentor-resources-page {
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+/* Header */
+
+:root[data-theme="dark"] .mentor-resources-eyebrow,
+body[data-theme="dark"] .mentor-resources-eyebrow {
+  color: #9aabc1;
+}
+
+:root[data-theme="dark"] .mentor-resources-header h2,
+body[data-theme="dark"] .mentor-resources-header h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-resources-header p,
+body[data-theme="dark"] .mentor-resources-header p {
+  color: #a5b4c8;
+}
+
+/* Total resources */
+
+:root[data-theme="dark"] .mentor-resources-total,
+body[data-theme="dark"] .mentor-resources-total {
+  background: #22334b;
+  border-color: #304159;
+}
+
+:root[data-theme="dark"] .mentor-resources-total strong,
+body[data-theme="dark"] .mentor-resources-total strong {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-resources-total span:last-child,
+body[data-theme="dark"] .mentor-resources-total span:last-child {
+  color: #a5b4c8;
+}
+
+/* Search panel */
+
+:root[data-theme="dark"] .mentor-resources-search-panel,
+body[data-theme="dark"] .mentor-resources-search-panel {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .mentor-resources-search,
+body[data-theme="dark"] .mentor-resources-search {
+  background: #111e31;
+  border-color: #40516a;
+}
+
+:root[data-theme="dark"] .mentor-resources-search > span,
+body[data-theme="dark"] .mentor-resources-search > span {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .mentor-resources-search input,
+body[data-theme="dark"] .mentor-resources-search input {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-resources-search input::placeholder,
+body[data-theme="dark"] .mentor-resources-search input::placeholder {
+  color: #899bb4;
+}
+
+:root[data-theme="dark"] .mentor-resources-search-panel select,
+body[data-theme="dark"] .mentor-resources-search-panel select {
+  background: #111e31;
+  border-color: #40516a;
+  color: #dce6f5;
+}
+
+:root[data-theme="dark"] .mentor-resources-search-panel select:focus,
+body[data-theme="dark"] .mentor-resources-search-panel select:focus {
+  border-color: #719bd5;
+}
+
+/* Results heading */
+
+:root[data-theme="dark"] .mentor-resources-results h3,
+body[data-theme="dark"] .mentor-resources-results h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-resources-results > span,
+body[data-theme="dark"] .mentor-resources-results > span {
+  color: #a5b4c8;
+}
+
+/* Resource cards */
+
+:root[data-theme="dark"] .mentor-resource-card,
+body[data-theme="dark"] .mentor-resource-card {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .mentor-resource-card:hover,
+body[data-theme="dark"] .mentor-resource-card:hover {
+  box-shadow: 0 9px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* Resource icon */
+
+:root[data-theme="dark"] .mentor-resource-icon,
+body[data-theme="dark"] .mentor-resource-icon {
+  background: #263950;
+}
+
+/* Resource level */
+
+:root[data-theme="dark"] .mentor-resource-level,
+body[data-theme="dark"] .mentor-resource-level {
+  background: #263f61;
+  color: #a9caff;
+}
+
+/* Category and title */
+
+:root[data-theme="dark"] .mentor-resource-category,
+body[data-theme="dark"] .mentor-resource-category {
+  color: #a9caff;
+}
+
+:root[data-theme="dark"] .mentor-resource-card h3,
+body[data-theme="dark"] .mentor-resource-card h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-resource-description,
+body[data-theme="dark"] .mentor-resource-description {
+  color: #a5b4c8;
+}
+
+/* Resource metadata */
+
+:root[data-theme="dark"] .mentor-resource-meta,
+body[data-theme="dark"] .mentor-resource-meta {
+  border-top-color: #304159;
+  border-bottom-color: #304159;
+  color: #b3c2d7;
+}
+
+/* Skills section */
+
+:root[data-theme="dark"] .mentor-resource-skills strong,
+:root[data-theme="dark"] .mentor-resource-links strong,
+body[data-theme="dark"] .mentor-resource-skills strong,
+body[data-theme="dark"] .mentor-resource-links strong {
+  color: #dce6f5;
+}
+
+:root[data-theme="dark"] .mentor-resource-skills > div span,
+body[data-theme="dark"] .mentor-resource-skills > div span {
+  background: #263950;
+  color: #c5d4ed;
+}
+
+/* Resource links */
+
+:root[data-theme="dark"] .mentor-resource-links,
+body[data-theme="dark"] .mentor-resource-links {
+  border-top-color: #304159;
+}
+
+:root[data-theme="dark"] .mentor-resource-links a,
+body[data-theme="dark"] .mentor-resource-links a {
+  color: #91b9ef;
+  border-bottom-color: #304159;
+}
+
+:root[data-theme="dark"] .mentor-resource-links a:hover,
+body[data-theme="dark"] .mentor-resource-links a:hover {
+  color: #c5dcff;
+}
+
+/* Loading and empty states */
+
+:root[data-theme="dark"] .mentor-resources-loading,
+:root[data-theme="dark"] .mentor-resources-error,
+:root[data-theme="dark"] .mentor-resources-empty,
+body[data-theme="dark"] .mentor-resources-loading,
+body[data-theme="dark"] .mentor-resources-error,
+body[data-theme="dark"] .mentor-resources-empty {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .mentor-resources-spinner,
+body[data-theme="dark"] .mentor-resources-spinner {
+  border-color: #304159;
+  border-top-color: #719bd5;
+}
+
+/* Error icon */
+
+:root[data-theme="dark"] .mentor-resources-error-icon,
+body[data-theme="dark"] .mentor-resources-error-icon {
+  background: #512b35;
+  color: #ffaaaa;
+}
+
+/* Error and empty headings */
+
+:root[data-theme="dark"] .mentor-resources-error h3,
+:root[data-theme="dark"] .mentor-resources-empty h3,
+body[data-theme="dark"] .mentor-resources-error h3,
+body[data-theme="dark"] .mentor-resources-empty h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-resources-error p,
+:root[data-theme="dark"] .mentor-resources-empty p,
+body[data-theme="dark"] .mentor-resources-error p,
+body[data-theme="dark"] .mentor-resources-empty p {
+  color: #a5b4c8;
+}
+
+/* Retry and empty state buttons */
+
+:root[data-theme="dark"] .mentor-resources-retry,
+:root[data-theme="dark"] .mentor-resources-empty button,
+body[data-theme="dark"] .mentor-resources-retry,
+body[data-theme="dark"] .mentor-resources-empty button {
+  background: #345486;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .mentor-resources-retry:hover,
+:root[data-theme="dark"] .mentor-resources-empty button:hover,
+body[data-theme="dark"] .mentor-resources-retry:hover,
+body[data-theme="dark"] .mentor-resources-empty button:hover {
+  background: #42699f;
+}
+
+/* Accessibility */
+
+:root[data-theme="dark"] .mentor-resources-page button:focus-visible,
+body[data-theme="dark"] .mentor-resources-page button:focus-visible {
+  outline: 3px solid rgba(145, 181, 232, 0.55);
+  outline-offset: 2px;
+}
+

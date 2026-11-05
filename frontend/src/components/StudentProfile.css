@@ -1,0 +1,402 @@
+
+.student-profile-section {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 8px 0 28px;
+  color: #243653;
+  box-sizing: border-box;
+}
+
+.student-profile-section *,
+.student-profile-section *::before,
+.student-profile-section *::after {
+  box-sizing: border-box;
+}
+
+.sp-heading {
+  margin-bottom: 26px;
+}
+
+.sp-eyebrow {
+  display: inline-block;
+  margin-bottom: 9px;
+  color: #5079bd;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.sp-heading h1 {
+  margin: 0;
+  color: #243b64;
+  font-size: clamp(27px, 3vw, 34px);
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.sp-heading > p {
+  margin: 9px 0 0;
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.sp-card {
+  width: 100%;
+  padding: 30px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e5ebf4;
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(35, 59, 100, 0.06);
+}
+
+.sp-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #edf1f7;
+}
+
+.sp-avatar {
+  display: flex;
+  flex: 0 0 54px;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #426bb0, #294574);
+  border-radius: 16px;
+  font-size: 19px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sp-card-heading h2 {
+  margin: 0 0 5px;
+  color: #273d60;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.sp-card-heading p {
+  margin: 0;
+  color: #8490a3;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sp-message {
+  margin: 0 0 22px;
+  padding: 13px 15px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sp-message-success {
+  color: #176b49;
+  background: #edf9f2;
+  border-color: #ccebd9;
+}
+
+.sp-message-error {
+  color: #a83232;
+  background: #fff1f1;
+  border-color: #f2d0d0;
+}
+
+.sp-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 23px;
+  width: 100%;
+}
+
+.sp-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 9px;
+  min-width: 0;
+  margin: 0;
+  color: #344663;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.sp-field > span {
+  display: block;
+}
+
+.sp-field input,
+.sp-field textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 14px;
+  color: #283b59;
+  background: #fbfcfe;
+  border: 1px solid #dce4ef;
+  border-radius: 9px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.sp-field input {
+  height: 46px;
+}
+
+.sp-field textarea {
+  min-height: 125px;
+  resize: vertical;
+}
+
+.sp-field input::placeholder,
+.sp-field textarea::placeholder {
+  color: #a1adbd;
+  opacity: 1;
+}
+
+.sp-field input:focus,
+.sp-field textarea:focus {
+  background: #ffffff;
+  border-color: #6388c7;
+  box-shadow: 0 0 0 3px rgba(76, 116, 183, 0.12);
+}
+
+.sp-full-width {
+  grid-column: 1 / -1;
+}
+
+.sp-field small {
+  align-self: flex-end;
+  margin-top: -3px;
+  color: #8a96a8;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sp-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 29px;
+  padding-top: 23px;
+  border-top: 1px solid #edf1f7;
+}
+
+.sp-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sp-actions button:focus-visible {
+  outline: 3px solid rgba(76, 116, 183, 0.3);
+  outline-offset: 3px;
+}
+
+.sp-actions button:active {
+  transform: translateY(1px);
+}
+
+.sp-reset-button {
+  color: #536781;
+  background: #ffffff;
+  border-color: #dce4ef !important;
+}
+
+.sp-reset-button:hover {
+  background: #f5f7fb;
+  border-color: #b9c8dc !important;
+}
+
+.sp-save-button {
+  color: #ffffff;
+  background: #2d4c7c;
+  box-shadow: 0 4px 10px rgba(45, 76, 124, 0.16);
+}
+
+.sp-save-button:hover {
+  background: #203c69;
+  box-shadow: 0 6px 14px rgba(45, 76, 124, 0.22);
+}
+
+@media (max-width: 760px) {
+  .student-profile-section {
+    padding-top: 2px;
+  }
+
+  .sp-card {
+    padding: 22px;
+    border-radius: 14px;
+  }
+
+  .sp-form-grid {
+    column-gap: 16px;
+    row-gap: 19px;
+  }
+}
+
+@media (max-width: 540px) {
+  .sp-card {
+    padding: 18px 15px;
+  }
+
+  .sp-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 19px;
+  }
+
+  .sp-full-width {
+    grid-column: auto;
+  }
+
+  .sp-card-heading {
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .sp-avatar {
+    flex-basis: 46px;
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+  }
+
+  .sp-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .sp-actions button {
+    width: 100%;
+  }
+}
+
+
+
+
+/* ==========================================
+   SkillSphere - Student Profile Dark Theme
+   ========================================== */
+
+:root[data-theme="dark"] .student-profile-section {
+  color: #e2e8f0;
+}
+
+:root[data-theme="dark"] .sp-heading h1,
+:root[data-theme="dark"] .sp-card-heading h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .sp-heading > p,
+:root[data-theme="dark"] .sp-card-heading p,
+:root[data-theme="dark"] .sp-field small {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .sp-eyebrow {
+  color: #9bbcf0;
+}
+
+:root[data-theme="dark"] .sp-card {
+  background: #18263a;
+  border-color: #2b3c54;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .sp-card-heading {
+  border-bottom-color: #34445a;
+}
+
+:root[data-theme="dark"] .sp-avatar {
+  background: linear-gradient(135deg, #477bd0, #294878);
+}
+
+:root[data-theme="dark"] .sp-message-success {
+  color: #9be4bd;
+  background: #1c382f;
+  border-color: #397b5c;
+}
+
+:root[data-theme="dark"] .sp-message-error {
+  color: #ffabb1;
+  background: #452b32;
+  border-color: #70404a;
+}
+
+:root[data-theme="dark"] .sp-field {
+  color: #dce7f5;
+}
+
+:root[data-theme="dark"] .sp-field input,
+:root[data-theme="dark"] .sp-field textarea {
+  color: #e2e8f0;
+  background: #202f43;
+  border-color: #40516a;
+}
+
+:root[data-theme="dark"] .sp-field input::placeholder,
+:root[data-theme="dark"] .sp-field textarea::placeholder {
+  color: #8292a8;
+}
+
+:root[data-theme="dark"] .sp-field input:focus,
+:root[data-theme="dark"] .sp-field textarea:focus {
+  background: #26364b;
+  border-color: #78a9ed;
+  box-shadow: 0 0 0 3px rgba(120, 169, 237, 0.13);
+}
+
+:root[data-theme="dark"] .sp-actions {
+  border-top-color: #34445a;
+}
+
+:root[data-theme="dark"] .sp-reset-button {
+  color: #c8d5e6;
+  background: #26364b;
+  border-color: #435671 !important;
+}
+
+:root[data-theme="dark"] .sp-reset-button:hover {
+  background: #30445f;
+  border-color: #6b8ebc !important;
+}
+
+:root[data-theme="dark"] .sp-save-button {
+  color: #ffffff;
+  background: #315d96;
+  border-color: #4778b9;
+}
+
+:root[data-theme="dark"] .sp-save-button:hover {
+  background: #3b6eaa;
+}

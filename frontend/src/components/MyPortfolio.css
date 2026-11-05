@@ -1,0 +1,833 @@
+
+.mpf-page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 8px 4px 32px;
+  color: #263752;
+  font-family: inherit;
+}
+
+.mpf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.mpf-eyebrow {
+  color: #5079c9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.mpf-header h1 {
+  margin: 8px 0;
+  color: #243b64;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+}
+
+.mpf-header p {
+  max-width: 680px;
+  margin: 0;
+  color: #7c899d;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.mpf-print-button,
+.mpf-save-button,
+.mpf-add-button,
+.mpf-remove-button,
+.mpf-tab {
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.mpf-print-button {
+  padding: 12px 16px;
+  color: #315b9d;
+  background: #fff;
+  border: 1px solid #dce5f3;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mpf-print-button:hover {
+  background: #eff4ff;
+}
+
+.mpf-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 5px;
+  background: #edf1f8;
+  border-radius: 12px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.mpf-tab {
+  padding: 11px 17px;
+  color: #73819a;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mpf-tab.active {
+  color: #2f5898;
+  background: #fff;
+  box-shadow: 0 2px 7px rgba(35, 59, 100, 0.08);
+}
+
+.mpf-editor {
+  display: grid;
+  gap: 20px;
+}
+
+.mpf-card {
+  min-width: 0;
+  padding: 25px;
+  background: #fff;
+  border: 1px solid #e6ebf3;
+  border-radius: 17px;
+  box-shadow: 0 5px 20px rgba(35, 59, 100, 0.035);
+}
+
+.mpf-card-heading,
+.mpf-heading-left {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.mpf-card-heading {
+  margin-bottom: 22px;
+}
+
+.mpf-heading-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  place-items: center;
+  background: #edf3ff;
+  border-radius: 13px;
+  font-size: 22px;
+}
+
+.mpf-card-heading h2 {
+  margin: 0 0 6px;
+  color: #293f62;
+  font-size: 17px;
+}
+
+.mpf-card-heading p {
+  margin: 0;
+  color: #8995a8;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.mpf-heading-with-action {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.mpf-heading-left {
+  min-width: 0;
+}
+
+.mpf-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.mpf-page label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  color: #52637c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mpf-page input,
+.mpf-page textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 13px;
+  color: #293e5e;
+  background: #fbfcfe;
+  border: 1px solid #e0e6f0;
+  border-radius: 9px;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mpf-page input:focus,
+.mpf-page textarea:focus {
+  background: #fff;
+  border-color: #6d92d9;
+  box-shadow: 0 0 0 3px rgba(75, 120, 205, 0.1);
+}
+
+.mpf-page input::placeholder,
+.mpf-page textarea::placeholder {
+  color: #a5afbf;
+}
+
+.mpf-page textarea {
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.mpf-full-field {
+  margin-top: 19px;
+}
+
+.mpf-skill-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.mpf-skill-preview > span {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: #315b9d;
+  background: #edf3ff;
+  border: 1px solid #e0eaff;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mpf-add-button {
+  padding: 10px 13px;
+  color: #315b9d;
+  background: #edf3ff;
+  border: 1px solid #dfe8fb;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mpf-add-button:hover {
+  background: #e1ebff;
+}
+
+.mpf-repeat-item {
+  margin-top: 18px;
+  padding: 19px;
+  background: #fbfcfe;
+  border: 1px solid #e8edf5;
+  border-radius: 13px;
+}
+
+.mpf-repeat-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 17px;
+}
+
+.mpf-repeat-title strong {
+  color: #334b70;
+  font-size: 13px;
+}
+
+.mpf-remove-button {
+  padding: 7px 10px;
+  color: #bf5260;
+  background: #fff0f1;
+  border: 1px solid #f7dadd;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.mpf-remove-button:hover {
+  background: #ffe2e5;
+}
+
+.mpf-empty-text,
+.mpf-earned-badges > p {
+  color: #8592a6;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.mpf-earned-badges {
+  margin-top: 23px;
+  padding-top: 19px;
+  border-top: 1px solid #edf0f5;
+}
+
+.mpf-earned-badges h3 {
+  margin: 0;
+  color: #344966;
+  font-size: 13px;
+}
+
+.mpf-earned-badges .mpf-skill-preview {
+  margin-top: 12px;
+}
+
+.mpf-save-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 19px 22px;
+  background: #fff;
+  border: 1px solid #e6ebf3;
+  border-radius: 14px;
+}
+
+.mpf-save-row p {
+  margin: 0;
+  color: #8290a4;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.mpf-save-button {
+  padding: 12px 20px;
+  color: #fff;
+  background: #315b9d;
+  border: 0;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mpf-save-button:hover {
+  background: #243f70;
+}
+
+/* Portfolio preview */
+
+.mpf-preview {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5ebf4;
+  border-radius: 17px;
+  box-shadow: 0 7px 24px rgba(35, 59, 100, 0.05);
+}
+
+.mpf-preview-hero {
+  padding: 42px 30px;
+  color: #fff;
+  background: linear-gradient(120deg, #243b64, #315a99 70%, #527ec4);
+  text-align: center;
+}
+
+.mpf-avatar {
+  display: grid;
+  width: 82px;
+  height: 82px;
+  place-items: center;
+  margin: 0 auto 19px;
+  color: #315b9d;
+  background: #fff;
+  border: 5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.mpf-preview-label {
+  color: #cddcff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.mpf-preview-hero h2 {
+  margin: 12px 0 7px;
+  font-size: clamp(24px, 4vw, 34px);
+}
+
+.mpf-preview-hero > p {
+  margin: 0;
+  color: #dce7fb;
+  font-size: 14px;
+}
+
+.mpf-contact-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 22px;
+  color: #e6edfb;
+  font-size: 11px;
+}
+
+.mpf-preview-body {
+  padding: 28px;
+}
+
+.mpf-preview-section {
+  padding: 22px 0;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.mpf-preview-section:first-child {
+  padding-top: 0;
+}
+
+.mpf-preview-section:last-child {
+  border-bottom: 0;
+}
+
+.mpf-preview-section h3 {
+  margin: 0 0 15px;
+  color: #2c4771;
+  font-size: 17px;
+}
+
+.mpf-preview-section > p {
+  margin: 0;
+  color: #6f7e93;
+  font-size: 13px;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.mpf-preview-entry {
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  background: #f8faff;
+  border-left: 3px solid #6088d0;
+  border-radius: 5px 10px 10px 5px;
+}
+
+.mpf-preview-entry h4,
+.mpf-preview-project h4 {
+  margin: 0 0 7px;
+  color: #30496f;
+  font-size: 14px;
+}
+
+.mpf-preview-entry p,
+.mpf-preview-project p {
+  margin: 0 0 8px;
+  color: #728198;
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.mpf-preview-entry > span {
+  color: #8a97aa;
+  font-size: 11px;
+}
+
+.mpf-preview-project {
+  padding: 18px;
+  margin-bottom: 13px;
+  background: #f8faff;
+  border: 1px solid #e8edf6;
+  border-radius: 12px;
+}
+
+.mpf-preview-project .mpf-skill-preview {
+  margin-top: 12px;
+}
+
+.mpf-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 14px;
+}
+
+.mpf-project-links a {
+  color: #315b9d;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.mpf-project-links a:hover {
+  text-decoration: underline;
+}
+
+.mpf-preview-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  background: #f8faff;
+  border-top: 1px solid #e7ecf4;
+}
+
+.mpf-notice {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: calc(100vw - 32px);
+  padding: 15px 18px;
+  color: #fff;
+  background: #243b64;
+  border-radius: 12px;
+  box-shadow: 0 9px 30px rgba(25, 45, 78, 0.2);
+  font-size: 12px;
+}
+
+.mpf-notice button {
+  padding: 0;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 21px;
+}
+
+@media (max-width: 700px) {
+  .mpf-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mpf-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mpf-card {
+    padding: 18px 15px;
+  }
+
+  .mpf-repeat-item {
+    padding: 14px;
+  }
+
+  .mpf-preview-body {
+    padding: 20px 16px;
+  }
+
+  .mpf-heading-with-action {
+    align-items: flex-start;
+  }
+
+  .mpf-save-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mpf-save-button {
+    width: 100%;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .mpf-preview,
+  .mpf-preview * {
+    visibility: visible;
+  }
+
+  .mpf-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .mpf-preview-actions,
+  .mpf-tabs,
+  .mpf-header,
+  .mpf-notice {
+    display: none !important;
+  }
+
+  .mpf-preview-hero {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .mpf-preview-section,
+  .mpf-preview-project {
+    break-inside: avoid;
+  }
+}
+
+
+
+
+/* =====================================================
+   SKILLSPHERE MY PORTFOLIO - GLOBAL DARK THEME
+   ===================================================== */
+
+:root[data-theme="dark"] .mpf-page {
+  color: #e7eefb;
+}
+
+/* Header */
+
+:root[data-theme="dark"] .mpf-eyebrow {
+  color: #8fb5ff;
+}
+
+:root[data-theme="dark"] .mpf-header h1 {
+  color: #f4f7ff;
+}
+
+:root[data-theme="dark"] .mpf-header p {
+  color: #b2c2d8;
+}
+
+/* Print button and tabs */
+
+:root[data-theme="dark"] .mpf-print-button {
+  color: #c8dcff;
+  background: #203754;
+  border-color: #3b5879;
+}
+
+:root[data-theme="dark"] .mpf-print-button:hover {
+  background: #2c496c;
+}
+
+:root[data-theme="dark"] .mpf-tabs {
+  background: #172b45;
+}
+
+:root[data-theme="dark"] .mpf-tab {
+  color: #bdcbe0;
+}
+
+:root[data-theme="dark"] .mpf-tab.active {
+  color: #ffffff;
+  background: #315b91;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+}
+
+/* Main cards */
+
+:root[data-theme="dark"] .mpf-card,
+:root[data-theme="dark"] .mpf-save-row {
+  color: #e7eefb;
+  background: #1b2c43;
+  border-color: #304761;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.16);
+}
+
+/* Card headings */
+
+:root[data-theme="dark"] .mpf-heading-icon {
+  background: #263e66;
+}
+
+:root[data-theme="dark"] .mpf-card-heading h2 {
+  color: #f0f5ff;
+}
+
+:root[data-theme="dark"] .mpf-card-heading p {
+  color: #aabbd3;
+}
+
+/* Labels */
+
+:root[data-theme="dark"] .mpf-page label {
+  color: #d5e1f2;
+}
+
+/* Input fields */
+
+:root[data-theme="dark"] .mpf-page input,
+:root[data-theme="dark"] .mpf-page textarea {
+  color: #f0f5ff;
+  background: #172238;
+  border-color: #354d6c;
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] .mpf-page input:focus,
+:root[data-theme="dark"] .mpf-page textarea:focus {
+  background: #1c304b;
+  border-color: #79a9f5;
+  box-shadow: 0 0 0 3px rgba(91, 145, 225, 0.18);
+}
+
+:root[data-theme="dark"] .mpf-page input::placeholder,
+:root[data-theme="dark"] .mpf-page textarea::placeholder {
+  color: #91a4bf;
+}
+
+/* Skill badges */
+
+:root[data-theme="dark"] .mpf-skill-preview > span {
+  color: #c7dcff;
+  background: #263f63;
+  border-color: #3b5c82;
+}
+
+/* Add buttons */
+
+:root[data-theme="dark"] .mpf-add-button {
+  color: #c8dcff;
+  background: #263f63;
+  border-color: #3b5c82;
+}
+
+:root[data-theme="dark"] .mpf-add-button:hover {
+  background: #31527e;
+}
+
+/* Repeat items */
+
+:root[data-theme="dark"] .mpf-repeat-item {
+  background: #172b45;
+  border-color: #354f70;
+}
+
+:root[data-theme="dark"] .mpf-repeat-title strong {
+  color: #e7eefb;
+}
+
+:root[data-theme="dark"] .mpf-remove-button {
+  color: #ffadb5;
+  background: #412b38;
+  border-color: #704451;
+}
+
+:root[data-theme="dark"] .mpf-remove-button:hover {
+  background: #563443;
+}
+
+/* Empty text and badges */
+
+:root[data-theme="dark"] .mpf-empty-text,
+:root[data-theme="dark"] .mpf-earned-badges > p {
+  color: #aabbd3;
+}
+
+:root[data-theme="dark"] .mpf-earned-badges {
+  border-color: #304761;
+}
+
+:root[data-theme="dark"] .mpf-earned-badges h3 {
+  color: #e7eefb;
+}
+
+/* Save section */
+
+:root[data-theme="dark"] .mpf-save-row p {
+  color: #b2c2d8;
+}
+
+:root[data-theme="dark"] .mpf-save-button {
+  color: #ffffff;
+  background: #3478d4;
+}
+
+:root[data-theme="dark"] .mpf-save-button:hover {
+  background: #2867bd;
+}
+
+/* Portfolio preview */
+
+:root[data-theme="dark"] .mpf-preview {
+  background: #14253b;
+  border-color: #304761;
+  box-shadow: 0 7px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Keep preview hero gradient unchanged */
+
+:root[data-theme="dark"] .mpf-preview-body {
+  background: #14253b;
+}
+
+:root[data-theme="dark"] .mpf-preview-section {
+  border-color: #304761;
+}
+
+:root[data-theme="dark"] .mpf-preview-section h3 {
+  color: #d9e7ff;
+}
+
+:root[data-theme="dark"] .mpf-preview-section > p {
+  color: #bdcbe0;
+}
+
+:root[data-theme="dark"] .mpf-preview-entry {
+  background: #1b304b;
+  border-left-color: #6d9de8;
+}
+
+:root[data-theme="dark"] .mpf-preview-entry h4,
+:root[data-theme="dark"] .mpf-preview-project h4 {
+  color: #e6efff;
+}
+
+:root[data-theme="dark"] .mpf-preview-entry p,
+:root[data-theme="dark"] .mpf-preview-project p {
+  color: #b3c3d9;
+}
+
+:root[data-theme="dark"] .mpf-preview-entry > span {
+  color: #aabbd3;
+}
+
+:root[data-theme="dark"] .mpf-preview-project {
+  background: #1b304b;
+  border-color: #354f70;
+}
+
+:root[data-theme="dark"] .mpf-project-links a {
+  color: #91baff;
+}
+
+/* Preview footer */
+
+:root[data-theme="dark"] .mpf-preview-actions {
+  background: #192d46;
+  border-color: #304761;
+}
+
+/* Notification message */
+
+:root[data-theme="dark"] .mpf-notice {
+  color: #ffffff;
+  background: #25466f;
+  box-shadow: 0 9px 30px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .mpf-notice button {
+  color: #ffffff;
+}
+
+/* Print mode remains unchanged */
+

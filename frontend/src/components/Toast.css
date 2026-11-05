@@ -1,0 +1,230 @@
+
+/* =========================================
+   SKILLSPHERE GLOBAL TOAST NOTIFICATIONS
+   ========================================= */
+
+.skillsphere-toast {
+  position: fixed !important;
+  top: 24px !important;
+  right: 24px !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  z-index: 100000 !important;
+
+  width: min(390px, calc(100vw - 32px));
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 15px 17px 18px;
+  box-sizing: border-box;
+
+  border: 1px solid transparent;
+  border-radius: 14px;
+
+  color: #ffffff;
+
+  box-shadow: 0 14px 40px rgba(28, 42, 75, 0.22);
+
+  overflow: hidden;
+
+  animation: skillsphereToastIn 0.3s ease-out;
+}
+
+/* SUCCESS - GREEN */
+.skillsphere-toast.toast-success {
+  background: #15803d;
+  border-left: 5px solid #22c55e;
+  color: #ffffff;
+}
+
+/* ERROR - RED */
+.skillsphere-toast.toast-error {
+  background: #dc2626;
+  border-left: 5px solid #991b1b;
+  color: #ffffff;
+}
+
+/* WARNING - ORANGE */
+.skillsphere-toast.toast-warning {
+  background: #d97706;
+  border-left: 5px solid #92400e;
+  color: #ffffff;
+}
+
+/* INFORMATION - BLUE */
+.skillsphere-toast.toast-info {
+  background: #2563eb;
+  border-left: 5px solid #1e40af;
+  color: #ffffff;
+}
+
+/* ICON */
+.skillsphere-toast-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+
+  font-size: 19px;
+  font-weight: 800;
+}
+
+/* CONTENT */
+.skillsphere-toast-content {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* TITLE */
+.skillsphere-toast-title {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* MESSAGE */
+.skillsphere-toast-message {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* CLOSE BUTTON */
+.skillsphere-toast-close {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.skillsphere-toast-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* PROGRESS BAR */
+.skillsphere-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  transform-origin: left;
+  animation: skillsphereToastCountdown 3s linear forwards;
+}
+
+/* ANIMATIONS */
+@keyframes skillsphereToastIn {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes skillsphereToastCountdown {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .skillsphere-toast {
+    top: 12px !important;
+    right: 12px !important;
+    left: 12px !important;
+    width: auto;
+  }
+}
+/* Success Toast - Green Progress Line */
+.skillsphere-toast.toast-success .skillsphere-toast-progress {
+  background: #86efac !important;
+}
+
+/* Error Toast - Red Progress Line */
+.skillsphere-toast.toast-error .skillsphere-toast-progress {
+  background: #fca5a5 !important;
+}
+
+/* Warning Toast - Yellow Progress Line */
+.skillsphere-toast.toast-warning .skillsphere-toast-progress {
+  background: #fcd34d !important;
+}
+
+/* Info Toast - Blue Progress Line */
+.skillsphere-toast.toast-info .skillsphere-toast-progress {
+  background: #93c5fd !important;
+}/* =========================================
+   SKILLSPHERE - COMMON SUCCESS TOAST DESIGN
+   Apply consistently across all pages
+   ========================================= */
+
+.skillsphere-toast.toast-success {
+  background: #ffffff !important;
+  border-left: 5px solid #16a36a !important;
+  color: #253454 !important;
+  box-shadow: 0 12px 35px rgba(20, 40, 80, 0.16) !important;
+}
+
+.skillsphere-toast.toast-success .skillsphere-toast-icon {
+  background: #e6f8ef !important;
+  color: #15965f !important;
+}
+
+.skillsphere-toast.toast-success .skillsphere-toast-title {
+  color: #253454 !important;
+}
+
+.skillsphere-toast.toast-success .skillsphere-toast-message {
+  color: #344563 !important;
+}
+
+.skillsphere-toast.toast-success .skillsphere-toast-close {
+  color: #8491a7 !important;
+}
+
+.skillsphere-toast.toast-success .skillsphere-toast-progress {
+  background: #16a36a !important;
+}

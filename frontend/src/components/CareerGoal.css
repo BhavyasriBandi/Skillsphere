@@ -1,0 +1,642 @@
+
+.career-goal-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #24344d;
+  animation: careerGoalAppear 0.3s ease;
+}
+
+.career-goal-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 25px;
+}
+
+.career-goal-heading h1 {
+  margin: 8px 0;
+  color: #1d2e49;
+  font-size: clamp(27px, 3vw, 34px);
+  letter-spacing: -0.8px;
+}
+
+.career-goal-heading p {
+  margin: 0;
+  max-width: 650px;
+  color: #758198;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.career-goal-heading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  border-radius: 19px;
+  background: #eaf0ff;
+  color: #3159a4;
+  font-size: 37px;
+}
+
+.career-goal-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 27px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  border: 1px solid #dbe5fa;
+  border-radius: 19px;
+  background: linear-gradient(115deg, #f1f5ff 0%, #ffffff 70%);
+}
+
+.career-goal-banner::after {
+  position: absolute;
+  top: -75px;
+  right: 90px;
+  width: 190px;
+  height: 190px;
+  border: 1px solid #dce6fa;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.career-goal-banner-symbol {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 17px;
+  background: #294878;
+  color: #ffffff;
+  font-size: 28px;
+}
+
+.career-goal-banner-copy {
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.career-goal-banner-copy > span {
+  color: #5775ad;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.career-goal-banner-copy h2 {
+  margin: 8px 0 5px;
+  color: #243b64;
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+
+.career-goal-banner-copy p {
+  margin: 0;
+  color: #71809a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.career-goal-progress {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  border: 5px solid #d8e4fc;
+  border-top-color: #4169b2;
+  border-right-color: #4169b2;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.career-goal-progress strong {
+  color: #294878;
+  font-size: 20px;
+}
+
+.career-goal-progress span {
+  margin-top: 3px;
+  color: #8290a7;
+  font-size: 9px;
+}
+
+.career-goal-card {
+  padding: 27px;
+  border: 1px solid #e5eaf2;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 5px 24px rgba(31, 55, 92, 0.035);
+}
+
+.career-goal-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 23px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #edf0f6;
+}
+
+.career-goal-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: #edf3ff;
+  color: #3159a4;
+  font-size: 24px;
+}
+
+.career-goal-card-heading h2 {
+  margin: 0 0 6px;
+  color: #263953;
+  font-size: 17px;
+}
+
+.career-goal-card-heading p {
+  margin: 0;
+  color: #8791a3;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.career-goal-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 23px 22px;
+}
+
+.career-goal-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 9px;
+}
+
+.career-goal-field-full {
+  grid-column: 1 / -1;
+}
+
+.career-goal-field label {
+  color: #36455c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.career-goal-field input,
+.career-goal-field select,
+.career-goal-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #dfe5ef;
+  border-radius: 10px;
+  outline: none;
+  background: #fbfcfe;
+  color: #2d3c53;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.career-goal-field input,
+.career-goal-field select {
+  min-height: 47px;
+}
+
+.career-goal-field textarea {
+  min-height: 125px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.career-goal-field input::placeholder,
+.career-goal-field textarea::placeholder {
+  color: #a0a9b8;
+}
+
+.career-goal-field input:focus,
+.career-goal-field select:focus,
+.career-goal-field textarea:focus {
+  border-color: #587fc3;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(69, 108, 180, 0.11);
+}
+
+.career-goal-field small {
+  color: #8994a6;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.career-goal-character-count {
+  align-self: flex-end;
+  margin-top: -3px;
+}
+
+.career-goal-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 27px;
+  padding-top: 22px;
+  border-top: 1px solid #edf0f6;
+}
+
+.career-goal-reset,
+.career-goal-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 45px;
+  padding: 0 19px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.career-goal-reset {
+  border: 1px solid #dfe5ef;
+  background: #ffffff;
+  color: #536178;
+}
+
+.career-goal-reset:hover:not(:disabled) {
+  background: #f4f6fa;
+}
+
+.career-goal-reset:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.career-goal-save {
+  border: 1px solid #294878;
+  background: #294878;
+  color: #ffffff;
+}
+
+.career-goal-save:hover {
+  transform: translateY(-1px);
+  background: #203b65;
+}
+
+.career-goal-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 21px;
+  padding: 18px 20px;
+  border: 1px solid #e3eafa;
+  border-radius: 13px;
+  background: #f6f8ff;
+}
+
+.career-goal-tip > span {
+  color: #4169b2;
+  font-size: 20px;
+}
+
+.career-goal-tip strong {
+  color: #354c73;
+  font-size: 12px;
+}
+
+.career-goal-tip p {
+  margin: 6px 0 0;
+  color: #77849a;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.career-goal-notice {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  animation: careerGoalAppear 0.2s ease;
+}
+
+.career-goal-notice > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.career-goal-notice p {
+  flex: 1;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.career-goal-notice button {
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.career-goal-notice.success {
+  border-color: #ccebdc;
+  background: #f0fbf5;
+  color: #216a4a;
+}
+
+.career-goal-notice.success > span {
+  background: #d6f3e3;
+}
+
+.career-goal-notice.error {
+  border-color: #f2d3d3;
+  background: #fff5f5;
+  color: #a33131;
+}
+
+.career-goal-notice.error > span {
+  background: #ffe3e3;
+}
+
+@keyframes careerGoalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .career-goal-heading {
+    align-items: flex-start;
+  }
+
+  .career-goal-heading-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 29px;
+  }
+
+  .career-goal-banner {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .career-goal-banner-copy {
+    flex-basis: calc(100% - 80px);
+  }
+
+  .career-goal-progress {
+    width: 68px;
+    height: 68px;
+    margin-left: auto;
+  }
+
+  .career-goal-card {
+    padding: 20px;
+  }
+
+  .career-goal-fields {
+    grid-template-columns: 1fr;
+    gap: 19px;
+  }
+
+  .career-goal-field-full {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .career-goal-heading h1 {
+    font-size: 27px;
+  }
+
+  .career-goal-banner {
+    gap: 13px;
+  }
+
+  .career-goal-banner-symbol {
+    width: 47px;
+    height: 47px;
+    border-radius: 14px;
+  }
+
+  .career-goal-banner-copy {
+    flex-basis: calc(100% - 65px);
+  }
+
+  .career-goal-banner-copy h2 {
+    font-size: 18px;
+  }
+
+  .career-goal-progress {
+    margin: 6px 0 0 auto;
+  }
+
+  .career-goal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .career-goal-reset,
+  .career-goal-save {
+    width: 100%;
+  }
+}
+
+
+
+/* ==========================================
+   SkillSphere - Career Goal Dark Theme
+   ========================================== */
+
+:root[data-theme="dark"] .career-goal-page {
+  color: #e2e8f0;
+}
+
+:root[data-theme="dark"] .career-goal-heading h1,
+:root[data-theme="dark"] .career-goal-banner-copy h2,
+:root[data-theme="dark"] .career-goal-card-heading h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .career-goal-heading p,
+:root[data-theme="dark"] .career-goal-banner-copy p,
+:root[data-theme="dark"] .career-goal-card-heading p,
+:root[data-theme="dark"] .career-goal-field small,
+:root[data-theme="dark"] .career-goal-tip p {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .career-goal-heading-icon {
+  color: #a9caff;
+  background: #263e60;
+}
+
+:root[data-theme="dark"] .career-goal-banner {
+  background: linear-gradient(115deg, #203653 0%, #18263a 70%);
+  border-color: #354c6c;
+}
+
+:root[data-theme="dark"] .career-goal-banner::after {
+  border-color: #3a506e;
+}
+
+:root[data-theme="dark"] .career-goal-banner-copy > span {
+  color: #9bbcf0;
+}
+
+:root[data-theme="dark"] .career-goal-progress {
+  background: #202f43;
+  border-color: #405879;
+  border-top-color: #78a9ed;
+  border-right-color: #78a9ed;
+}
+
+:root[data-theme="dark"] .career-goal-progress strong {
+  color: #c4dcff;
+}
+
+:root[data-theme="dark"] .career-goal-progress span {
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .career-goal-card {
+  background: #18263a;
+  border-color: #2b3c54;
+  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .career-goal-card-heading {
+  border-bottom-color: #34445a;
+}
+
+:root[data-theme="dark"] .career-goal-card-icon {
+  color: #a9caff;
+  background: #263e60;
+}
+
+:root[data-theme="dark"] .career-goal-field label {
+  color: #dce7f5;
+}
+
+:root[data-theme="dark"] .career-goal-field input,
+:root[data-theme="dark"] .career-goal-field select,
+:root[data-theme="dark"] .career-goal-field textarea {
+  color: #e2e8f0;
+  background: #202f43;
+  border-color: #40516a;
+}
+
+:root[data-theme="dark"] .career-goal-field input::placeholder,
+:root[data-theme="dark"] .career-goal-field textarea::placeholder {
+  color: #8292a8;
+}
+
+:root[data-theme="dark"] .career-goal-field input:focus,
+:root[data-theme="dark"] .career-goal-field select:focus,
+:root[data-theme="dark"] .career-goal-field textarea:focus {
+  background: #26364b;
+  border-color: #78a9ed;
+  box-shadow: 0 0 0 3px rgba(120, 169, 237, 0.13);
+}
+
+:root[data-theme="dark"] .career-goal-field select option {
+  color: #e2e8f0;
+  background: #202f43;
+}
+
+:root[data-theme="dark"] .career-goal-actions {
+  border-top-color: #34445a;
+}
+
+:root[data-theme="dark"] .career-goal-reset {
+  color: #c8d5e6;
+  background: #26364b;
+  border-color: #435671;
+}
+
+:root[data-theme="dark"] .career-goal-reset:hover:not(:disabled) {
+  background: #30445f;
+}
+
+:root[data-theme="dark"] .career-goal-save {
+  color: #ffffff;
+  background: #315d96;
+  border-color: #4778b9;
+}
+
+:root[data-theme="dark"] .career-goal-save:hover {
+  background: #3b6eaa;
+}
+
+:root[data-theme="dark"] .career-goal-tip {
+  background: #213650;
+  border-color: #344f70;
+}
+
+:root[data-theme="dark"] .career-goal-tip > span {
+  color: #9cc3ff;
+}
+
+:root[data-theme="dark"] .career-goal-tip strong {
+  color: #c5d9f5;
+}
+
+:root[data-theme="dark"] .career-goal-notice.success {
+  color: #9be4bd;
+  background: #1c382f;
+  border-color: #397b5c;
+}
+
+:root[data-theme="dark"] .career-goal-notice.success > span {
+  background: #285640;
+}
+
+:root[data-theme="dark"] .career-goal-notice.error {
+  color: #ffabb1;
+  background: #452b32;
+  border-color: #70404a;
+}
+
+:root[data-theme="dark"] .career-goal-notice.error > span {
+  background: #58333c;
+}

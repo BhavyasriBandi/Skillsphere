@@ -1,0 +1,595 @@
+
+.mentor-settings-content {
+  width: 100%;
+  padding: 28px;
+  color: #24324a;
+}
+
+.mentor-settings-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.mentor-settings-heading h1 {
+  margin: 0 0 8px;
+  color: #243b64;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.mentor-settings-heading p {
+  margin: 0;
+  color: #788398;
+  font-size: 14px;
+}
+
+.mentor-settings-card {
+  background: #ffffff;
+  border: 1px solid #e7ebf2;
+  border-radius: 13px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 12px rgba(36, 59, 100, 0.04);
+}
+
+.mentor-settings-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.mentor-settings-icon {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: #edf2fb;
+  font-size: 20px;
+}
+
+.mentor-settings-card-heading h2 {
+  margin: 0 0 5px;
+  color: #243b64;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.mentor-settings-card-heading p {
+  margin: 0;
+  color: #8993a5;
+  font-size: 13px;
+}
+
+.mentor-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.mentor-settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.mentor-settings-field label {
+  color: #34435c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mentor-settings-field input,
+.mentor-settings-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 13px;
+  border: 1px solid #dce2ec;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #34435c;
+  font-size: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mentor-settings-field input:focus,
+.mentor-settings-field select:focus {
+  border-color: #456da9;
+  box-shadow: 0 0 0 3px rgba(69, 109, 169, 0.1);
+}
+
+.mentor-settings-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.mentor-settings-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 0;
+  border-bottom: 1px solid #edf0f5;
+  cursor: pointer;
+}
+
+.mentor-settings-option:first-child {
+  padding-top: 0;
+}
+
+.mentor-settings-option:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.mentor-settings-option strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #34435c;
+  font-size: 14px;
+}
+
+.mentor-settings-option p {
+  margin: 0;
+  color: #8993a5;
+  font-size: 12px;
+}
+
+.mentor-settings-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.mentor-settings-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 43px;
+  height: 23px;
+  border-radius: 20px;
+  background: #cbd2df;
+  transition: background 0.2s;
+}
+
+.mentor-settings-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.mentor-settings-option input:checked + .mentor-settings-switch {
+  background: #345b91;
+}
+
+.mentor-settings-option input:checked + .mentor-settings-switch::after {
+  transform: translateX(20px);
+}
+
+.mentor-settings-option input:focus-visible + .mentor-settings-switch {
+  outline: 3px solid rgba(69, 109, 169, 0.25);
+  outline-offset: 3px;
+}
+
+.mentor-settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.mentor-settings-actions button {
+  min-width: 135px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.mentor-settings-reset {
+  background: #edf1f7;
+  color: #34435c;
+}
+
+.mentor-settings-reset:hover {
+  background: #e1e7f0;
+}
+
+.mentor-settings-save {
+  background: #243b64;
+  color: #ffffff;
+}
+
+.mentor-settings-save:hover {
+  background: #304f80;
+  transform: translateY(-1px);
+}
+
+.mentor-settings-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* TOAST NOTIFICATIONS */
+.mentor-settings-toast {
+  position: fixed;
+  top: 22px;
+  right: 25px;
+  z-index: 99999;
+  width: min(390px, calc(100vw - 35px));
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.16);
+  animation: mentorSettingsToastIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+.mentor-settings-toast.success {
+  color: #176b43;
+  background: #ffffff;
+  border-left: 5px solid #24a36a;
+}
+
+.mentor-settings-toast.error {
+  color: #a52d35;
+  background: #ffffff;
+  border-left: 5px solid #dc4545;
+}
+
+.mentor-settings-toast-icon {
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e9f7ef;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.mentor-settings-toast.error .mentor-settings-toast-icon {
+  background: #fff0f0;
+}
+
+.mentor-settings-toast-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.mentor-settings-toast-text strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.7px;
+}
+
+.mentor-settings-toast-text p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.mentor-settings-toast button {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.mentor-settings-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  animation: mentorSettingsToastProgress 3.5s linear forwards;
+}
+
+.success-progress {
+  background: #24a36a;
+}
+
+.error-progress {
+  background: #dc4545;
+}
+
+@keyframes mentorSettingsToastIn {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mentorSettingsToastProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.mentor-settings-message {
+  padding: 40px;
+  text-align: center;
+  color: #788398;
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .mentor-settings-content {
+    padding: 18px;
+  }
+
+  .mentor-settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mentor-settings-card {
+    padding: 18px;
+  }
+
+  .mentor-settings-toast {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mentor-settings-actions {
+    flex-direction: column-reverse;
+  }
+
+  .mentor-settings-actions button {
+    width: 100%;
+  }
+
+  .mentor-settings-option {
+    gap: 12px;
+  }
+}
+
+/* ==========================================
+   SKILLSPHERE - MENTOR SETTINGS
+   COMPLETE DARK THEME
+========================================== */
+
+/* Main page */
+
+:root[data-theme="dark"] .mentor-settings-content,
+body[data-theme="dark"] .mentor-settings-content {
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+/* Heading */
+
+:root[data-theme="dark"] .mentor-settings-heading h1,
+body[data-theme="dark"] .mentor-settings-heading h1 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-settings-heading p,
+body[data-theme="dark"] .mentor-settings-heading p {
+  color: #a5b4c8;
+}
+
+/* Settings cards */
+
+:root[data-theme="dark"] .mentor-settings-card,
+body[data-theme="dark"] .mentor-settings-card {
+  background: #18263a;
+  border-color: #304159;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card headings and icons */
+
+:root[data-theme="dark"] .mentor-settings-icon,
+body[data-theme="dark"] .mentor-settings-icon {
+  background: #263950;
+  color: #a9caff;
+}
+
+:root[data-theme="dark"] .mentor-settings-card-heading h2,
+body[data-theme="dark"] .mentor-settings-card-heading h2 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-settings-card-heading p,
+body[data-theme="dark"] .mentor-settings-card-heading p {
+  color: #a5b4c8;
+}
+
+/* Settings labels */
+
+:root[data-theme="dark"] .mentor-settings-field label,
+body[data-theme="dark"] .mentor-settings-field label {
+  color: #dce6f5;
+}
+
+/* Inputs and select */
+
+:root[data-theme="dark"] .mentor-settings-field input,
+:root[data-theme="dark"] .mentor-settings-field select,
+body[data-theme="dark"] .mentor-settings-field input,
+body[data-theme="dark"] .mentor-settings-field select {
+  background: #111e31;
+  color: #e5edf8;
+  border-color: #40516a;
+}
+
+:root[data-theme="dark"] .mentor-settings-field input::placeholder,
+body[data-theme="dark"] .mentor-settings-field input::placeholder {
+  color: #899bb4;
+}
+
+:root[data-theme="dark"] .mentor-settings-field input:focus,
+:root[data-theme="dark"] .mentor-settings-field select:focus,
+body[data-theme="dark"] .mentor-settings-field input:focus,
+body[data-theme="dark"] .mentor-settings-field select:focus {
+  border-color: #719bd5;
+  box-shadow: 0 0 0 3px rgba(113, 155, 213, 0.15);
+}
+
+/* Notification and preference options */
+
+:root[data-theme="dark"] .mentor-settings-option,
+body[data-theme="dark"] .mentor-settings-option {
+  border-bottom-color: #304159;
+}
+
+:root[data-theme="dark"] .mentor-settings-option strong,
+body[data-theme="dark"] .mentor-settings-option strong {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-settings-option p,
+body[data-theme="dark"] .mentor-settings-option p {
+  color: #a5b4c8;
+}
+
+/* Toggle switches */
+
+:root[data-theme="dark"] .mentor-settings-switch,
+body[data-theme="dark"] .mentor-settings-switch {
+  background: #53647a;
+}
+
+:root[data-theme="dark"] .mentor-settings-option input:checked + .mentor-settings-switch,
+body[data-theme="dark"] .mentor-settings-option input:checked + .mentor-settings-switch {
+  background: #527fba;
+}
+
+:root[data-theme="dark"] .mentor-settings-option input:focus-visible + .mentor-settings-switch,
+body[data-theme="dark"] .mentor-settings-option input:focus-visible + .mentor-settings-switch {
+  outline-color: rgba(145, 181, 232, 0.45);
+}
+
+/* Reset button */
+
+:root[data-theme="dark"] .mentor-settings-reset,
+body[data-theme="dark"] .mentor-settings-reset {
+  background: #293b53;
+  color: #dce6f5;
+}
+
+:root[data-theme="dark"] .mentor-settings-reset:hover,
+body[data-theme="dark"] .mentor-settings-reset:hover {
+  background: #354b68;
+}
+
+/* Save button */
+
+:root[data-theme="dark"] .mentor-settings-save,
+body[data-theme="dark"] .mentor-settings-save {
+  background: #345486;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .mentor-settings-save:hover,
+body[data-theme="dark"] .mentor-settings-save:hover {
+  background: #42699f;
+}
+
+/* Disabled buttons */
+
+:root[data-theme="dark"] .mentor-settings-actions button:disabled,
+body[data-theme="dark"] .mentor-settings-actions button:disabled {
+  opacity: 0.5;
+}
+
+/* Toast notifications */
+
+:root[data-theme="dark"] .mentor-settings-toast.success,
+:root[data-theme="dark"] .mentor-settings-toast.error,
+body[data-theme="dark"] .mentor-settings-toast.success,
+body[data-theme="dark"] .mentor-settings-toast.error {
+  background: #18263a;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .mentor-settings-toast.success,
+body[data-theme="dark"] .mentor-settings-toast.success {
+  color: #91e3bd;
+  border-left-color: #24a36a;
+}
+
+:root[data-theme="dark"] .mentor-settings-toast.error,
+body[data-theme="dark"] .mentor-settings-toast.error {
+  color: #ffaaaa;
+  border-left-color: #dc4545;
+}
+
+:root[data-theme="dark"] .mentor-settings-toast-icon,
+body[data-theme="dark"] .mentor-settings-toast-icon {
+  background: #194638;
+}
+
+:root[data-theme="dark"] .mentor-settings-toast.error .mentor-settings-toast-icon,
+body[data-theme="dark"] .mentor-settings-toast.error .mentor-settings-toast-icon {
+  background: #512b35;
+}
+
+:root[data-theme="dark"] .mentor-settings-toast-text strong,
+body[data-theme="dark"] .mentor-settings-toast-text strong {
+  color: inherit;
+}
+
+:root[data-theme="dark"] .mentor-settings-toast-text p,
+body[data-theme="dark"] .mentor-settings-toast-text p {
+  color: #dce6f5;
+}
+
+/* Toast close button */
+
+:root[data-theme="dark"] .mentor-settings-toast button,
+body[data-theme="dark"] .mentor-settings-toast button {
+  color: #dce6f5;
+}
+
+/* Empty and message state */
+
+:root[data-theme="dark"] .mentor-settings-message,
+body[data-theme="dark"] .mentor-settings-message {
+  background: #18263a;
+  color: #a5b4c8;
+}
+
+/* Accessibility */
+
+:root[data-theme="dark"] .mentor-settings-content button:focus-visible,
+body[data-theme="dark"] .mentor-settings-content button:focus-visible {
+  outline: 3px solid rgba(145, 181, 232, 0.55);
+  outline-offset: 2px;
+}

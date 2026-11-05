@@ -1,0 +1,664 @@
+
+.mentor-profile-content {
+  position: relative;
+  padding: 28px 32px;
+  min-height: calc(100vh - 90px);
+  color: #26344a;
+}
+
+.mentor-profile-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 23px;
+}
+
+.mentor-profile-heading h1 {
+  margin: 0;
+  color: #243b64;
+  font-size: 24px;
+}
+
+.mentor-profile-heading p {
+  margin: 7px 0 0;
+  color: #8995a8;
+  font-size: 13px;
+}
+
+.mentor-profile-edit-button,
+.mentor-profile-save-button {
+  border: none;
+  border-radius: 7px;
+  padding: 12px 20px;
+  background: #243b64;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.mentor-profile-edit-button:hover,
+.mentor-profile-save-button:hover {
+  background: #42699f;
+}
+
+.mentor-profile-card {
+  background: #fff;
+  border: 1px solid #e9eef5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.mentor-profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 27px 30px;
+  background: linear-gradient(110deg, #243b64, #42699f);
+  color: #fff;
+}
+
+.mentor-profile-avatar {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(255,255,255,0.65);
+  border-radius: 50%;
+  background: #fff;
+  color: #243b64;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.mentor-profile-identity h2 {
+  margin: 0 0 7px;
+  font-size: 21px;
+}
+
+.mentor-profile-identity p {
+  margin: 0 0 10px;
+  color: #e1eafa;
+  font-size: 13px;
+}
+
+.mentor-profile-identity span {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.16);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.mentor-profile-section {
+  padding: 25px 30px;
+}
+
+.mentor-profile-section-title {
+  margin-bottom: 22px;
+}
+
+.mentor-profile-section-title h3 {
+  margin: 0;
+  color: #243b64;
+  font-size: 17px;
+}
+
+.mentor-profile-section-title p {
+  margin: 6px 0 0;
+  color: #8995a8;
+  font-size: 12px;
+}
+
+.mentor-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.mentor-profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mentor-profile-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.mentor-profile-field label {
+  color: #344e75;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mentor-profile-field input,
+.mentor-profile-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dce4ef;
+  border-radius: 7px;
+  outline: none;
+  background: #fff;
+  color: #26344a;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.mentor-profile-field input:focus,
+.mentor-profile-field textarea:focus {
+  border-color: #5277b5;
+  box-shadow: 0 0 0 2px rgba(82,119,181,0.09);
+}
+
+.mentor-profile-field input:disabled,
+.mentor-profile-field textarea:disabled {
+  background: #f6f8fc;
+  color: #68768b;
+  cursor: not-allowed;
+}
+
+.mentor-profile-field textarea {
+  resize: vertical;
+  min-height: 85px;
+  line-height: 1.6;
+}
+
+.mentor-profile-field small {
+  color: #8995a8;
+  text-align: right;
+  font-size: 11px;
+}
+
+.mentor-profile-divider {
+  height: 1px;
+  margin: 0 30px;
+  background: #edf1f6;
+}
+
+.mentor-profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 30px;
+  border-top: 1px solid #edf1f6;
+  background: #fbfcfe;
+}
+
+.mentor-profile-cancel-button {
+  padding: 11px 20px;
+  border: 1px solid #dce4ef;
+  border-radius: 7px;
+  background: #fff;
+  color: #52627a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mentor-profile-cancel-button:hover {
+  background: #f1f5fb;
+}
+
+.mentor-profile-save-button:disabled,
+.mentor-profile-cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* TIMER TOAST NOTIFICATION */
+
+.mentor-profile-toast {
+  position: fixed;
+  top: 22px;
+  right: 25px;
+  z-index: 99999;
+  width: min(400px, calc(100vw - 35px));
+  min-height: 95px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 18px 17px 22px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  animation: mentorToastSlide 0.3s ease;
+}
+
+.mentor-profile-toast.success {
+  background: #fff;
+  color: #26344a;
+  border-left: 6px solid #24a05a;
+}
+
+.mentor-profile-toast.error {
+  background: #fff;
+  color: #26344a;
+  border-left: 6px solid #e34b4b;
+}
+
+.mentor-toast-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.success .mentor-toast-icon {
+  background: #e8f7ed;
+  color: #24a05a;
+}
+
+.error .mentor-toast-icon {
+  background: #fff0f0;
+  color: #e34b4b;
+}
+
+.mentor-toast-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.mentor-toast-text strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.mentor-toast-text p {
+  margin: 0;
+  color: #69768a;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mentor-profile-toast button {
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  color: #68768b;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mentor-toast-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  transform-origin: left center;
+  animation: toastCountdown 3s linear forwards;
+}
+
+.success-progress {
+  background: #24a05a;
+}
+
+.error-progress {
+  background: #e34b4b;
+}
+
+@keyframes toastCountdown {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes mentorToastSlide {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Loading and error */
+.mentor-profile-message {
+  padding: 35px;
+  background: #fff;
+  border: 1px solid #e9eef5;
+  border-radius: 10px;
+  text-align: center;
+  color: #68768b;
+}
+
+.mentor-profile-message button {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  background: #243b64;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 750px) {
+  .mentor-profile-content {
+    padding: 18px;
+  }
+
+  .mentor-profile-section {
+    padding: 22px 20px;
+  }
+
+  .mentor-profile-divider {
+    margin: 0 20px;
+  }
+
+  .mentor-profile-actions {
+    padding: 18px 20px;
+  }
+
+  .mentor-profile-toast {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 550px) {
+  .mentor-profile-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mentor-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mentor-profile-field.full-width {
+    grid-column: auto;
+  }
+
+  .mentor-profile-banner {
+    padding: 22px 20px;
+  }
+
+  .mentor-profile-avatar {
+    width: 62px;
+    height: 62px;
+    font-size: 21px;
+  }
+
+  .mentor-profile-identity h2 {
+    font-size: 18px;
+  }
+}
+
+/* ==========================================
+   SKILLSPHERE - MENTOR PROFILE
+   COMPLETE DARK THEME
+========================================== */
+
+/* Main content */
+
+:root[data-theme="dark"] .mentor-profile-content,
+body[data-theme="dark"] .mentor-profile-content {
+  background: #0d1829;
+  color: #e5edf8;
+}
+
+/* Heading */
+
+:root[data-theme="dark"] .mentor-profile-heading h1,
+body[data-theme="dark"] .mentor-profile-heading h1 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-profile-heading p,
+body[data-theme="dark"] .mentor-profile-heading p {
+  color: #a5b4c8;
+}
+
+/* Edit and save buttons */
+
+:root[data-theme="dark"] .mentor-profile-edit-button,
+:root[data-theme="dark"] .mentor-profile-save-button,
+body[data-theme="dark"] .mentor-profile-edit-button,
+body[data-theme="dark"] .mentor-profile-save-button {
+  background: #345486;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .mentor-profile-edit-button:hover,
+:root[data-theme="dark"] .mentor-profile-save-button:hover,
+body[data-theme="dark"] .mentor-profile-edit-button:hover,
+body[data-theme="dark"] .mentor-profile-save-button:hover {
+  background: #42699f;
+}
+
+/* Profile card */
+
+:root[data-theme="dark"] .mentor-profile-card,
+body[data-theme="dark"] .mentor-profile-card {
+  background: #18263a;
+  border-color: #304159;
+}
+
+/* Profile banner */
+
+:root[data-theme="dark"] .mentor-profile-banner,
+body[data-theme="dark"] .mentor-profile-banner {
+  background: linear-gradient(110deg, #243b64, #345486);
+  color: #ffffff;
+}
+
+/* Avatar */
+
+:root[data-theme="dark"] .mentor-profile-avatar,
+body[data-theme="dark"] .mentor-profile-avatar {
+  background: #263950;
+  border-color: #719bd5;
+  color: #e5edf8;
+}
+
+/* Identity */
+
+:root[data-theme="dark"] .mentor-profile-identity h2,
+body[data-theme="dark"] .mentor-profile-identity h2 {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .mentor-profile-identity p,
+body[data-theme="dark"] .mentor-profile-identity p {
+  color: #d0def0;
+}
+
+:root[data-theme="dark"] .mentor-profile-identity span,
+body[data-theme="dark"] .mentor-profile-identity span {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Profile sections */
+
+:root[data-theme="dark"] .mentor-profile-section,
+body[data-theme="dark"] .mentor-profile-section {
+  background: #18263a;
+}
+
+:root[data-theme="dark"] .mentor-profile-section-title h3,
+body[data-theme="dark"] .mentor-profile-section-title h3 {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-profile-section-title p,
+body[data-theme="dark"] .mentor-profile-section-title p {
+  color: #a5b4c8;
+}
+
+/* Form labels */
+
+:root[data-theme="dark"] .mentor-profile-field label,
+body[data-theme="dark"] .mentor-profile-field label {
+  color: #c5d4ed;
+}
+
+/* Input and textarea */
+
+:root[data-theme="dark"] .mentor-profile-field input,
+:root[data-theme="dark"] .mentor-profile-field textarea,
+body[data-theme="dark"] .mentor-profile-field input,
+body[data-theme="dark"] .mentor-profile-field textarea {
+  background: #111e31;
+  border-color: #3a4d67;
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-profile-field input::placeholder,
+:root[data-theme="dark"] .mentor-profile-field textarea::placeholder,
+body[data-theme="dark"] .mentor-profile-field input::placeholder,
+body[data-theme="dark"] .mentor-profile-field textarea::placeholder {
+  color: #8192aa;
+}
+
+:root[data-theme="dark"] .mentor-profile-field input:focus,
+:root[data-theme="dark"] .mentor-profile-field textarea:focus,
+body[data-theme="dark"] .mentor-profile-field input:focus,
+body[data-theme="dark"] .mentor-profile-field textarea:focus {
+  border-color: #719bd5;
+  box-shadow: 0 0 0 2px rgba(113, 155, 213, 0.15);
+}
+
+/* Disabled fields */
+
+:root[data-theme="dark"] .mentor-profile-field input:disabled,
+:root[data-theme="dark"] .mentor-profile-field textarea:disabled,
+body[data-theme="dark"] .mentor-profile-field input:disabled,
+body[data-theme="dark"] .mentor-profile-field textarea:disabled {
+  background: #202e49;
+  border-color: #304159;
+  color: #a5b4c8;
+}
+
+:root[data-theme="dark"] .mentor-profile-field small,
+body[data-theme="dark"] .mentor-profile-field small {
+  color: #a5b4c8;
+}
+
+/* Dividers */
+
+:root[data-theme="dark"] .mentor-profile-divider,
+body[data-theme="dark"] .mentor-profile-divider {
+  background: #304159;
+}
+
+/* Profile action footer */
+
+:root[data-theme="dark"] .mentor-profile-actions,
+body[data-theme="dark"] .mentor-profile-actions {
+  background: #142238;
+  border-top-color: #304159;
+}
+
+/* Cancel button */
+
+:root[data-theme="dark"] .mentor-profile-cancel-button,
+body[data-theme="dark"] .mentor-profile-cancel-button {
+  background: #263950;
+  border-color: #405675;
+  color: #dce6f5;
+}
+
+:root[data-theme="dark"] .mentor-profile-cancel-button:hover,
+body[data-theme="dark"] .mentor-profile-cancel-button:hover {
+  background: #344b68;
+}
+
+/* Disabled buttons */
+
+:root[data-theme="dark"] .mentor-profile-save-button:disabled,
+:root[data-theme="dark"] .mentor-profile-cancel-button:disabled,
+body[data-theme="dark"] .mentor-profile-save-button:disabled,
+body[data-theme="dark"] .mentor-profile-cancel-button:disabled {
+  opacity: 0.5;
+}
+
+/* Toast notifications */
+
+:root[data-theme="dark"] .mentor-profile-toast.success,
+:root[data-theme="dark"] .mentor-profile-toast.error,
+body[data-theme="dark"] .mentor-profile-toast.success,
+body[data-theme="dark"] .mentor-profile-toast.error {
+  background: #18263a;
+  color: #e5edf8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+:root[data-theme="dark"] .mentor-toast-text strong,
+body[data-theme="dark"] .mentor-toast-text strong {
+  color: #e5edf8;
+}
+
+:root[data-theme="dark"] .mentor-toast-text p,
+body[data-theme="dark"] .mentor-toast-text p {
+  color: #b3c2d7;
+}
+
+:root[data-theme="dark"] .mentor-profile-toast button,
+body[data-theme="dark"] .mentor-profile-toast button {
+  color: #c5d4ed;
+}
+
+:root[data-theme="dark"] .success .mentor-toast-icon,
+body[data-theme="dark"] .success .mentor-toast-icon {
+  background: #194638;
+  color: #91e3bd;
+}
+
+:root[data-theme="dark"] .error .mentor-toast-icon,
+body[data-theme="dark"] .error .mentor-toast-icon {
+  background: #492b30;
+  color: #ffb4b4;
+}
+
+/* Loading and error messages */
+
+:root[data-theme="dark"] .mentor-profile-message,
+body[data-theme="dark"] .mentor-profile-message {
+  background: #18263a;
+  border-color: #304159;
+  color: #b3c2d7;
+}
+
+:root[data-theme="dark"] .mentor-profile-message button,
+body[data-theme="dark"] .mentor-profile-message button {
+  background: #345486;
+  color: #ffffff;
+}
+
+/* Focus accessibility */
+
+:root[data-theme="dark"] .mentor-profile-content button:focus-visible,
+:root[data-theme="dark"] .mentor-profile-content input:focus-visible,
+:root[data-theme="dark"] .mentor-profile-content textarea:focus-visible,
+body[data-theme="dark"] .mentor-profile-content button:focus-visible,
+body[data-theme="dark"] .mentor-profile-content input:focus-visible,
+body[data-theme="dark"] .mentor-profile-content textarea:focus-visible {
+  outline: 3px solid rgba(145, 181, 232, 0.55);
+  outline-offset: 2px;
+}
