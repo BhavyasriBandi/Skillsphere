@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import { showToast } from "../components/ToastProvider";
 import "./AdminProjects.css";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/projects/admin/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/projects/admin/";
 const TOKEN_KEY = "skillsphere_access";
 
 const EMPTY_FORM = {

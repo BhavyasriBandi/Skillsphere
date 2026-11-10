@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { showToast } from "../components/ToastProvider";
 import "./AssessmentQuestionManagement.css";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/assessments/admin/questions/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/assessments/admin/questions/";
 
 const EMPTY_FORM = {
   skill: "Python",

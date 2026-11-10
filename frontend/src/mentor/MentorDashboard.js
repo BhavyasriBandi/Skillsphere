@@ -17,7 +17,7 @@ import FeedbackMessages from "./FeedbackMessages";
 import MentorNotifications from "./MentorNotifications";
 import MentorSettings from "./MentorSettings";
 
-const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
+const API_BASE_URL = "https://skillsphere-u93o.onrender.com";
 
 const menuItems = [
   "Dashboard",  "My Students", "Student Progress",

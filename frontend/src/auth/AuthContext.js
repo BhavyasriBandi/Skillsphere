@@ -7,7 +7,7 @@ import React, {
   useCallback,
 } from "react";
 
-export const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
+export const API_BASE_URL = "https://skillsphere-u93o.onrender.com";
 
 const ACCESS_KEY = "skillsphere_access";
 const REFRESH_KEY = "skillsphere_refresh";

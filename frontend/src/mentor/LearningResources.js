@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./LearningResources.css";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/mentors/learning-resources/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/mentors/learning-resources/";
 
 function LearningResources() {
   const [resources, setResources] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./FeedbackMessages.css";
 
-const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
+const API_BASE_URL = "https://skillsphere-u93o.onrender.com";
 
 function FeedbackMessages({ students = [] }) {
   const [activeTab, setActiveTab] = useState("messages");

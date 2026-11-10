@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./MentorInterviewPrep.css";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/mentors/interview-prep/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/mentors/interview-prep/";
 
 const CATEGORIES = [
   "All",

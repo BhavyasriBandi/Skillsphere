@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Toast from "./Toast";
 import "./SkillAnalysis.css";
 
-const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
+const API_BASE_URL = "https://skillsphere-u93o.onrender.com";
 
 const EXCLUDED_SKILLS = [
   "object-oriented programming",

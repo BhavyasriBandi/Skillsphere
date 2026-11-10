@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Toast from "./Toast";
 import "./SkillGap.css";
 
-const API_BASE = "https://skillsphere-17hl.onrender.com/api/skills/";
+const API_BASE = "https://skillsphere-u93o.onrender.com/api/skills/";
 const SKILLS_API = API_BASE;
 const ASSESSMENT_API = `${API_BASE}assessments/`;
 const PROGRESS_API = `${API_BASE}progress/`;

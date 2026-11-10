@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./MentorProfile.css";
 
-const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
+const API_BASE_URL = "https://skillsphere-u93o.onrender.com";
 
 const initialProfile = {
   phone: "",

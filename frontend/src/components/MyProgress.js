@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./MyProgress.css";
 import { showToast } from "../components/ToastProvider";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/careers/roadmap-progress/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/careers/roadmap-progress/";
 
 const STORAGE_KEYS = {
   assessments: "skillsphere_assessment_history",

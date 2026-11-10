@@ -1,5 +1,5 @@
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/progress/learning-hub/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/progress/learning-hub/";
 
 function getAuthHeaders() {
   // SkillSphere JWT access token

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./AdminAssessmentResults.css";
 
 const API_URL =
-  "https://skillsphere-17hl.onrender.com/api/skills/assessments/admin/results/";
+  "https://skillsphere-u93o.onrender.com/api/skills/assessments/admin/results/";
 
 function getToken() {
   return (

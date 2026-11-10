@@ -9,7 +9,7 @@ import React, {
 import "./InterviewPrep.css";
 import { showToast } from "../components/ToastProvider";
 
-const API_BASE = "https://skillsphere-17hl.onrender.com/api/interview-prep";
+const API_BASE = "https://skillsphere-u93o.onrender.com/api/interview-prep";
 
 const TOPICS = [
   "All Topics",

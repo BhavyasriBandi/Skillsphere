@@ -8,7 +8,7 @@ import "./AdminInterviewPreparation.css";
 import { showToast } from "../components/ToastProvider";
 
 const API_URL =
-  "https://skillsphere-17hl.onrender.com/api/interview-prep/admin/questions/";
+  "https://skillsphere-u93o.onrender.com/api/interview-prep/admin/questions/";
 
 const TOKEN_KEY = "skillsphere_access";
 

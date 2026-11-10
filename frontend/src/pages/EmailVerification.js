@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { showToast } from "../components/ToastProvider";
 import "./EmailVerification.css";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/auth";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/auth";
 
 function EmailVerification() {
   const navigate = useNavigate();

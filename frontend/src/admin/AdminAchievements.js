@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./AdminAchievements.css";
 import { showToast } from "../components/ToastProvider";
 
-const API_URL = "https://skillsphere-17hl.onrender.com/api/achievements/admin/";
+const API_URL = "https://skillsphere-u93o.onrender.com/api/achievements/admin/";
 
 const CATEGORIES = [
   "Career",

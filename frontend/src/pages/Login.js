@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Login.css";
 
-const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
+const API_BASE_URL = "https://skillsphere-u93o.onrender.com";
 
 const ACCESS_KEY = "skillsphere_access";
 const REFRESH_KEY = "skillsphere_refresh";
@@ -353,7 +353,7 @@ export default function Login() {
 
       const message =
         err instanceof TypeError && /fetch/i.test(err.message)
-          ? "Cannot connect to the backend. Make sure Django is running at https://skillsphere-17hl.onrender.com."
+          ? "Cannot connect to the backend. Make sure Django is running at https://skillsphere-u93o.onrender.com."
           : err.message || "Something went wrong. Please try again.";
 
       setError(message);

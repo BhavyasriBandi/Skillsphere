@@ -23,7 +23,7 @@ import AdminSecurityPermissions from "./AdminSecurityPermissions";
 import AdminAssessmentResults from "./AdminAssessmentResults";
 import { useAuth } from "../auth/AuthContext";
 const ADMIN_DASHBOARD_API =
-  "https://skillsphere-17hl.onrender.com/api/auth/admin/dashboard/";
+  "https://skillsphere-u93o.onrender.com/api/auth/admin/dashboard/";
 
 const MENU_GROUPS = [
   {
