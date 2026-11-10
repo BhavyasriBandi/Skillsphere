@@ -23,7 +23,7 @@ import AdminSecurityPermissions from "./AdminSecurityPermissions";
 import AdminAssessmentResults from "./AdminAssessmentResults";
 import { useAuth } from "../auth/AuthContext";
 const ADMIN_DASHBOARD_API =
-  "http://127.0.0.1:8000/api/auth/admin/dashboard/";
+  "https://skillsphere-17hl.onrender.com/api/auth/admin/dashboard/";
 
 const MENU_GROUPS = [
   {

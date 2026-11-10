@@ -4,7 +4,7 @@ import "./CareerGoal.css";
 import Toast, { showToast } from "./Toast";
 
 const API_URL =
-  "http://127.0.0.1:8000/api/learning-goals/career-goal/";
+  "https://skillsphere-17hl.onrender.com/api/learning-goals/career-goal/";
 
 const initialGoal = {
   careerRole: "",

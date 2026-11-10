@@ -7,7 +7,7 @@ const GOAL_KEY = "skillsphere_student_career_goal";
 const GAP_KEY = "skillsphere_student_skill_gap";
 const ROADMAP_KEY = "skillsphere_student_roadmap_progress";
 const ROADMAP_API_URL =
-  "http://127.0.0.1:8000/api/careers/roadmap-progress/";
+  "https://skillsphere-17hl.onrender.com/api/careers/roadmap-progress/";
 
 const CAREER_PLANS = {
   "Full Stack Developer": [

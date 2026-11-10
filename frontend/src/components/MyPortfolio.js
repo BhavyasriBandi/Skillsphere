@@ -4,7 +4,7 @@ import "./MyPortfolio.css";
 import Toast from "./Toast";
 
 const STORAGE_KEY = "skillsphere_student_portfolio";
-const API_URL = "http://127.0.0.1:8000/api/portfolio/";
+const API_URL = "https://skillsphere-17hl.onrender.com/api/portfolio/";
 
 const DEFAULT_PORTFOLIO = {
   name: "",

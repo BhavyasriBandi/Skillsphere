@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { showToast } from "../components/ToastProvider";
 import "./ReportsAnalytics.css";
 
-const API_URL = "http://127.0.0.1:8000/api/reports/analytics/";
+const API_URL = "https://skillsphere-17hl.onrender.com/api/reports/analytics/";
 const TOKEN_KEY = "skillsphere_access";
 
 const EMPTY_METRICS = {

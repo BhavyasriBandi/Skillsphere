@@ -7,7 +7,7 @@ import Toast, { showToast } from "../components/Toast";
 
 import "./Register.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/auth";
+const API_BASE_URL = "https://skillsphere-17hl.onrender.com/api/auth";
 
 const initialFormData = {
   first_name: "",

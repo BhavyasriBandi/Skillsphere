@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Toast from "./Toast";
 import "./SkillAssessment.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
 const QUESTION_COUNT = 10;
 
 const DIFFICULTIES = [

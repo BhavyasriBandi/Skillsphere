@@ -9,7 +9,7 @@ import { showToast } from "../components/ToastProvider";
 import "./AdminLearningResources.css";
 
 const API_URL =
-  "http://127.0.0.1:8000/api/learning-resources/";
+  "https://skillsphere-17hl.onrender.com/api/learning-resources/";
 
 const EMPTY_FORM = {
   title: "",

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Toast, { showToast } from "./Toast";
 
-const API_URL = "http://127.0.0.1:8000/api/auth/profile/";
+const API_URL = "https://skillsphere-17hl.onrender.com/api/auth/profile/";
 
 const emptyProfile = {
   fullName: "",

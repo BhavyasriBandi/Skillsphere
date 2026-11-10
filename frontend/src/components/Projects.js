@@ -8,7 +8,7 @@ import React, {
 import "./Projects.css";
 import { showToast } from "../components/ToastProvider";
 
-const API_URL = "http://127.0.0.1:8000/api/projects/";
+const API_URL = "https://skillsphere-17hl.onrender.com/api/projects/";
 
 const PAGE_SIZE = 5;
 

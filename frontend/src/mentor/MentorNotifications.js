@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./MentorNotifications.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
 
 function MentorNotifications() {
   const [notifications, setNotifications] = useState([]);

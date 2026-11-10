@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./Achievements.css";
 import { showToast } from "../components/ToastProvider";
 
-const ACHIEVEMENTS_API = "http://127.0.0.1:8000/api/achievements/";
+const ACHIEVEMENTS_API = "https://skillsphere-17hl.onrender.com/api/achievements/";
 
 const ACHIEVEMENTS = [
   { id: "career-starter", icon: "🎯", title: "Career Starter", description: "Set your first career goal.", category: "Career", requirement: "career", target: 1, points: 20, tier: "bronze" },

@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./Roadmaps.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://skillsphere-17hl.onrender.com";
 
 function Roadmaps() {
   const [roadmaps, setRoadmaps] = useState([]);

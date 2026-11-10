@@ -1,5 +1,5 @@
 
-const API_URL = "http://127.0.0.1:8000/api/progress/challenges/";
+const API_URL = "https://skillsphere-17hl.onrender.com/api/progress/challenges/";
 
 const TOKEN_KEY = "skillsphere_access";
 const FALLBACK_TOKEN_KEY = "access";
