@@ -2,8 +2,11 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+from urllib.parse import urlparse, unquote, parse_qs
 
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,14 +24,31 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # DJANGO CORE SETTINGS
 # =====================================================
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "django-insecure-skillsphere-development-key",
-)
+DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "yes")
 
-DEBUG = True
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = "django-insecure-skillsphere-development-key"
+    else:
+        raise ImproperlyConfigured(
+            "DJANGO_SECRET_KEY environment variable is required."
+        )
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "ALLOWED_HOSTS",
+        "localhost,127.0.0.1,.onrender.com",
+    ).split(",")
+    if host.strip()
+]
+
+RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+
+if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # =====================================================
@@ -90,6 +110,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -133,16 +154,37 @@ WSGI_APPLICATION = "config.wsgi.application"
 # DATABASE CONFIGURATION
 # =====================================================
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "skillsphere"),
-        "USER": os.getenv("DB_USER", "postgres"),
-        "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if DATABASE_URL:
+    db_url = urlparse(DATABASE_URL)
+    db_query = parse_qs(db_url.query)
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": unquote(db_url.path.lstrip("/")),
+            "USER": unquote(db_url.username or ""),
+            "PASSWORD": unquote(db_url.password or ""),
+            "HOST": db_url.hostname,
+            "PORT": db_url.port or "5432",
+            "OPTIONS": {
+                "sslmode": db_query.get("sslmode", ["require"])[0],
+            },
+            "CONN_MAX_AGE": 600,
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME", "skillsphere"),
+            "USER": os.getenv("DB_USER", "postgres"),
+            "PASSWORD": os.getenv("DB_PASSWORD", ""),
+            "HOST": os.getenv("DB_HOST", "localhost"),
+            "PORT": os.getenv("DB_PORT", "5432"),
+        }
+    }
 
 
 # =====================================================
@@ -194,11 +236,24 @@ USE_TZ = True
 # STATIC AND MEDIA FILES
 # =====================================================
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        ),
+    },
+}
 
 
 # =====================================================
@@ -231,7 +286,6 @@ REST_FRAMEWORK = {
 
     "PAGE_SIZE": 5,
 
-    # Login rate limiting
     "DEFAULT_THROTTLE_RATES": {
         "login": "5/minute",
     },
@@ -268,11 +322,43 @@ SIMPLE_JWT = {
 # =====================================================
 
 CORS_ALLOWED_ORIGINS = [
+    origin.strip().rstrip("/")
+    for origin in os.getenv(
+        "FRONTEND_URL",
+        "",
+    ).split(",")
+    if origin.strip()
+]
+
+CORS_ALLOWED_ORIGINS += [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip().rstrip("/")
+    for origin in os.getenv(
+        "CSRF_TRUSTED_ORIGINS",
+        "",
+    ).split(",")
+    if origin.strip()
+]
+
+if RENDER_EXTERNAL_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append(
+        f"https://{RENDER_EXTERNAL_HOSTNAME}"
+    )
+
+
+# =====================================================
+# PROXY / HTTPS CONFIGURATION
+# =====================================================
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+USE_X_FORWARDED_HOST = True
 
 
 # =====================================================
@@ -298,7 +384,6 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 
 if EMAIL_HOST_USER and EMAIL_HOST_PASSWORD:
-
     EMAIL_BACKEND = (
         "django.core.mail.backends.smtp.EmailBackend"
     )
@@ -307,26 +392,9 @@ if EMAIL_HOST_USER and EMAIL_HOST_PASSWORD:
         "DEFAULT_FROM_EMAIL",
         EMAIL_HOST_USER,
     )
-
 else:
-
     EMAIL_BACKEND = (
         "django.core.mail.backends.console.EmailBackend"
     )
 
     DEFAULT_FROM_EMAIL = "skillsphere@example.com"
-
-
-# =====================================================
-# LOCAL AI - OLLAMA
-# =====================================================
-
-OLLAMA_BASE_URL = os.getenv(
-    "OLLAMA_BASE_URL",
-    "http://127.0.0.1:11434",
-)
-
-OLLAMA_MODEL = os.getenv(
-    "OLLAMA_MODEL",
-    "qwen2.5:7b",
-)
