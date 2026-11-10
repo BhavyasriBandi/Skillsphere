@@ -1,13 +1,28 @@
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import "./SkillAnalysis.css";
 
 const API_BASE_URL = "http://127.0.0.1:8000";
+
+const formatNumber = (value) => {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : 0;
+};
+
+const getInitials = (name = "Student") =>
+  name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
 
 function SkillAnalysis() {
   const [analysisData, setAnalysisData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("all");
 
   const fetchSkillAnalysis = useCallback(async () => {
     try {
@@ -59,12 +74,116 @@ function SkillAnalysis() {
     fetchSkillAnalysis();
   }, [fetchSkillAnalysis]);
 
+  const summary = analysisData?.summary || {};
+  const proficiency = summary.proficiency || {};
+  const students = Array.isArray(analysisData?.students)
+    ? analysisData.students
+    : [];
+  const skillBreakdown = Array.isArray(analysisData?.skill_breakdown)
+    ? analysisData.skill_breakdown
+    : [];
+
+  const filteredStudents = useMemo(() => {
+    return students.filter((item) => {
+      const student = item.student || {};
+      const name = (student.name || "").toLowerCase();
+      const email = (student.email || "").toLowerCase();
+      const query = searchTerm.trim().toLowerCase();
+
+      const matchesSearch =
+        !query || name.includes(query) || email.includes(query);
+
+      const skills = Array.isArray(item.skills) ? item.skills : [];
+      const matchesLevel =
+        selectedLevel === "all" ||
+        skills.some(
+          (skill) =>
+            (skill.proficiency || "beginner").toLowerCase() === selectedLevel
+        );
+
+      return matchesSearch && matchesLevel;
+    });
+  }, [students, searchTerm, selectedLevel]);
+
+  const summaryCards = [
+    {
+      title: "Assigned Students",
+      value: analysisData?.student_count ?? 0,
+      icon: "♙",
+      tone: "blue",
+      note: "Students assigned to you",
+    },
+    {
+      title: "Total Skills",
+      value: summary.total_skills ?? 0,
+      icon: "✦",
+      tone: "purple",
+      note: "Skills across your students",
+    },
+    {
+      title: "Completed Skills",
+      value: summary.completed_skills ?? 0,
+      icon: "✓",
+      tone: "green",
+      note: "Successfully completed",
+    },
+    {
+      title: "Incomplete Skills",
+      value: summary.incomplete_skills ?? 0,
+      icon: "◷",
+      tone: "orange",
+      note: "Need more attention",
+    },
+  ];
+
+  const totalProficiency =
+    formatNumber(proficiency.beginner) +
+    formatNumber(proficiency.intermediate) +
+    formatNumber(proficiency.advanced);
+
+  const proficiencyItems = [
+    {
+      label: "Beginner",
+      value: formatNumber(proficiency.beginner),
+      className: "beginner",
+      color: "#e8a23a",
+    },
+    {
+      label: "Intermediate",
+      value: formatNumber(proficiency.intermediate),
+      className: "intermediate",
+      color: "#4388dc",
+    },
+    {
+      label: "Advanced",
+      value: formatNumber(proficiency.advanced),
+      className: "advanced",
+      color: "#27a879",
+    },
+  ];
+
+  const assessedSkills = skillBreakdown
+    .filter((skill) => skill.average_assessment_percentage !== null &&
+      skill.average_assessment_percentage !== undefined)
+    .map((skill) => ({
+      ...skill,
+      score: Math.min(
+        100,
+        Math.max(0, formatNumber(skill.average_assessment_percentage))
+      ),
+    }))
+    .sort((a, b) => b.score - a.score);
+
+  const topSkill = assessedSkills[0];
+  const needsAttention = assessedSkills[assessedSkills.length - 1];
+
   if (loading) {
     return (
-      <section className="skill-analysis-page">
-        <div className="skill-analysis-message">
-          <h2>Loading Skill Analysis...</h2>
-          <p>Please wait while we retrieve student skill information.</p>
+      <section className="mentor-skill-page">
+        <div className="msa-state-card">
+          <div className="msa-spinner" />
+          <h2>Loading Skill Analysis</h2>
+          <p>Retrieving your students' skill information...</p>
         </div>
       </section>
     );
@@ -72,8 +191,9 @@ function SkillAnalysis() {
 
   if (error) {
     return (
-      <section className="skill-analysis-page">
-        <div className="skill-analysis-message">
+      <section className="mentor-skill-page">
+        <div className="msa-state-card msa-error-card">
+          <div className="msa-state-icon">!</div>
           <h2>Unable to Load Skill Analysis</h2>
           <p>{error}</p>
           <button type="button" onClick={fetchSkillAnalysis}>
@@ -84,92 +204,208 @@ function SkillAnalysis() {
     );
   }
 
-  const summary = analysisData?.summary || {};
-  const proficiency = summary.proficiency || {};
-  const students = analysisData?.students || [];
-  const skillBreakdown = analysisData?.skill_breakdown || [];
-
-  const summaryCards = [
-    {
-      title: "Total Students",
-      value: analysisData?.student_count ?? 0,
-      icon: "👨‍🎓",
-    },
-    {
-      title: "Total Skills",
-      value: summary.total_skills ?? 0,
-      icon: "💡",
-    },
-    {
-      title: "Completed Skills",
-      value: summary.completed_skills ?? 0,
-      icon: "✅",
-    },
-    {
-      title: "Incomplete Skills",
-      value: summary.incomplete_skills ?? 0,
-      icon: "⏳",
-    },
-  ];
-
   return (
-    <section className="skill-analysis-page">
-      <div className="skill-analysis-heading">
+    <section className="mentor-skill-page">
+      {/* Page heading */}
+      <header className="msa-header">
         <div>
+          <div className="msa-eyebrow">
+            <span className="msa-eyebrow-dot" />
+            MENTOR WORKSPACE
+          </div>
           <h1>Student Skill Analysis</h1>
           <p>
-            Monitor student skills, proficiency levels and assessment
-            performance.
+            Understand student capabilities, track skill completion and
+            identify areas that need attention.
           </p>
         </div>
 
-        <button type="button" onClick={fetchSkillAnalysis}>
-          ↻ Refresh
+        <button
+          className="msa-refresh-button"
+          type="button"
+          onClick={fetchSkillAnalysis}
+        >
+          <span>↻</span> Refresh Data
         </button>
-      </div>
+      </header>
 
       {/* Summary cards */}
-      <div className="skill-analysis-summary">
+      <div className="msa-summary-grid">
         {summaryCards.map((card) => (
-          <div className="skill-analysis-card" key={card.title}>
-            <div className="skill-analysis-card-icon">{card.icon}</div>
-            <div>
-              <p>{card.title}</p>
-              <h2>{card.value}</h2>
+          <article className="msa-summary-card" key={card.title}>
+            <div className={`msa-summary-icon ${card.tone}`}>
+              {card.icon}
             </div>
-          </div>
+            <div className="msa-summary-content">
+              <span>{card.title}</span>
+              <strong>{card.value}</strong>
+              <small>{card.note}</small>
+            </div>
+            <div className={`msa-card-accent ${card.tone}`} />
+          </article>
         ))}
       </div>
 
-      {/* Proficiency overview */}
-      <div className="skill-analysis-panel">
-        <h2>Proficiency Overview</h2>
-
-        <div className="skill-proficiency-grid">
-          <div className="skill-proficiency-item beginner">
-            <span>Beginner</span>
-            <strong>{proficiency.beginner ?? 0}</strong>
+      {/* Proficiency and insights */}
+      <div className="msa-overview-grid">
+        <article className="msa-panel msa-proficiency-panel">
+          <div className="msa-panel-heading">
+            <div>
+              <span className="msa-section-label">SKILL DISTRIBUTION</span>
+              <h2>Proficiency Overview</h2>
+              <p>Distribution of student skill levels</p>
+            </div>
+            <span className="msa-heading-icon">◉</span>
           </div>
 
-          <div className="skill-proficiency-item intermediate">
-            <span>Intermediate</span>
-            <strong>{proficiency.intermediate ?? 0}</strong>
+          <div className="msa-proficiency-content">
+            <div className="msa-donut-wrap">
+              <div
+                className="msa-donut"
+                style={{
+                  background: totalProficiency
+                    ? `conic-gradient(
+                        #e8a23a 0% ${
+                          (formatNumber(proficiency.beginner) /
+                            totalProficiency) *
+                          100
+                        }%,
+                        #4388dc ${
+                          (formatNumber(proficiency.beginner) /
+                            totalProficiency) *
+                          100
+                        }% ${
+                          ((formatNumber(proficiency.beginner) +
+                            formatNumber(proficiency.intermediate)) /
+                            totalProficiency) *
+                          100
+                        }%,
+                        #27a879 ${
+                          ((formatNumber(proficiency.beginner) +
+                            formatNumber(proficiency.intermediate)) /
+                            totalProficiency) *
+                          100
+                        }% 100%)`
+                    : "#e9eef5",
+                }}
+              >
+                <div className="msa-donut-center">
+                  <strong>{totalProficiency}</strong>
+                  <span>Total levels</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="msa-proficiency-legend">
+              {proficiencyItems.map((item) => (
+                <div className="msa-legend-item" key={item.label}>
+                  <div className="msa-legend-label">
+                    <span
+                      className={`msa-legend-dot ${item.className}`}
+                    />
+                    <span>{item.label}</span>
+                  </div>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <article className="msa-panel msa-insights-panel">
+          <div className="msa-panel-heading">
+            <div>
+              <span className="msa-section-label">PERFORMANCE INSIGHTS</span>
+              <h2>Skill Highlights</h2>
+              <p>Based on available assessment averages</p>
+            </div>
+            <span className="msa-heading-icon">✧</span>
           </div>
 
-          <div className="skill-proficiency-item advanced">
-            <span>Advanced</span>
-            <strong>{proficiency.advanced ?? 0}</strong>
-          </div>
-        </div>
+          {assessedSkills.length > 0 ? (
+            <div className="msa-highlight-list">
+              <div className="msa-highlight-item positive">
+                <div className="msa-highlight-icon">↗</div>
+                <div>
+                  <span>Highest average assessment</span>
+                  <strong>{topSkill.skill_name}</strong>
+                  <small>{topSkill.score}% average score</small>
+                </div>
+              </div>
+
+              <div className="msa-highlight-item attention">
+                <div className="msa-highlight-icon">◎</div>
+                <div>
+                  <span>Lowest average assessment</span>
+                  <strong>{needsAttention.skill_name}</strong>
+                  <small>{needsAttention.score}% average score</small>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="msa-mini-empty">
+              <span>◎</span>
+              <p>No assessment averages available yet.</p>
+            </div>
+          )}
+        </article>
       </div>
 
-      {/* Skill breakdown */}
-      <div className="skill-analysis-panel">
-        <h2>Skill-wise Analysis</h2>
+      {/* Skill comparison */}
+      <article className="msa-panel">
+        <div className="msa-panel-heading msa-chart-heading">
+          <div>
+            <span className="msa-section-label">ASSESSMENT PERFORMANCE</span>
+            <h2>Skill-wise Performance</h2>
+            <p>Average assessment percentage for each skill</p>
+          </div>
+          <span className="msa-chart-unit">Score / 100</span>
+        </div>
+
+        {assessedSkills.length > 0 ? (
+          <div className="msa-performance-chart">
+            {assessedSkills.map((skill) => (
+              <div className="msa-performance-row" key={skill.skill_name}>
+                <div className="msa-performance-name" title={skill.skill_name}>
+                  {skill.skill_name}
+                </div>
+                <div className="msa-performance-track">
+                  <div
+                    className="msa-performance-fill"
+                    style={{ width: `${skill.score}%` }}
+                  />
+                </div>
+                <strong className="msa-performance-score">
+                  {skill.score}%
+                </strong>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="msa-empty-state">
+            <span>▥</span>
+            <h3>No assessment performance yet</h3>
+            <p>Skill averages will appear here when assessment data is available.</p>
+          </div>
+        )}
+      </article>
+
+      {/* Skill breakdown table */}
+      <article className="msa-panel">
+        <div className="msa-panel-heading">
+          <div>
+            <span className="msa-section-label">OVERALL BREAKDOWN</span>
+            <h2>Skill-wise Analysis</h2>
+            <p>Compare proficiency and completion across all skills</p>
+          </div>
+          <span className="msa-count-badge">
+            {skillBreakdown.length} Skills
+          </span>
+        </div>
 
         {skillBreakdown.length > 0 ? (
-          <div className="skill-analysis-table-wrapper">
-            <table className="skill-analysis-table">
+          <div className="msa-table-wrap">
+            <table className="msa-table">
               <thead>
                 <tr>
                   <th>Skill</th>
@@ -182,21 +418,37 @@ function SkillAnalysis() {
                   <th>Avg. Assessment</th>
                 </tr>
               </thead>
-
               <tbody>
                 {skillBreakdown.map((skill, index) => (
                   <tr key={`${skill.skill_name}-${index}`}>
-                    <td>{skill.skill_name}</td>
-                    <td>{skill.student_count}</td>
-                    <td>{skill.beginner}</td>
-                    <td>{skill.intermediate}</td>
-                    <td>{skill.advanced}</td>
-                    <td>{skill.completed}</td>
-                    <td>{skill.incomplete}</td>
+                    <td className="msa-table-skill">{skill.skill_name}</td>
+                    <td>{formatNumber(skill.student_count)}</td>
                     <td>
-                      {skill.average_assessment_percentage !== null
-                        ? `${skill.average_assessment_percentage}%`
-                        : "Not assessed"}
+                      <span className="msa-number-pill beginner">
+                        {formatNumber(skill.beginner)}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="msa-number-pill intermediate">
+                        {formatNumber(skill.intermediate)}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="msa-number-pill advanced">
+                        {formatNumber(skill.advanced)}
+                      </span>
+                    </td>
+                    <td>{formatNumber(skill.completed)}</td>
+                    <td>{formatNumber(skill.incomplete)}</td>
+                    <td>
+                      {skill.average_assessment_percentage !== null &&
+                      skill.average_assessment_percentage !== undefined ? (
+                        <strong className="msa-table-score">
+                          {skill.average_assessment_percentage}%
+                        </strong>
+                      ) : (
+                        <span className="msa-not-assessed">Not assessed</span>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -204,119 +456,176 @@ function SkillAnalysis() {
             </table>
           </div>
         ) : (
-          <div className="skill-analysis-empty">
-            <span>📊</span>
-            <p>No skill breakdown available yet.</p>
+          <div className="msa-empty-state">
+            <span>▤</span>
+            <h3>No skill breakdown available</h3>
+            <p>Skill statistics will appear here when student data is available.</p>
           </div>
         )}
-      </div>
+      </article>
 
-      {/* Individual student skills */}
-      <div className="skill-analysis-panel">
-        <h2>Student-wise Skill Details</h2>
+      {/* Student details */}
+      <article className="msa-panel msa-students-panel">
+        <div className="msa-panel-heading msa-students-heading">
+          <div>
+            <span className="msa-section-label">INDIVIDUAL PERFORMANCE</span>
+            <h2>Student-wise Skill Details</h2>
+            <p>Review each student's skills and proficiency levels</p>
+          </div>
+          <span className="msa-count-badge">
+            {filteredStudents.length} Students
+          </span>
+        </div>
 
-        {students.length > 0 ? (
-          <div className="skill-student-list">
-            {students.map((studentItem) => {
+        <div className="msa-student-toolbar">
+          <div className="msa-search-box">
+            <span>⌕</span>
+            <input
+              type="search"
+              placeholder="Search student by name or email..."
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+          </div>
+
+          <select
+            value={selectedLevel}
+            onChange={(event) => setSelectedLevel(event.target.value)}
+            aria-label="Filter students by proficiency"
+          >
+            <option value="all">All proficiency levels</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+
+        {filteredStudents.length > 0 ? (
+          <div className="msa-student-list">
+            {filteredStudents.map((studentItem, index) => {
               const student = studentItem.student || {};
-              const skills = studentItem.skills || [];
+              const skills = Array.isArray(studentItem.skills)
+                ? studentItem.skills
+                : [];
 
               return (
                 <div
-                  className="skill-student-card"
-                  key={student.id}
+                  className="msa-student-card"
+                  key={student.id || student.email || index}
                 >
-                  <div className="skill-student-header">
-                    <div className="skill-student-avatar">
-                      {(student.name || "S").charAt(0).toUpperCase()}
+                  <div className="msa-student-top">
+                    <div className="msa-student-identity">
+                      <div className="msa-student-avatar">
+                        {getInitials(student.name)}
+                      </div>
+                      <div>
+                        <h3>{student.name || "Student"}</h3>
+                        <p>{student.email || "Email not available"}</p>
+                      </div>
                     </div>
 
-                    <div>
-                      <h3>{student.name || "Student"}</h3>
-                      <p>{student.email || ""}</p>
+                    <div className="msa-student-total">
+                      <strong>{formatNumber(studentItem.total_skills)}</strong>
+                      <span>Total skills</span>
                     </div>
                   </div>
 
-                  <div className="skill-student-stats">
-                    <span>
-                      Total Skills: <strong>{studentItem.total_skills}</strong>
-                    </span>
-                    <span>
-                      Completed:{" "}
-                      <strong>{studentItem.completed_skills}</strong>
-                    </span>
-                    <span>
-                      Incomplete:{" "}
-                      <strong>{studentItem.incomplete_skills}</strong>
-                    </span>
+                  <div className="msa-student-stats">
+                    <div>
+                      <span className="msa-stat-mark completed">✓</span>
+                      <span>Completed</span>
+                      <strong>
+                        {formatNumber(studentItem.completed_skills)}
+                      </strong>
+                    </div>
+                    <div>
+                      <span className="msa-stat-mark incomplete">◷</span>
+                      <span>Incomplete</span>
+                      <strong>
+                        {formatNumber(studentItem.incomplete_skills)}
+                      </strong>
+                    </div>
                   </div>
 
                   {skills.length > 0 ? (
-                    <div className="skill-detail-table-wrapper">
-                      <table className="skill-detail-table">
-                        <thead>
-                          <tr>
-                            <th>Skill</th>
-                            <th>Category</th>
-                            <th>Proficiency</th>
-                            <th>Status</th>
-                            <th>Assessments</th>
-                          </tr>
-                        </thead>
+                    <div className="msa-student-skills-wrap">
+                      <div className="msa-student-skills-title">
+                        <strong>Skill details</strong>
+                        <span>{skills.length} records</span>
+                      </div>
 
-                        <tbody>
-                          {skills.map((skill) => (
-                            <tr key={skill.id}>
-                              <td>{skill.skill_name}</td>
-                              <td>{skill.category}</td>
-                              <td>
-                                <span
-                                  className={`skill-level ${(
-                                    skill.proficiency || "beginner"
-                                  ).toLowerCase()}`}
-                                >
-                                  {skill.proficiency}
-                                </span>
-                              </td>
-                              <td>
-                                <span
-                                  className={
-                                    skill.is_completed
-                                      ? "skill-status completed"
-                                      : "skill-status incomplete"
-                                  }
-                                >
-                                  {skill.is_completed
-                                    ? "Completed"
-                                    : "Incomplete"}
-                                </span>
-                              </td>
-                              <td>{skill.assessment_count}</td>
+                      <div className="msa-table-wrap">
+                        <table className="msa-table msa-student-table">
+                          <thead>
+                            <tr>
+                              <th>Skill</th>
+                              <th>Category</th>
+                              <th>Proficiency</th>
+                              <th>Status</th>
+                              <th>Assessments</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody>
+                            {skills.map((skill, skillIndex) => {
+                              const level = (
+                                skill.proficiency || "beginner"
+                              ).toLowerCase();
+
+                              return (
+                                <tr key={skill.id || skillIndex}>
+                                  <td className="msa-table-skill">
+                                    {skill.skill_name}
+                                  </td>
+                                  <td>{skill.category || "—"}</td>
+                                  <td>
+                                    <span
+                                      className={`msa-level-badge ${level}`}
+                                    >
+                                      {skill.proficiency || "Beginner"}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    <span
+                                      className={`msa-status-badge ${
+                                        skill.is_completed
+                                          ? "completed"
+                                          : "incomplete"
+                                      }`}
+                                    >
+                                      {skill.is_completed
+                                        ? "Completed"
+                                        : "Incomplete"}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    {formatNumber(skill.assessment_count)}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   ) : (
-                    <p className="skill-analysis-empty-text">
+                    <div className="msa-no-skills">
                       No skills added by this student yet.
-                    </p>
+                    </div>
                   )}
                 </div>
               );
             })}
           </div>
         ) : (
-          <div className="skill-analysis-empty">
-            <span>👨‍🎓</span>
-            <p>No active assigned students found.</p>
-            <small>
-              Student skill analysis will appear after students are assigned
-              to you.
-            </small>
+          <div className="msa-empty-state">
+            <span>♙</span>
+            <h3>No matching students found</h3>
+            <p>
+              Try changing the search term or proficiency filter.
+            </p>
           </div>
         )}
-      </div>
+      </article>
     </section>
   );
 }

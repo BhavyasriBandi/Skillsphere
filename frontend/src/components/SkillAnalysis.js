@@ -21,18 +21,14 @@ function getLevelClass(level) {
 }
 
 function formatDate(value) {
-  if (!value) return "Date not available";
-
+  if (!value) return "Date unavailable";
   const date = new Date(value);
-
-  if (Number.isNaN(date.getTime())) {
-    return "Date not available";
-  }
+  if (Number.isNaN(date.getTime())) return "Date unavailable";
 
   return date.toLocaleDateString("en-IN", {
-    year: "numeric",
-    month: "short",
     day: "numeric",
+    month: "short",
+    year: "numeric",
   });
 }
 
@@ -40,8 +36,8 @@ function getSkillShortName(name) {
   const value = String(name || "").toLowerCase();
 
   if (value.includes("python")) return "Py";
-  if (value.includes("java")) return "Ja";
   if (value.includes("javascript")) return "JS";
+  if (value.includes("java")) return "Ja";
   if (value.includes("c programming")) return "C";
   if (value.includes("sql")) return "SQL";
   if (value.includes("django")) return "Dj";
@@ -69,13 +65,8 @@ function getSkillColor(name) {
 }
 
 function normalizeSkillName(item) {
-  if (typeof item.skill_name === "string") {
-    return item.skill_name.trim();
-  }
-
-  if (typeof item.skill === "string") {
-    return item.skill.trim();
-  }
+  if (typeof item.skill_name === "string") return item.skill_name.trim();
+  if (typeof item.skill === "string") return item.skill.trim();
 
   if (item.skill && typeof item.skill === "object") {
     return item.skill.name || "";
@@ -84,19 +75,170 @@ function normalizeSkillName(item) {
   return "";
 }
 
+function TrendChart({ items }) {
+  const chartItems = useMemo(() => {
+    return [...items]
+      .sort(
+        (a, b) =>
+          new Date(a.completedAt).getTime() -
+          new Date(b.completedAt).getTime()
+      )
+      .slice(-12);
+  }, [items]);
+
+  if (!chartItems.length) {
+    return (
+      <div className="analysis-chart-empty">
+        <span>📈</span>
+        <strong>No trend data available</strong>
+        <p>Complete more assessments to see your performance trend.</p>
+      </div>
+    );
+  }
+
+  const width = 760;
+  const height = 260;
+  const left = 42;
+  const right = 22;
+  const top = 24;
+  const bottom = 42;
+  const chartWidth = width - left - right;
+  const chartHeight = height - top - bottom;
+
+  const points = chartItems.map((item, index) => ({
+    ...item,
+    x:
+      chartItems.length === 1
+        ? width / 2
+        : left + (index / (chartItems.length - 1)) * chartWidth,
+    y: top + ((100 - item.percentage) / 100) * chartHeight,
+  }));
+
+  const linePath = points
+    .map((point, index) =>
+      `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`
+    )
+    .join(" ");
+
+  const areaPath = `${linePath} L ${points[points.length - 1].x} ${
+    height - bottom
+  } L ${points[0].x} ${height - bottom} Z`;
+
+  const average = Math.round(
+    chartItems.reduce((sum, item) => sum + item.percentage, 0) /
+      chartItems.length
+  );
+
+  return (
+    <div className="analysis-chart-wrap">
+      <div className="analysis-chart-topline">
+        <div>
+          <span className="analysis-chart-caption">PERFORMANCE OVER TIME</span>
+          <strong className="analysis-chart-average">{average}%</strong>
+          <span className="analysis-chart-average-label">Average score</span>
+        </div>
+        <span className="analysis-chart-count">
+          {chartItems.length} recent {chartItems.length === 1 ? "attempt" : "attempts"}
+        </span>
+      </div>
+
+      <div className="analysis-chart-scroll">
+        <svg
+          className="analysis-trend-svg"
+          viewBox={`0 0 ${width} ${height}`}
+          role="img"
+          aria-label="Assessment score trend chart"
+        >
+          <defs>
+            <linearGradient id="skillTrendFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#6689ee" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="#6689ee" stopOpacity="0.015" />
+            </linearGradient>
+            <linearGradient id="skillTrendLine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#4779df" />
+              <stop offset="100%" stopColor="#9869e8" />
+            </linearGradient>
+          </defs>
+
+          {[0, 25, 50, 75, 100].map((value) => {
+            const y = top + ((100 - value) / 100) * chartHeight;
+            return (
+              <g key={value}>
+                <line
+                  x1={left}
+                  y1={y}
+                  x2={width - right}
+                  y2={y}
+                  className="analysis-chart-gridline"
+                />
+                <text
+                  x={left - 12}
+                  y={y + 4}
+                  textAnchor="end"
+                  className="analysis-chart-axis-label"
+                >
+                  {value}
+                </text>
+              </g>
+            );
+          })}
+
+          <path d={areaPath} fill="url(#skillTrendFill)" />
+          <path
+            d={linePath}
+            fill="none"
+            stroke="url(#skillTrendLine)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {points.map((point, index) => (
+            <g key={`${point.id || point.skill}-${index}`}>
+              <circle
+                cx={point.x}
+                cy={point.y}
+                r="9"
+                className="analysis-chart-point-halo"
+              />
+              <circle
+                cx={point.x}
+                cy={point.y}
+                r="5"
+                className="analysis-chart-point"
+              >
+                <title>
+                  {point.skill}: {point.percentage}% · {point.date}
+                </title>
+              </circle>
+              <text
+                x={point.x}
+                y={height - 14}
+                textAnchor="middle"
+                className="analysis-chart-date"
+              >
+                {point.date.split(" ").slice(0, 2).join(" ")}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+
+      <div className="analysis-chart-legend">
+        <span><i /> Assessment score</span>
+        <span>Scores are based on saved assessment attempts</span>
+      </div>
+    </div>
+  );
+}
+
 function SkillAnalysis() {
   const [skills, setSkills] = useState([]);
   const [history, setHistory] = useState([]);
-
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
-
   const [selectedSkill, setSelectedSkill] = useState("All");
-
-  const [toast, setToast] = useState({
-    message: "",
-    type: "success",
-  });
+  const [toast, setToast] = useState({ message: "", type: "success" });
 
   function showToast(message, type = "success") {
     setToast({ message, type });
@@ -106,10 +248,6 @@ function SkillAnalysis() {
     setToast({ message: "", type: "success" });
   }
 
-  // =====================================================
-  // LOAD SKILLS AND ASSESSMENT HISTORY
-  // =====================================================
-
   async function loadAnalysisData() {
     setLoading(true);
     setLoadError("");
@@ -118,14 +256,11 @@ function SkillAnalysis() {
       const token = localStorage.getItem("skillsphere_access");
 
       if (!token) {
-        throw new Error(
-          "Your login session was not found. Please log in again."
-        );
+        throw new Error("Your login session was not found. Please log in again.");
       }
 
       const [skillsResponse, historyResponse] = await Promise.all([
         fetch(`${API_BASE_URL}/api/skills/`),
-
         fetch(`${API_BASE_URL}/api/skills/assessments/`, {
           method: "GET",
           headers: {
@@ -136,15 +271,11 @@ function SkillAnalysis() {
       ]);
 
       if (!skillsResponse.ok) {
-        throw new Error(
-          `Unable to load skills. Server returned ${skillsResponse.status}.`
-        );
+        throw new Error(`Unable to load skills. Server returned ${skillsResponse.status}.`);
       }
 
       if (historyResponse.status === 401 || historyResponse.status === 403) {
-        throw new Error(
-          "Your session may have expired. Please log in again."
-        );
+        throw new Error("Your session may have expired. Please log in again.");
       }
 
       if (!historyResponse.ok) {
@@ -156,20 +287,13 @@ function SkillAnalysis() {
       const skillsData = await skillsResponse.json();
       const historyData = await historyResponse.json();
 
-      // Dynamic active skills from Django.
       const activeSkills = Array.isArray(skillsData.skills)
         ? skillsData.skills.filter((skill) => {
             const name = String(skill.name || "").trim().toLowerCase();
-
-            return (
-              skill.is_active &&
-              name &&
-              !EXCLUDED_SKILLS.includes(name)
-            );
+            return skill.is_active && name && !EXCLUDED_SKILLS.includes(name);
           })
         : [];
 
-      // Backend assessment history response.
       const resultItems = Array.isArray(historyData)
         ? historyData
         : Array.isArray(historyData.assessments)
@@ -210,11 +334,11 @@ function SkillAnalysis() {
             item.percentage >= 0 &&
             item.percentage <= 100
         )
-        .sort((a, b) => {
-          const dateA = new Date(a.completedAt).getTime() || 0;
-          const dateB = new Date(b.completedAt).getTime() || 0;
-          return dateB - dateA;
-        });
+        .sort(
+          (a, b) =>
+            new Date(b.completedAt).getTime() -
+            new Date(a.completedAt).getTime()
+        );
 
       setSkills(activeSkills);
       setHistory(normalizedHistory);
@@ -236,75 +360,59 @@ function SkillAnalysis() {
     }
 
     window.addEventListener("focus", handleWindowFocus);
-
-    return () => {
-      window.removeEventListener("focus", handleWindowFocus);
-    };
+    return () => window.removeEventListener("focus", handleWindowFocus);
   }, []);
 
-  // =====================================================
-  // VALID HISTORY
-  // =====================================================
-
-  const validHistory = useMemo(() => {
-    return history.filter(
-      (item) =>
-        item &&
-        Number.isFinite(Number(item.percentage)) &&
-        Number(item.percentage) >= 0 &&
-        Number(item.percentage) <= 100
-    );
-  }, [history]);
-
-  // =====================================================
-  // SKILL SUMMARIES
-  // =====================================================
-
-  const skillSummaries = useMemo(() => {
-    return skills.map((skill) => {
-      const attempts = validHistory.filter(
+  const validHistory = useMemo(
+    () =>
+      history.filter(
         (item) =>
-          item.skill.toLowerCase() === skill.name.toLowerCase()
-      );
+          item &&
+          Number.isFinite(Number(item.percentage)) &&
+          Number(item.percentage) >= 0 &&
+          Number(item.percentage) <= 100
+      ),
+    [history]
+  );
 
-      const latest = attempts[0] || null;
-      const previous = attempts[1] || null;
+  const skillSummaries = useMemo(
+    () =>
+      skills.map((skill) => {
+        const attempts = validHistory.filter(
+          (item) => item.skill.toLowerCase() === skill.name.toLowerCase()
+        );
 
-      const average = attempts.length
-        ? Math.round(
-            attempts.reduce(
-              (sum, item) => sum + item.percentage,
-              0
-            ) / attempts.length
-          )
-        : null;
-
-      const change =
-        latest && previous
-          ? latest.percentage - previous.percentage
+        const latest = attempts[0] || null;
+        const previous = attempts[1] || null;
+        const average = attempts.length
+          ? Math.round(
+              attempts.reduce((sum, item) => sum + item.percentage, 0) /
+                attempts.length
+            )
           : null;
 
-      return {
-        ...skill,
-        short: getSkillShortName(skill.name),
-        color: getSkillColor(skill.name),
-        description:
-          skill.description || "Skill assessment and development",
-        attempts,
-        latest,
-        previous,
-        average,
-        change,
-        level: latest
-          ? getLevel(latest.percentage)
-          : "Not assessed",
-      };
-    });
-  }, [skills, validHistory]);
+        const change =
+          latest && previous
+            ? latest.percentage - previous.percentage
+            : null;
 
-  const assessedSkills = skillSummaries.filter(
-    (skill) => skill.latest
+        return {
+          ...skill,
+          short: getSkillShortName(skill.name),
+          color: getSkillColor(skill.name),
+          description: skill.description || "Skill assessment and development",
+          attempts,
+          latest,
+          previous,
+          average,
+          change,
+          level: latest ? getLevel(latest.percentage) : "Not assessed",
+        };
+      }),
+    [skills, validHistory]
   );
+
+  const assessedSkills = skillSummaries.filter((skill) => skill.latest);
 
   const overallAverage = assessedSkills.length
     ? Math.round(
@@ -320,9 +428,7 @@ function SkillAnalysis() {
   const filteredHistory =
     selectedSkill === "All"
       ? validHistory
-      : validHistory.filter(
-          (item) => item.skill === selectedSkill
-        );
+      : validHistory.filter((item) => item.skill === selectedSkill);
 
   const strongestSkill = [...assessedSkills].sort(
     (a, b) => b.latest.percentage - a.latest.percentage
@@ -338,7 +444,6 @@ function SkillAnalysis() {
 
   function handleSkillFilterChange(value) {
     setSelectedSkill(value);
-
     showToast(
       value === "All"
         ? "Showing assessment history for all skills."
@@ -351,80 +456,51 @@ function SkillAnalysis() {
     if (!skill.latest) {
       return "Take your first assessment to discover your current level.";
     }
-
     if (skill.latest.percentage >= 80) {
       return "Practise advanced questions and build a real-world project.";
     }
-
     if (skill.latest.percentage >= 60) {
       return "Revise incorrect answers and practise intermediate problems.";
     }
-
     return "Review fundamentals and practise basic problems before retaking.";
   }
 
-  // =====================================================
-  // UI
-  // =====================================================
-
   return (
     <div className="skill-analysis-page">
-      <Toast
-        message={toast.message}
-        type={toast.type}
-        onClose={closeToast}
-      />
+      <Toast message={toast.message} type={toast.type} onClose={closeToast} />
 
       <header className="analysis-header">
         <div>
-          <span className="analysis-eyebrow">
-            MEASURE · UNDERSTAND · IMPROVE
-          </span>
-
+          <span className="analysis-eyebrow">MEASURE · UNDERSTAND · IMPROVE</span>
           <h1>Skill Analysis</h1>
-
-          <p>
-            Understand your assessment performance and decide what to learn
-            next.
-          </p>
+          <p>Understand your assessment performance and discover what to learn next.</p>
         </div>
-
-        <div className="analysis-header-icon" aria-hidden="true">
-          <span>↗</span>
-        </div>
+        <div className="analysis-header-icon" aria-hidden="true">↗</div>
       </header>
 
       <section className="analysis-summary-grid">
         <article className="analysis-summary-card">
           <div className="analysis-summary-icon blue">%</div>
           <span className="analysis-summary-label">Overall score</span>
-
           <strong className="analysis-summary-value">
             {overallAverage === null ? "—" : `${overallAverage}%`}
           </strong>
-
           <small>Average of latest assessed skills</small>
         </article>
 
         <article className="analysis-summary-card">
           <div className="analysis-summary-icon purple">✓</div>
           <span className="analysis-summary-label">Skills assessed</span>
-
           <strong className="analysis-summary-value">
             {assessedSkills.length}/{skills.length}
           </strong>
-
           <small>Subjects with assessment results</small>
         </article>
 
         <article className="analysis-summary-card">
           <div className="analysis-summary-icon green">↻</div>
           <span className="analysis-summary-label">Total attempts</span>
-
-          <strong className="analysis-summary-value">
-            {totalAttempts}
-          </strong>
-
+          <strong className="analysis-summary-value">{totalAttempts}</strong>
           <small>Saved assessment results</small>
         </article>
       </section>
@@ -440,38 +516,41 @@ function SkillAnalysis() {
           <div className="analysis-empty-icon">!</div>
           <h2>Unable to load assessment results</h2>
           <p>{loadError}</p>
-
-          <button
-            type="button"
-            onClick={loadAnalysisData}
-          >
-            Try again
-          </button>
+          <button type="button" onClick={loadAnalysisData}>Try again</button>
         </section>
       ) : validHistory.length === 0 ? (
         <section className="analysis-empty-card">
           <div className="analysis-empty-icon">▤</div>
           <h2>Your skill analysis starts here</h2>
-
           <p>
-            You haven't completed an assessment yet. Finish a Skill
-            Assessment to see your actual scores, skill levels, and
-            learning recommendations.
+            You haven't completed an assessment yet. Finish a Skill Assessment
+            to see your actual scores, skill levels, and learning recommendations.
           </p>
-
           <div className="analysis-empty-note">
             Your analysis will update using saved assessment results.
           </div>
         </section>
       ) : (
         <>
+          <section className="analysis-panel analysis-trend-panel">
+            <div className="analysis-panel-heading">
+              <div>
+                <span className="analysis-section-kicker">YOUR PROGRESS</span>
+                <h2>Performance Trend</h2>
+                <p>Track how your assessment scores change over time.</p>
+              </div>
+              <span className="analysis-neutral-badge">Live assessment data</span>
+            </div>
+            <TrendChart items={filteredHistory} />
+          </section>
+
           <section className="analysis-panel">
             <div className="analysis-panel-heading">
               <div>
+                <span className="analysis-section-kicker">SKILL BREAKDOWN</span>
                 <h2>Skill performance</h2>
                 <p>Your latest result for each subject.</p>
               </div>
-
               <span className="analysis-neutral-badge">
                 {assessedSkills.length} assessed
               </span>
@@ -479,60 +558,39 @@ function SkillAnalysis() {
 
             <div className="analysis-skill-list">
               {skillSummaries.map((skill) => (
-                <article
-                  className="analysis-skill-row"
-                  key={skill.id}
-                >
-                  <div
-                    className={`analysis-skill-icon ${skill.color}`}
-                    aria-hidden="true"
-                  >
+                <article className="analysis-skill-row" key={skill.id}>
+                  <div className={`analysis-skill-icon ${skill.color}`}>
                     {skill.short}
                   </div>
-
                   <div className="analysis-skill-main">
                     <div className="analysis-skill-title-row">
                       <div>
                         <h3>{skill.name}</h3>
                         <p>{skill.description}</p>
                       </div>
-
                       {skill.latest ? (
-                        <span
-                          className={`analysis-level-badge ${getLevelClass(
-                            skill.level
-                          )}`}
-                        >
+                        <span className={`analysis-level-badge ${getLevelClass(skill.level)}`}>
                           {skill.level}
                         </span>
                       ) : (
-                        <span className="analysis-not-assessed">
-                          Not assessed
-                        </span>
+                        <span className="analysis-not-assessed">Not assessed</span>
                       )}
                     </div>
-
                     <div className="analysis-bar-track">
                       <div
                         className={`analysis-bar-fill ${skill.color}`}
-                        style={{
-                          width: `${skill.latest?.percentage ?? 0}%`,
-                        }}
+                        style={{ width: `${skill.latest?.percentage ?? 0}%` }}
                       />
                     </div>
-
                     <div className="analysis-skill-meta">
                       <span>
                         {skill.latest
                           ? `${skill.latest.percentage}% latest score`
                           : "Complete an assessment to get a score"}
                       </span>
-
                       <span>
                         {skill.attempts.length}{" "}
-                        {skill.attempts.length === 1
-                          ? "attempt"
-                          : "attempts"}
+                        {skill.attempts.length === 1 ? "attempt" : "attempts"}
                       </span>
                     </div>
                   </div>
@@ -543,10 +601,7 @@ function SkillAnalysis() {
 
           <section className="analysis-insights-grid">
             <article className="analysis-insight-card">
-              <span className="analysis-insight-label">
-                STRONGEST SKILL
-              </span>
-
+              <span className="analysis-insight-label">STRONGEST SKILL</span>
               {strongestSkill ? (
                 <>
                   <div className="analysis-insight-heading">
@@ -555,52 +610,34 @@ function SkillAnalysis() {
                       {strongestSkill.latest.percentage}%
                     </span>
                   </div>
-
-                  <p>
-                    Your highest latest assessment score is in{" "}
-                    {strongestSkill.name}.
-                  </p>
+                  <p>Your highest latest assessment score is in {strongestSkill.name}.</p>
                 </>
               ) : (
-                <p>
-                  Complete an assessment to discover your strongest skill.
-                </p>
+                <p>Complete an assessment to discover your strongest skill.</p>
               )}
             </article>
 
             <article className="analysis-insight-card">
-              <span className="analysis-insight-label">
-                BIGGEST SCORE IMPROVEMENT
-              </span>
-
+              <span className="analysis-insight-label">BIGGEST SCORE IMPROVEMENT</span>
               {improvementSkill ? (
                 <>
                   <div className="analysis-insight-heading">
                     <h3>{improvementSkill.name}</h3>
-
-                    <span
-                      className={`analysis-change ${
-                        improvementSkill.change > 0
-                          ? "positive"
-                          : improvementSkill.change < 0
-                            ? "negative"
-                            : ""
-                      }`}
-                    >
+                    <span className={`analysis-change ${
+                      improvementSkill.change > 0
+                        ? "positive"
+                        : improvementSkill.change < 0
+                          ? "negative"
+                          : ""
+                    }`}>
                       {improvementSkill.change > 0 ? "+" : ""}
                       {improvementSkill.change}%
                     </span>
                   </div>
-
-                  <p>
-                    Compared with the previous saved attempt in this subject.
-                  </p>
+                  <p>Compared with the previous saved attempt in this subject.</p>
                 </>
               ) : (
-                <p>
-                  Take another assessment in the same subject to compare
-                  scores.
-                </p>
+                <p>Take another assessment in the same subject to compare scores.</p>
               )}
             </article>
           </section>
@@ -608,6 +645,7 @@ function SkillAnalysis() {
           <section className="analysis-panel">
             <div className="analysis-panel-heading">
               <div>
+                <span className="analysis-section-kicker">NEXT STEPS</span>
                 <h2>Learning recommendations</h2>
                 <p>Suggested next steps based on your latest scores.</p>
               </div>
@@ -615,21 +653,14 @@ function SkillAnalysis() {
 
             <div className="analysis-recommendation-list">
               {skillSummaries.map((skill) => (
-                <article
-                  className="analysis-recommendation"
-                  key={skill.id}
-                >
-                  <div
-                    className={`analysis-recommendation-icon ${skill.color}`}
-                  >
+                <article className="analysis-recommendation" key={skill.id}>
+                  <div className={`analysis-recommendation-icon ${skill.color}`}>
                     {skill.short}
                   </div>
-
                   <div className="analysis-recommendation-content">
                     <h3>{skill.name}</h3>
                     <p>{getRecommendation(skill)}</p>
                   </div>
-
                   {skill.latest && (
                     <span className="analysis-recommendation-score">
                       {skill.latest.percentage}%
@@ -642,13 +673,11 @@ function SkillAnalysis() {
             {needsPractice && (
               <div className="analysis-priority-note">
                 <span className="analysis-priority-icon">!</span>
-
                 <div>
                   <strong>Suggested practice priority</strong>
-
                   <p>
-                    Focus on {needsPractice.name} next because it currently
-                    has your lowest latest score among assessed subjects.
+                    Focus on {needsPractice.name} next because it currently has
+                    your lowest latest score among assessed subjects.
                   </p>
                 </div>
               </div>
@@ -658,24 +687,19 @@ function SkillAnalysis() {
           <section className="analysis-panel">
             <div className="analysis-panel-heading analysis-history-heading">
               <div>
+                <span className="analysis-section-kicker">YOUR RECORDS</span>
                 <h2>Assessment history</h2>
                 <p>Review scores from your previous attempts.</p>
               </div>
-
               <select
                 className="analysis-filter"
                 value={selectedSkill}
-                onChange={(event) =>
-                  handleSkillFilterChange(event.target.value)
-                }
+                onChange={(event) => handleSkillFilterChange(event.target.value)}
                 aria-label="Filter assessment history by skill"
               >
                 <option value="All">All skills</option>
-
                 {skills.map((skill) => (
-                  <option key={skill.id} value={skill.name}>
-                    {skill.name}
-                  </option>
+                  <option key={skill.id} value={skill.name}>{skill.name}</option>
                 ))}
               </select>
             </div>
@@ -693,35 +717,20 @@ function SkillAnalysis() {
                   return (
                     <article
                       className="analysis-history-row"
-                      key={
-                        item.id ||
-                        `${item.skill}-${item.date}-${index}`
-                      }
+                      key={item.id || `${item.skill}-${item.date}-${index}`}
                     >
-                      <div
-                        className={`analysis-history-icon ${color}`}
-                      >
+                      <div className={`analysis-history-icon ${color}`}>
                         {getSkillShortName(item.skill)}
                       </div>
-
                       <div className="analysis-history-details">
                         <strong>{item.skill} Assessment</strong>
                         <span>{item.date}</span>
                       </div>
-
                       <div className="analysis-history-score">
                         <strong>{item.percentage}%</strong>
-
-                        <span>
-                          {item.correctAnswers}/{item.totalQuestions} correct
-                        </span>
+                        <span>{item.correctAnswers}/{item.totalQuestions} correct</span>
                       </div>
-
-                      <span
-                        className={`analysis-level-badge ${getLevelClass(
-                          level
-                        )}`}
-                      >
+                      <span className={`analysis-level-badge ${getLevelClass(level)}`}>
                         {level}
                       </span>
                     </article>
@@ -735,8 +744,8 @@ function SkillAnalysis() {
 
       <div className="analysis-footer-note">
         <span>i</span>
-        Analysis is based on assessment results saved to your account. It
-        refreshes from the server when this page opens or regains focus.
+        Analysis is based on assessment results saved to your account. It refreshes
+        from the server when this page opens or regains focus.
       </div>
     </div>
   );

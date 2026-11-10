@@ -1116,15 +1116,10 @@
    ========================================= */
 
 .login-back-home {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 22px;
-  color: #5264c9;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: flex-end;
+  width: fit-content;
+  margin-left: auto;
 }
 
 .login-back-home:hover {
@@ -1198,5 +1193,361 @@
     height: auto;
     min-height: 100vh;
     overflow: visible;
+  }
+}
+
+
+
+/* FIX LOGIN FORM VERTICAL POSITION */
+.login-form-panel {
+  align-items: flex-start !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  min-height: 100vh;
+}
+
+.login-form-container {
+  position: relative !important;
+  margin: 0 auto !important;
+}
+
+
+/* =====================================
+   PREMIUM BACK TO HOME BUTTON
+===================================== */
+
+.login-form-panel {
+  position: relative !important;
+  padding-top: 85px !important;
+  box-sizing: border-box;
+}
+
+.login-form-container {
+  position: relative;
+  width: 100%;
+  max-width: 510px;
+  margin: 0 auto;
+}
+
+.login-form-panel .login-back-home {
+  position: absolute !important;
+  top: 24px !important;
+  right: 35px !important;
+  z-index: 1000 !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 11px 19px;
+
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #405cf5, #7541ed);
+
+  border: none;
+  border-radius: 30px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  text-decoration: none !important;
+  box-shadow: 0 5px 16px rgba(79, 70, 229, 0.22);
+
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.login-form-panel .login-back-home span:first-child {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.login-form-panel .login-back-home:hover {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #3048d8, #6030d8);
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.32);
+  transform: translateY(-2px);
+}
+
+.login-form-panel .login-back-home:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 760px) {
+  .login-form-panel {
+    padding-top: 85px !important;
+  }
+
+  .login-form-panel .login-back-home {
+    top: 18px !important;
+    right: 20px !important;
+  }
+}
+
+
+
+
+/* BACK TO HOME - MOVE TO FAR RIGHT */
+
+.login-form-panel {
+  position: relative !important;
+}
+
+.login-form-container {
+  position: static !important;
+}
+
+.login-form-panel .login-back-home {
+  position: absolute !important;
+
+  top: 24px !important;
+  right: 24px !important;
+  left: auto !important;
+
+  margin: 0 !important;
+  float: none !important;
+
+  z-index: 10000 !important;
+}
+
+/* Keep login heading below the button */
+.login-form-container > .login-back-home {
+  position: absolute !important;
+}
+
+
+/* =========================================
+   BACK TO HOME - FINAL POSITION FIX
+========================================= */
+
+@media (min-width: 761px) {
+  .login-form-panel {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 35px 52px !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .login-form-container {
+    position: static !important;
+    width: 100% !important;
+    max-width: 510px !important;
+    margin: 0 auto !important;
+  }
+
+  .login-form-container .login-back-home {
+    position: static !important;
+    display: flex !important;
+    width: fit-content !important;
+    margin: 0 0 28px auto !important;
+    padding: 10px 18px !important;
+
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #405cf5, #7541ed) !important;
+    border: none !important;
+    border-radius: 25px !important;
+
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.2);
+    cursor: pointer;
+  }
+
+  .login-form-container .login-back-home:hover {
+    background: linear-gradient(135deg, #3048d8, #6030d8) !important;
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .login-form-panel {
+    align-items: flex-start !important;
+  }
+
+  .login-form-container .login-back-home {
+    display: flex !important;
+    width: fit-content;
+    margin: 0 0 22px auto !important;
+  }
+}
+
+
+
+
+
+/* BACK TO HOME - VISIBLE TOP RIGHT */
+
+.login-form-panel {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding: 30px 52px !important;
+  overflow: visible !important;
+  box-sizing: border-box;
+}
+
+.login-form-container {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 510px !important;
+  margin: 0 auto !important;
+  position: relative !important;
+}
+
+.login-form-container > .login-back-home {
+  display: inline-flex !important;
+  align-self: flex-end !important;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  float: none !important;
+
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10000 !important;
+
+  align-items: center;
+  gap: 8px;
+
+  margin: 0 0 24px auto !important;
+  padding: 10px 18px !important;
+
+  background: #5548ed !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 25px !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .login-form-panel {
+    padding: 25px 20px !important;
+  }
+}
+
+
+
+/* BALANCE BACK TO HOME AND LOGIN BUTTON */
+
+.login-form-panel {
+  overflow-y: auto !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+
+.login-form-container > .login-back-home {
+  margin-top: 15px !important;
+  margin-bottom: 18px !important;
+  align-self: flex-end !important;
+}
+
+/* Keep LOGIN button visible */
+.login-form-container form {
+  gap: 14px !important;
+}
+
+.login-form-container .login-submit-button {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  min-height: 51px !important;
+  margin-top: 5px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* BACK TO HOME - EXTREME TOP RIGHT */
+
+.login-form-panel {
+  position: relative !important;
+}
+
+.login-form-panel .login-back-home {
+  position: absolute !important;
+
+  top: 24px !important;
+  right: 24px !important;
+  left: auto !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: auto !important;
+  margin: 0 !important;
+  padding: 11px 20px !important;
+
+  z-index: 99999 !important;
+
+  background: linear-gradient(135deg, #405cf5, #7541ed) !important;
+  color: #ffffff !important;
+
+  border: none !important;
+  border-radius: 30px !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+/* Move Back to Home slightly right */
+.login-form-panel .login-back-home {
+  right: -18px !important;
+  transform: translateX(0) !important;
+}
+
+/* Keep hover smooth */
+.login-form-panel .login-back-home:hover {
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 1100px) {
+  .login-form-panel .login-back-home {
+    right: 18px !important;
+  }
+}
+
+/* LOGIN TOAST - ALWAYS ABOVE OTHER ELEMENTS */
+.login-toast {
+  position: fixed !important;
+  top: 16px !important;
+  right: 24px !important;
+  left: auto !important;
+  z-index: 999999 !important;
+  isolation: isolate;
+}
+
+/* Keep Back to Home in its normal position */
+.login-back-home {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 420px) {
+  .login-toast {
+    top: 12px !important;
+    right: 12px !important;
+    width: calc(100vw - 24px) !important;
   }
 }

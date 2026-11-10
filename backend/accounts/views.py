@@ -600,18 +600,32 @@ class ChangePasswordAPIView(APIView):
 # ADMIN: LIST USERS
 # =====================================================
 
+
+# =====================================================
+# ADMIN: LIST VERIFIED USERS
+# =====================================================
+
 class AdminUserListAPIView(APIView):
     permission_classes = [IsAuthenticated, IsPlatformAdmin]
 
     @extend_schema(
         operation_id="admin_list_users",
-        summary="List All Users",
+        summary="List Verified Users",
         description=(
-            "Returns registered users for the SkillSphere admin dashboard."
+            "Returns only users whose email verification is complete. "
+            "Admin-deactivated verified accounts remain visible."
         ),
     )
     def get(self, request):
-        users = User.objects.all().order_by("-date_joined")
+        # Users with an unused verification code have not completed OTP.
+        # Users without verification records (such as admin-created
+        # accounts) remain visible.
+        users = (
+            User.objects
+            .exclude(email_verification_codes__is_used=False)
+            .distinct()
+            .order_by("-date_joined")
+        )
 
         results = [
             {
@@ -628,9 +642,13 @@ class AdminUserListAPIView(APIView):
         ]
 
         return Response(
-            {"count": len(results), "results": results},
+            {
+                "count": len(results),
+                "results": results,
+            },
             status=status.HTTP_200_OK,
         )
+
 
 
 # =====================================================
