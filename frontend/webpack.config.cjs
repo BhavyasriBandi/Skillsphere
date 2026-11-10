@@ -6,6 +6,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
 
+  // Production: Render backend
+  // Local development: Django localhost
   const API_URL =
     process.env.REACT_APP_API_URL ||
     "http://127.0.0.1:8000";
@@ -61,6 +63,10 @@ module.exports = (env, argv) => {
     plugins: [
       new webpack.DefinePlugin({
         "process.env.REACT_APP_API_URL": JSON.stringify(API_URL),
+
+        '"http://127.0.0.1:8000"': JSON.stringify(API_URL),
+
+        '"http://localhost:8000"': JSON.stringify(API_URL),
       }),
 
       new HtmlWebpackPlugin({
