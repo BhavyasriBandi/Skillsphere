@@ -329,6 +329,8 @@ CORS_ALLOWED_ORIGINS = [
 
 frontend_url = os.getenv("FRONTEND_URL")
 
+FRONTEND_URL = frontend_url.rstrip("/") if frontend_url else ""
+
 if frontend_url:
     CORS_ALLOWED_ORIGINS.append(frontend_url.rstrip("/"))
 

@@ -1,3 +1,4 @@
+
 import React, {
   useCallback,
   useEffect,
@@ -33,16 +34,18 @@ function normalizeUser(user) {
     email: user.email || "",
     role: user.role || "Unassigned",
     status:
-      user.status || (user.is_active ? "Active" : "Inactive"),
+      user.status ||
+      (user.is_active ? "Active" : "Inactive"),
     joined:
       user.joined ||
-      (user.date_joined ? user.date_joined.slice(0, 10) : ""),
+      (user.date_joined
+        ? user.date_joined.slice(0, 10)
+        : ""),
   };
 }
 
 // =====================================================
 // AUTHENTICATED API REQUEST
-// Uses AuthContext automatic token refresh
 // =====================================================
 
 async function apiRequest(path = "", options = {}) {
@@ -54,7 +57,10 @@ async function apiRequest(path = "", options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
+    if (
+      response.status === 401 ||
+      response.status === 403
+    ) {
       throw new Error(
         data.detail ||
           data.message ||
@@ -255,31 +261,65 @@ export default function UserManagement() {
     setError("");
 
     try {
-      const payload = {
-        name,
-        email,
-        role: form.role,
-        status: form.status,
-      };
-
       if (editingId !== null) {
+        const originalUser = users.find(
+          (user) =>
+            String(user.id) === String(editingId)
+        );
+
+        // Update name and email.
         await apiRequest(`${editingId}/`, {
           method: "PATCH",
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            name,
+            email,
+          }),
         });
+
+        // Update role using the existing role endpoint.
+        if (
+          originalUser &&
+          originalUser.role !== form.role
+        ) {
+          await apiRequest(`${editingId}/role/`, {
+            method: "POST",
+            body: JSON.stringify({
+              role: form.role,
+            }),
+          });
+        }
+
+        // Update account status using the existing endpoint.
+        if (
+          originalUser &&
+          originalUser.status !== form.status
+        ) {
+          await apiRequest(`${editingId}/status/`, {
+            method: "PATCH",
+            body: JSON.stringify({
+              is_active: form.status === "Active",
+            }),
+          });
+        }
 
         showToast(
           "User details updated successfully!",
           "success"
         );
       } else {
+        // Backend must create the account and send
+        // a secure password setup email.
         await apiRequest("", {
           method: "POST",
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            name,
+            email,
+            role: form.role,
+          }),
         });
 
         showToast(
-          "User added successfully!",
+          "User created. Password setup email sent successfully!",
           "success"
         );
       }
@@ -315,10 +355,10 @@ export default function UserManagement() {
     if (!confirmed) return;
 
     try {
-      await apiRequest(`${user.id}/`, {
+      await apiRequest(`${user.id}/status/`, {
         method: "PATCH",
         body: JSON.stringify({
-          status: nextStatus,
+          is_active: nextStatus === "Active",
         }),
       });
 
@@ -404,7 +444,7 @@ export default function UserManagement() {
 
         <article className="um-stat-card">
           <div className="um-stat-icon um-icon-blue">
-            ♙
+            ◉
           </div>
 
           <div>
@@ -428,7 +468,7 @@ export default function UserManagement() {
 
         <article className="um-stat-card">
           <div className="um-stat-icon um-icon-purple">
-            ♧
+            ◈
           </div>
 
           <div>
@@ -440,7 +480,7 @@ export default function UserManagement() {
 
         <article className="um-stat-card">
           <div className="um-stat-icon um-icon-orange">
-            ✧
+            ★
           </div>
 
           <div>
@@ -641,7 +681,7 @@ export default function UserManagement() {
                             }
                           >
                             {user.status === "Active"
-                              ? "⊘"
+                              ? "◉"
                               : "✓"}
                           </button>
 

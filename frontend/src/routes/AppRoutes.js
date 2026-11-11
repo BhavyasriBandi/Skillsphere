@@ -21,6 +21,7 @@ import MentorDashboard from "../mentor/MentorDashboard";
 
 import ToastProvider from "../components/ToastProvider";
 import PrivateRoute from "./PrivateRoutes";
+import SetPassword from "../pages/SetPassword";
 
 // Landing Page
 function HomePage() {
@@ -63,6 +64,12 @@ export default function AppRoutes() {
           path="/verify-email"
           element={<EmailVerification />}
         />
+
+        <Route
+  path="/set-password/:uid/:token"
+  element={<SetPassword />}
+/>
+
 
 
         {/* STUDENT PRIVATE ROUTES */}

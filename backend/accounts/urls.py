@@ -9,13 +9,18 @@ from .views import (
     LoginView,
     LogoutView,
     CurrentUserView,
-    AdminUserListAPIView,
     AssignUserRoleAPIView,
     AdminUserStatusAPIView,
     StudentDashboardAPIView,
     MentorDashboardAPIView,
     AdminDashboardAPIView,
     AdminSendEmailAPIView,
+)
+
+from .admin_user_views import (
+    AdminUserListAPIView,
+    AdminUserDetailAPIView,
+    AdminSetPasswordAPIView,
 )
 
 from .profile_views import (
@@ -55,7 +60,16 @@ urlpatterns = [
     ),
 
     # Admin User Management
-    path("users/", AdminUserListAPIView.as_view(), name="admin-users"),
+    path(
+        "users/",
+        AdminUserListAPIView.as_view(),
+        name="admin-users",
+    ),
+    path(
+        "users/<int:user_id>/",
+        AdminUserDetailAPIView.as_view(),
+        name="admin-user-detail",
+    ),
     path(
         "users/<int:user_id>/role/",
         AssignUserRoleAPIView.as_view(),
@@ -65,6 +79,13 @@ urlpatterns = [
         "users/<int:user_id>/status/",
         AdminUserStatusAPIView.as_view(),
         name="admin-user-status",
+    ),
+
+    # Admin-created user password setup
+    path(
+        "set-password/",
+        AdminSetPasswordAPIView.as_view(),
+        name="admin-set-password",
     ),
 
     # Admin Email Management
