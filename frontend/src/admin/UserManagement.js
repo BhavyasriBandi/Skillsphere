@@ -15,11 +15,9 @@ const emptyForm = {
   email: "",
   role: "Student",
   status: "Active",
+  password: "",
+  confirm_password: "",
 };
-
-// =====================================================
-// NORMALIZE USER DATA
-// =====================================================
 
 function normalizeUser(user) {
   const name =
@@ -44,10 +42,6 @@ function normalizeUser(user) {
   };
 }
 
-// =====================================================
-// AUTHENTICATED API REQUEST
-// =====================================================
-
 async function apiRequest(path = "", options = {}) {
   const response = await apiFetch(
     `/api/auth/users/${path}`,
@@ -57,10 +51,7 @@ async function apiRequest(path = "", options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    if (
-      response.status === 401 ||
-      response.status === 403
-    ) {
+    if (response.status === 401 || response.status === 403) {
       throw new Error(
         data.detail ||
           data.message ||
@@ -73,20 +64,23 @@ async function apiRequest(path = "", options = {}) {
       data.email?.[0] ||
       data.name?.[0] ||
       data.role?.[0] ||
+      data.password?.[0] ||
+      data.confirm_password?.[0] ||
       data.status?.[0] ||
       data.error;
 
     throw new Error(
-      detail || `Request failed (${response.status}).`
+      typeof detail === "string"
+        ? detail
+        : Array.isArray(detail)
+          ? detail.join(", ")
+          : JSON.stringify(detail) ||
+              `Request failed (${response.status}).`
     );
   }
 
   return data;
 }
-
-// =====================================================
-// USER MANAGEMENT COMPONENT
-// =====================================================
 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
@@ -103,10 +97,11 @@ export default function UserManagement() {
   const [saving, setSaving] = useState(false);
   const [pageError, setPageError] = useState("");
 
-  // ===================================================
-  // LOAD USERS
-  // ===================================================
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false);
 
+  // LOAD USERS
   const loadUsers = useCallback(async () => {
     setLoading(true);
     setPageError("");
@@ -126,9 +121,7 @@ export default function UserManagement() {
 
       setUsers(results.map(normalizeUser));
     } catch (err) {
-      setPageError(
-        err.message || "Could not load users."
-      );
+      setPageError(err.message || "Could not load users.");
     } finally {
       setLoading(false);
     }
@@ -138,10 +131,7 @@ export default function UserManagement() {
     loadUsers();
   }, [loadUsers]);
 
-  // ===================================================
   // SEARCH AND FILTER
-  // ===================================================
-
   const filteredUsers = useMemo(() => {
     const query = search.trim().toLowerCase();
 
@@ -158,18 +148,11 @@ export default function UserManagement() {
         statusFilter === "All" ||
         user.status === statusFilter;
 
-      return (
-        matchesSearch &&
-        matchesRole &&
-        matchesStatus
-      );
+      return matchesSearch && matchesRole && matchesStatus;
     });
   }, [users, search, roleFilter, statusFilter]);
 
-  // ===================================================
   // STATISTICS
-  // ===================================================
-
   const activeCount = users.filter(
     (user) => user.status === "Active"
   ).length;
@@ -182,21 +165,17 @@ export default function UserManagement() {
     (user) => user.role === "Mentor"
   ).length;
 
-  // ===================================================
   // ADD USER
-  // ===================================================
-
   function openAddModal() {
     setEditingId(null);
     setForm({ ...emptyForm });
     setError("");
+    setShowPassword(false);
+    setShowConfirmPassword(false);
     setModalOpen(true);
   }
 
-  // ===================================================
   // EDIT USER
-  // ===================================================
-
   function openEditModal(user) {
     setEditingId(user.id);
 
@@ -205,16 +184,17 @@ export default function UserManagement() {
       email: user.email,
       role: user.role,
       status: user.status,
+      password: "",
+      confirm_password: "",
     });
 
     setError("");
+    setShowPassword(false);
+    setShowConfirmPassword(false);
     setModalOpen(true);
   }
 
-  // ===================================================
   // CLOSE MODAL
-  // ===================================================
-
   function closeModal() {
     if (saving) return;
 
@@ -222,12 +202,11 @@ export default function UserManagement() {
     setEditingId(null);
     setForm({ ...emptyForm });
     setError("");
+    setShowPassword(false);
+    setShowConfirmPassword(false);
   }
 
-  // ===================================================
   // ADD / UPDATE USER
-  // ===================================================
-
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -257,6 +236,26 @@ export default function UserManagement() {
       return;
     }
 
+    // Password validation only for new users.
+    if (editingId === null) {
+      if (!form.password || !form.confirm_password) {
+        setError(
+          "Please enter password and confirm password."
+        );
+        return;
+      }
+
+      if (form.password !== form.confirm_password) {
+        setError("Passwords do not match.");
+        return;
+      }
+
+      if (form.password.length < 8) {
+        setError("Password must contain at least 8 characters.");
+        return;
+      }
+    }
+
     setSaving(true);
     setError("");
 
@@ -276,7 +275,7 @@ export default function UserManagement() {
           }),
         });
 
-        // Update role using the existing role endpoint.
+        // Update role.
         if (
           originalUser &&
           originalUser.role !== form.role
@@ -289,7 +288,7 @@ export default function UserManagement() {
           });
         }
 
-        // Update account status using the existing endpoint.
+        // Update account status.
         if (
           originalUser &&
           originalUser.status !== form.status
@@ -307,19 +306,20 @@ export default function UserManagement() {
           "success"
         );
       } else {
-        // Backend must create the account and send
-        // a secure password setup email.
+        // Create user without sending any email.
         await apiRequest("", {
           method: "POST",
           body: JSON.stringify({
             name,
             email,
             role: form.role,
+            password: form.password,
+            confirm_password: form.confirm_password,
           }),
         });
 
         showToast(
-          "User created. Password setup email sent successfully!",
+          "User created successfully. Account is ready to log in!",
           "success"
         );
       }
@@ -327,26 +327,21 @@ export default function UserManagement() {
       setModalOpen(false);
       setEditingId(null);
       setForm({ ...emptyForm });
+      setShowPassword(false);
+      setShowConfirmPassword(false);
 
       await loadUsers();
     } catch (err) {
-      setError(
-        err.message || "Could not save user."
-      );
+      setError(err.message || "Could not save user.");
     } finally {
       setSaving(false);
     }
   }
 
-  // ===================================================
   // ACTIVATE / DEACTIVATE USER
-  // ===================================================
-
   async function toggleStatus(user) {
     const nextStatus =
-      user.status === "Active"
-        ? "Inactive"
-        : "Active";
+      user.status === "Active" ? "Inactive" : "Active";
 
     const confirmed = window.confirm(
       `${nextStatus === "Active" ? "Activate" : "Deactivate"} ${user.name}'s account?`
@@ -378,10 +373,7 @@ export default function UserManagement() {
     }
   }
 
-  // ===================================================
   // DELETE USER
-  // ===================================================
-
   async function deleteUser(user) {
     const confirmed = window.confirm(
       `Are you sure you want to delete ${user.name}? This action cannot be undone.`
@@ -394,10 +386,7 @@ export default function UserManagement() {
         method: "DELETE",
       });
 
-      showToast(
-        "User deleted successfully!",
-        "success"
-      );
+      showToast("User deleted successfully!", "success");
 
       await loadUsers();
     } catch (err) {
@@ -408,15 +397,9 @@ export default function UserManagement() {
     }
   }
 
-  // ===================================================
-  // UI
-  // ===================================================
-
   return (
     <main className="um-page">
-
       {/* HEADER */}
-
       <header className="um-header">
         <div>
           <span className="um-eyebrow">
@@ -433,15 +416,14 @@ export default function UserManagement() {
         <button
           className="um-primary-btn"
           onClick={openAddModal}
+          type="button"
         >
           <span aria-hidden="true">＋</span> Add User
         </button>
       </header>
 
       {/* STATISTICS */}
-
       <section className="um-stats">
-
         <article className="um-stat-card">
           <div className="um-stat-icon um-icon-blue">
             ◉
@@ -489,19 +471,14 @@ export default function UserManagement() {
             <span>Mentor accounts</span>
           </div>
         </article>
-
       </section>
 
       {/* USERS TABLE */}
-
       <section className="um-table-card">
-
         <div className="um-table-heading">
           <div>
             <h2>All Users</h2>
-            <p>
-              Search and manage registered accounts.
-            </p>
+            <p>Search and manage registered accounts.</p>
           </div>
 
           <span className="um-result-count">
@@ -510,9 +487,7 @@ export default function UserManagement() {
         </div>
 
         {/* FILTERS */}
-
         <div className="um-filters">
-
           <label className="um-search">
             <span aria-hidden="true">⌕</span>
 
@@ -550,32 +525,22 @@ export default function UserManagement() {
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
-
         </div>
 
         {/* ERROR */}
-
         {pageError && (
-          <div
-            role="alert"
-            className="um-form-error"
-          >
+          <div role="alert" className="um-form-error">
             {pageError}
 
-            <button
-              type="button"
-              onClick={loadUsers}
-            >
+            <button type="button" onClick={loadUsers}>
               Retry
             </button>
           </div>
         )}
 
         {/* TABLE */}
-
         <div className="um-table-wrapper">
           <table className="um-table">
-
             <thead>
               <tr>
                 <th>User</th>
@@ -587,13 +552,9 @@ export default function UserManagement() {
             </thead>
 
             <tbody>
-
               {loading ? (
                 <tr>
-                  <td
-                    colSpan="5"
-                    className="um-empty"
-                  >
+                  <td colSpan="5" className="um-empty">
                     Loading users from database...
                   </td>
                 </tr>
@@ -601,10 +562,8 @@ export default function UserManagement() {
                 <>
                   {filteredUsers.map((user) => (
                     <tr key={user.id}>
-
                       <td>
                         <div className="um-user-cell">
-
                           <div className="um-avatar">
                             {user.name
                               .split(" ")
@@ -619,7 +578,6 @@ export default function UserManagement() {
                             <strong>{user.name}</strong>
                             <span>{user.email}</span>
                           </div>
-
                         </div>
                       </td>
 
@@ -654,13 +612,10 @@ export default function UserManagement() {
 
                       <td>
                         <div className="um-actions">
-
                           <button
                             type="button"
                             className="um-action-btn"
-                            onClick={() =>
-                              openEditModal(user)
-                            }
+                            onClick={() => openEditModal(user)}
                             aria-label={`Edit ${user.name}`}
                             title="Edit user"
                           >
@@ -670,9 +625,7 @@ export default function UserManagement() {
                           <button
                             type="button"
                             className="um-action-btn"
-                            onClick={() =>
-                              toggleStatus(user)
-                            }
+                            onClick={() => toggleStatus(user)}
                             aria-label={`Change status for ${user.name}`}
                             title={
                               user.status === "Active"
@@ -688,27 +641,20 @@ export default function UserManagement() {
                           <button
                             type="button"
                             className="um-action-btn um-delete-btn"
-                            onClick={() =>
-                              deleteUser(user)
-                            }
+                            onClick={() => deleteUser(user)}
                             aria-label={`Delete ${user.name}`}
                             title="Delete user"
                           >
                             ×
                           </button>
-
                         </div>
                       </td>
-
                     </tr>
                   ))}
 
                   {filteredUsers.length === 0 && (
                     <tr>
-                      <td
-                        colSpan="5"
-                        className="um-empty"
-                      >
+                      <td colSpan="5" className="um-empty">
                         <div>⌕</div>
                         <strong>No users found</strong>
                         <span>
@@ -719,7 +665,6 @@ export default function UserManagement() {
                   )}
                 </>
               )}
-
             </tbody>
           </table>
         </div>
@@ -727,11 +672,9 @@ export default function UserManagement() {
         <div className="um-table-footer">
           Showing {filteredUsers.length} of {users.length} users
         </div>
-
       </section>
 
       {/* ADD / EDIT MODAL */}
-
       {modalOpen && (
         <div
           className="um-modal-backdrop"
@@ -747,7 +690,6 @@ export default function UserManagement() {
             aria-modal="true"
             aria-labelledby="um-modal-title"
           >
-
             <div className="um-modal-header">
               <div>
                 <span className="um-eyebrow">
@@ -772,7 +714,6 @@ export default function UserManagement() {
             </div>
 
             <form onSubmit={handleSubmit}>
-
               <label className="um-form-field">
                 Full Name
 
@@ -808,8 +749,93 @@ export default function UserManagement() {
                 />
               </label>
 
-              <div className="um-form-row">
+              {/* PASSWORD FIELDS - ONLY FOR NEW USERS */}
+              {editingId === null && (
+                <>
+                  <label className="um-form-field">
+                    Password
 
+                    <div className="um-password-field">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        value={form.password}
+                        onChange={(event) =>
+                          setForm({
+                            ...form,
+                            password: event.target.value,
+                          })
+                        }
+                        placeholder="Enter password"
+                        minLength={8}
+                        required
+                        autoComplete="new-password"
+                      />
+
+                      <button
+                        type="button"
+                        className="um-password-toggle"
+                        onClick={() =>
+                          setShowPassword((previous) => !previous)
+                        }
+                        aria-label={
+                          showPassword
+                            ? "Hide password"
+                            : "Show password"
+                        }
+                      >
+                        {showPassword ? "Hide" : "Show"}
+                      </button>
+                    </div>
+                  </label>
+
+                  <label className="um-form-field">
+                    Confirm Password
+
+                    <div className="um-password-field">
+                      <input
+                        type={
+                          showConfirmPassword ? "text" : "password"
+                        }
+                        value={form.confirm_password}
+                        onChange={(event) =>
+                          setForm({
+                            ...form,
+                            confirm_password: event.target.value,
+                          })
+                        }
+                        placeholder="Confirm password"
+                        minLength={8}
+                        required
+                        autoComplete="new-password"
+                      />
+
+                      <button
+                        type="button"
+                        className="um-password-toggle"
+                        onClick={() =>
+                          setShowConfirmPassword(
+                            (previous) => !previous
+                          )
+                        }
+                        aria-label={
+                          showConfirmPassword
+                            ? "Hide confirm password"
+                            : "Show confirm password"
+                        }
+                      >
+                        {showConfirmPassword ? "Hide" : "Show"}
+                      </button>
+                    </div>
+                  </label>
+
+                  <p className="um-password-hint">
+                    The admin-created account will be active
+                    immediately. No setup email will be sent.
+                  </p>
+                </>
+              )}
+
+              <div className="um-form-row">
                 <label className="um-form-field">
                   Role
 
@@ -828,33 +854,33 @@ export default function UserManagement() {
                   </select>
                 </label>
 
-                <label className="um-form-field">
-                  Status
+                {editingId !== null && (
+                  <label className="um-form-field">
+                    Status
 
-                  <select
-                    value={form.status}
-                    onChange={(event) =>
-                      setForm({
-                        ...form,
-                        status: event.target.value,
-                      })
-                    }
-                  >
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                  </select>
-                </label>
-
+                    <select
+                      value={form.status}
+                      onChange={(event) =>
+                        setForm({
+                          ...form,
+                          status: event.target.value,
+                        })
+                      }
+                    >
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </label>
+                )}
               </div>
 
               {error && (
-                <p className="um-form-error">
+                <p className="um-form-error" role="alert">
                   {error}
                 </p>
               )}
 
               <div className="um-modal-actions">
-
                 <button
                   type="button"
                   className="um-secondary-btn"
@@ -875,15 +901,11 @@ export default function UserManagement() {
                       ? "Save Changes"
                       : "Create User"}
                 </button>
-
               </div>
-
             </form>
-
           </section>
         </div>
       )}
-
     </main>
   );
 }
