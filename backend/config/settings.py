@@ -394,4 +394,6 @@ else:
         "django.core.mail.backends.console.EmailBackend"
     )
 
-    DEFAULT_FROM_EMAIL = "skillsphere@example.com"
+DEFAULT_FROM_EMAIL = "bhavyasribandi090@gmail.com"
+
+BREVO_API_KEY = os.getenv("BREVO_API_KEY", "")

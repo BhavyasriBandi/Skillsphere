@@ -1,20 +1,19 @@
-
+import json
+import os
 import secrets
+import urllib.error
+import urllib.request
 from datetime import timedelta
 
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
-from django.core.mail import send_mail
 from django.db import transaction
 from django.db.models import Q
 from django.utils import timezone
 
-
-
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-
 
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -43,6 +42,55 @@ User = get_user_model()
 
 SKILLSPHERE_ROLES = ["Student", "Mentor", "Admin"]
 OTP_EXPIRY_MINUTES = 1
+
+
+# =====================================================
+# BREVO TRANSACTIONAL EMAIL HELPER
+# =====================================================
+
+def send_skillsphere_email(recipient, subject, message):
+    """Send a transactional email through Brevo without SMTP."""
+    api_key = os.environ.get("BREVO_API_KEY") or getattr(
+        settings, "BREVO_API_KEY", ""
+    )
+    sender_email = getattr(settings, "DEFAULT_FROM_EMAIL", "")
+
+    if not api_key:
+        raise RuntimeError("Brevo API key is not configured.")
+    if not sender_email:
+        raise RuntimeError("SkillSphere sender email is not configured.")
+
+    payload = {
+        "sender": {
+            "name": "SkillSphere",
+            "email": sender_email,
+        },
+        "to": [{"email": recipient}],
+        "subject": subject,
+        "textContent": message,
+    }
+
+    request = urllib.request.Request(
+        url="https://api.brevo.com/v3/smtp/email",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "accept": "application/json",
+            "api-key": api_key,
+            "content-type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            return response.status in (200, 201, 202)
+    except urllib.error.HTTPError as exc:
+        # Do not expose the API key or provider response to the client.
+        raise RuntimeError(
+            f"Brevo rejected the email request (HTTP {exc.code})."
+        ) from None
+    except (urllib.error.URLError, TimeoutError) as exc:
+        raise RuntimeError("Could not connect to Brevo email service.") from None
 
 
 # =====================================================
@@ -87,18 +135,18 @@ def issue_verification_code(user):
         + timedelta(minutes=OTP_EXPIRY_MINUTES),
     )
 
-    send_mail(
-        subject="SkillSphere Email Verification",
-        message=(
-            f"Hello {user.first_name},\n\n"
-            f"Your SkillSphere verification code is: {code}\n\n"
-            f"This code expires in {OTP_EXPIRY_MINUTES} minutes.\n"
-            "If you did not request this code, please ignore this email."
-        ),
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[user.email],
-        fail_silently=False,
+    email_message = (
+        f"Hello {user.first_name},\n\n"
+        f"Your SkillSphere verification code is: {code}\n\n"
+        f"This code expires in {OTP_EXPIRY_MINUTES} minutes.\n"
+        "If you did not request this code, please ignore this email."
     )
+    if not send_skillsphere_email(
+        recipient=user.email,
+        subject="SkillSphere Email Verification",
+        message=email_message,
+    ):
+        raise RuntimeError("Brevo did not accept the verification email.")
 
 
 # =====================================================
@@ -650,7 +698,6 @@ class AdminUserListAPIView(APIView):
         )
 
 
-
 # =====================================================
 # ADMIN: ASSIGN USER ROLE
 # =====================================================
@@ -1112,15 +1159,13 @@ class AdminSendEmailAPIView(APIView):
             )
 
         try:
-            sent_count = send_mail(
+            sent = send_skillsphere_email(
+                recipient=recipient,
                 subject=subject,
                 message=message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[recipient],
-                fail_silently=False,
             )
 
-            if sent_count != 1:
+            if not sent:
                 return Response(
                     {"detail": "Email could not be delivered."},
                     status=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -1131,7 +1176,7 @@ class AdminSendEmailAPIView(APIView):
                 {
                     "detail": (
                         "Unable to send email. "
-                        "Please check the SMTP email configuration."
+                        "Please check the Brevo email configuration."
                     )
                 },
                 status=status.HTTP_503_SERVICE_UNAVAILABLE,
